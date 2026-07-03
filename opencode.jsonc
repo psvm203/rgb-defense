@@ -10,5 +10,10 @@
         "DEBUG": "true",
       },
     },
+    "godot-docs": {
+      "type": "local",
+      "command": ["npx", "mcp-remote", "http://localhost:8787/mcp"],
+      "enabled": true,
+    },
   },
 }
