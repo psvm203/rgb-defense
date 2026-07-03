@@ -8,6 +8,27 @@
 - Godot 4.7
 - GDScript
 
+## 프로젝트 구조
+
+파일 타입이 아니라, 기능을 기반으로 폴더 구조를 구성하세요.
+
+예:
+```tree
+prism-defense
+├── mob
+│   ├── mob_zombie.png
+│   ├── mob.gd
+│   └── mob.tscn
+├── tower
+│   ├── tower_build.wav
+│   ├── tower.gd
+│   └── tower.tscn
+├── AGENTS.md
+├── PLANS.md
+├── project.godot
+└── TODO.md
+```
+
 ## 코드 작성 워크플로우
 
 계획 - 구현 - 린트 - 커밋 순으로 진행하세요.
