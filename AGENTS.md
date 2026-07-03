@@ -40,4 +40,4 @@
 ### 커밋
 
 - 커밋하기 전 사용자에게 허락을 받으세요.
-- 커밋 메시지는 Conventional Commits 형식을 사용하세요.
+- 커밋 메시지는 Conventional Commits 형식을 사용하세요. (예: feat(monster): implement shield)
