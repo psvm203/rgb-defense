@@ -53,7 +53,7 @@ func _place_tower() -> void:
 			if track_cells.has(Vector2i(tx, ty)):
 				return
 
-	var tower_scene := preload("res://tower/archer/archer.tscn")
+	var tower_scene := preload("res://tower/mage/mage.tscn")
 	var tower := tower_scene.instantiate()
 	tower.position = Vector2(grid_pos) * GRID_UNIT + HALF_GRID
 	add_child(tower)
