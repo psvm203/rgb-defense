@@ -1,6 +1,7 @@
 extends Node2D
 
 const GRID_UNIT: int = 64
+const MAP_SIZE := Vector2i(15, 9)
 const HALF_GRID := Vector2(GRID_UNIT / 2.0, GRID_UNIT / 2.0)
 
 const TRACK_GRID: Array[Vector2i] = [
@@ -49,9 +50,11 @@ func _setup_tilemap() -> void:
 	var track_cells := _get_track_cells()
 	var grass_cells: Array[Vector2i] = []
 
-	# 화면을 충분히 덮을 만큼의 타일 범위 (-2 ~ 36, -2 ~ 22)
-	for x in range(-2, 36):
-		for y in range(-2, 22):
+	var tile_range_x := MAP_SIZE.x * 2
+	var tile_range_y := MAP_SIZE.y * 2
+
+	for x in range(tile_range_x):
+		for y in range(tile_range_y):
 			var cell = Vector2i(x, y)
 			if not track_cells.has(cell):
 				grass_cells.append(cell)
