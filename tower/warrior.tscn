@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cvhouptbx60ks"]
 
-[ext_resource type="Script" uid="uid://bxueqrfpqhyma" path="res://tower/tower.gd" id="1_tower"]
+[ext_resource type="Script" uid="uid://bxueqrfpqhyma" path="res://tower/warrior.gd" id="1_tower"]
 [ext_resource type="Texture2D" uid="uid://c3uvodo5byfef" path="res://tower/warrior_idle.png" id="2_3fjlj"]
 [ext_resource type="Texture2D" uid="uid://bo8doodydketa" path="res://tower/warrior_attack.png" id="2_4ulc0"]
 
