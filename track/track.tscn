@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://track/track.gd" id="1_track"]
+
+[node name="TrackRoot" type="Node2D"]
+script = ExtResource("1_track")
+
+[node name="Track" type="Path2D" parent="."]
+
+[node name="TrackLine" type="Line2D" parent="."]
