@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://bh413ahdugxhv"]
+
+[ext_resource type="Script" uid="uid://cjdauhwfs35qq" path="res://tower/archer_tower.gd" id="1_tower"]
+[ext_resource type="Texture2D" uid="uid://cyulql4jmrn50" path="res://tower/archer_attack.png" id="2_oghgm"]
+[ext_resource type="Texture2D" uid="uid://dcxencgnmyg3d" path="res://tower/archer_idle.png" id="3_daq3v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3r678"]
+atlas = ExtResource("2_oghgm")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otx6n"]
+atlas = ExtResource("2_oghgm")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jejbp"]
+atlas = ExtResource("2_oghgm")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srhgu"]
+atlas = ExtResource("2_oghgm")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_558ad"]
+atlas = ExtResource("2_oghgm")
+region = Rect2(256, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8vs6"]
+atlas = ExtResource("2_oghgm")
+region = Rect2(320, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nu53b"]
+atlas = ExtResource("3_daq3v")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7j17o"]
+atlas = ExtResource("3_daq3v")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_etvis"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r678")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otx6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jejbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srhgu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_558ad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8vs6")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nu53b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7j17o")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Tower" type="Node2D" unique_id=2098349245]
+script = ExtResource("1_tower")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=188592672]
+sprite_frames = SubResource("SpriteFrames_etvis")
+animation = &"attack"
+autoplay = "default"

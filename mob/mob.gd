@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var speed: float = 128.0
-@export var max_rgb: Vector3 = Vector3(1.0, 0.0, 0.0)
+@export var max_rgb: Vector3 = Vector3(0.0, 1.0, 0.0)
 
 var rgb: Vector3
 var _base_sprite_x: float

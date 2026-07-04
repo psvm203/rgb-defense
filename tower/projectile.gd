@@ -5,12 +5,14 @@ extends Area2D
 var _target: Area2D
 var _damage: float
 var _color_index: int
+var _color: Color
 
 
-func setup(target: Area2D, damage: float, color_index: int) -> void:
+func setup(target: Area2D, damage: float, color_index: int, proj_color: Color) -> void:
 	_target = target
 	_damage = damage
 	_color_index = color_index
+	_color = proj_color
 
 
 func _process(delta: float) -> void:
@@ -28,4 +30,4 @@ func _process(delta: float) -> void:
 
 
 func _draw() -> void:
-	draw_circle(Vector2.ZERO, 4.0, Color(1.0, 0.2, 0.2))
+	draw_circle(Vector2.ZERO, 4.0, _color)
