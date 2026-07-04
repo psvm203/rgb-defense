@@ -1,6 +1,36 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://dif8phw16lbpp"]
 
-[ext_resource type="Script" path="res://mob/mob.gd" id="1_mob"]
+[ext_resource type="Script" uid="uid://kl3oxjk4au7c" path="res://mob/mob.gd" id="1_mob"]
+[ext_resource type="Texture2D" uid="uid://bkbnq8gb04vwe" path="res://mob/slime_idle.png" id="2_6jlfs"]
 
-[node name="Mob" type="Area2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pirjb"]
+atlas = ExtResource("2_6jlfs")
+region = Rect2(0, 432, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mixeo"]
+atlas = ExtResource("2_6jlfs")
+region = Rect2(80, 432, 80, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_okuid"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pirjb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mixeo")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Mob" type="Area2D" unique_id=1063082781]
 script = ExtResource("1_mob")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1338951929]
+position = Vector2(12, -10)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_okuid")
+autoplay = "default"
+frame_progress = 0.14497307

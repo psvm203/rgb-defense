@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2kdob16fhkk6"
-path="res://.godot/imported/topDown_baseTiles.png-11da77074f8f31369428418a23963bcb.ctex"
+uid="uid://degn308v1bhaf"
+path="res://.godot/imported/grass_tile.png-c13ffcdc7c0afdf8a6d2a5454e212f39.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://track/topDown_baseTiles.png"
-dest_files=["res://.godot/imported/topDown_baseTiles.png-11da77074f8f31369428418a23963bcb.ctex"]
+source_file="res://track/grass_tile.png"
+dest_files=["res://.godot/imported/grass_tile.png-c13ffcdc7c0afdf8a6d2a5454e212f39.ctex"]
 
 [params]
 
