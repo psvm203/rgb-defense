@@ -18,30 +18,6 @@ const TRACK_GRID: Array[Vector2i] = [
 	Vector2i(12, 8),
 ]
 
-const WAVES: Array = [
-	{
-		groups = [
-			{ max_rgb = Vector3(1.0, 0.0, 0.0), count = 3 },
-		],
-		interval = 1.5,
-	},
-	{
-		groups = [
-			{ max_rgb = Vector3(1.0, 0.0, 0.0), count = 3 },
-			{ max_rgb = Vector3(0.0, 1.0, 0.0), count = 2 },
-		],
-		interval = 1.2,
-	},
-	{
-		groups = [
-			{ max_rgb = Vector3(1.0, 0.0, 0.0), count = 4 },
-			{ max_rgb = Vector3(0.0, 1.0, 0.0), count = 3 },
-			{ max_rgb = Vector3(0.0, 0.0, 1.0), count = 1 },
-		],
-		interval = 1.0,
-	},
-]
-
 var _spawn_queue: Array[Vector3] = []
 var _spawn_timer: Timer
 var _mob_scene: PackedScene
@@ -70,6 +46,7 @@ func _ready() -> void:
 	add_child(panel)
 
 	GameState.wave_completed.connect(_on_wave_completed)
+	GameState.start_wave_pressed.connect(start_wave)
 
 
 func _process(_delta: float) -> void:
@@ -210,8 +187,7 @@ func _on_wave_completed() -> void:
 
 
 func start_wave() -> void:
-	var idx: int = min(GameState.wave_number, WAVES.size() - 1)
-	var wave: Dictionary = WAVES[idx]
+	var wave: Dictionary = GameState.get_wave(GameState.wave_number)
 	_spawn_queue.clear()
 	for group in wave.groups:
 		for j in range(group.count):
