@@ -165,7 +165,7 @@ func _on_spawn_timer_timeout() -> void:
 	if _spawn_queue.is_empty():
 		_spawn_timer.stop()
 		return
-	var max_rgb := _spawn_queue.pop_front()
+	var max_rgb: Vector3 = _spawn_queue.pop_front()
 	_spawn_mob(max_rgb)
 
 
