@@ -5,7 +5,7 @@ const GRID_UNIT: int = 72
 
 func _ready() -> void:
 	var track_grid: Array[Vector2] = [
-		Vector2(0, 4), # entry
+		Vector2(0, 4),
 		Vector2(4, 4),
 		Vector2(4, 2),
 		Vector2(8, 2),
@@ -15,7 +15,7 @@ func _ready() -> void:
 		Vector2(10, 6),
 		Vector2(10, 2),
 		Vector2(12, 2),
-		Vector2(12, 8), # exit
+		Vector2(12, 8),
 	]
 
 	var track_points := PackedVector2Array()
@@ -30,3 +30,7 @@ func _ready() -> void:
 	$TrackLine.points = track_points
 	$TrackLine.width = 40.0
 	$TrackLine.default_color = Color(0.35, 0.35, 0.35)
+
+	var mob_scene := preload("res://mob/mob.tscn")
+	var mob := mob_scene.instantiate()
+	$Track/SpawnPoint.add_child(mob)

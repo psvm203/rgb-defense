@@ -5,6 +5,10 @@
 [node name="TrackRoot" type="Node2D"]
 script = ExtResource("1_track")
 
+[node name="TrackLine" type="Line2D" parent="."]
+
 [node name="Track" type="Path2D" parent="."]
 
-[node name="TrackLine" type="Line2D" parent="."]
+[node name="SpawnPoint" type="PathFollow2D" parent="Track"]
+loop = false
+rotates = false
