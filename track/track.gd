@@ -56,6 +56,8 @@ func _ready() -> void:
 	_spawn_timer.one_shot = false
 	_spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	add_child(_spawn_timer)
+	var hud_scene := preload("res://ui/hud.tscn")
+	add_child(hud_scene.instantiate())
 	GameState.wave_completed.connect(_on_wave_completed)
 
 
