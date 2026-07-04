@@ -20,9 +20,43 @@ const TRACK_GRID: Array[Vector2i] = [
 
 
 func _ready() -> void:
+	set_process_input(true)
 	_setup_tilemap()
 	_setup_path()
 	_spawn_mob()
+
+
+func _input(event: InputEvent) -> void:
+	if not (
+			event is InputEventMouseButton
+			and event.pressed
+			and event.button_index == MOUSE_BUTTON_LEFT
+	):
+		return
+	_place_tower()
+
+
+func _place_tower() -> void:
+	var world_pos := get_global_mouse_position()
+	var grid_pos := Vector2i(
+		roundi(world_pos.x / GRID_UNIT),
+		roundi(world_pos.y / GRID_UNIT),
+	)
+	if grid_pos.x < 0 or grid_pos.y < 0 or grid_pos.x >= MAP_SIZE.x or grid_pos.y >= MAP_SIZE.y:
+		return
+
+	var track_cells := _get_track_cells()
+	var tile_x := grid_pos.x * 2
+	var tile_y := grid_pos.y * 2
+	for tx in range(tile_x, tile_x + 2):
+		for ty in range(tile_y, tile_y + 2):
+			if track_cells.has(Vector2i(tx, ty)):
+				return
+
+	var tower_scene := preload("res://tower/tower.tscn")
+	var tower := tower_scene.instantiate()
+	tower.position = Vector2(grid_pos) * GRID_UNIT + HALF_GRID
+	add_child(tower)
 
 
 func _get_track_cells() -> Array[Vector2i]:

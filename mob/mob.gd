@@ -11,6 +11,7 @@ func _ready() -> void:
 	rgb = max_rgb
 	_update_appearance()
 	_base_sprite_x = $AnimatedSprite2D.position.x
+	add_to_group("mobs")
 
 
 func _process(delta: float) -> void:
@@ -55,6 +56,13 @@ func _channel_color(value: float, max_value: float) -> float:
 	return maxf(value / max_value, 0.4)
 
 
+func take_damage(color_index: int, amount: float) -> void:
+	rgb[color_index] = maxf(0.0, rgb[color_index] - amount)
+	_update_appearance()
+	if rgb == Vector3.ZERO:
+		queue_free()
+
+
 func _draw() -> void:
 	const BAR_WIDTH := 40.0
 	const BAR_HEIGHT := 4.0
@@ -74,4 +82,9 @@ func _draw() -> void:
 
 	draw_rect(Rect2(-BAR_WIDTH / 2.0, BAR_Y, BAR_WIDTH, BAR_HEIGHT), Color.BLACK)
 	draw_rect(Rect2(-BAR_WIDTH / 2.0, BAR_Y, BAR_WIDTH * ratio, BAR_HEIGHT), bar_color)
-	draw_rect(Rect2(-BAR_WIDTH / 2.0, BAR_Y, BAR_WIDTH, BAR_HEIGHT), Color(1.0, 1.0, 1.0, 0.5), false, 1.0)
+	draw_rect(
+		Rect2(-BAR_WIDTH / 2.0, BAR_Y, BAR_WIDTH, BAR_HEIGHT),
+		Color(1.0, 1.0, 1.0, 0.5),
+		false,
+		1.0,
+	)
