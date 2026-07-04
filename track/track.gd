@@ -18,12 +18,45 @@ const TRACK_GRID: Array[Vector2i] = [
 	Vector2i(12, 8),
 ]
 
+const WAVES: Array = [
+	{
+		groups = [
+			{ max_rgb = Vector3(1.0, 0.0, 0.0), count = 3 },
+		],
+		interval = 1.5,
+	},
+	{
+		groups = [
+			{ max_rgb = Vector3(1.0, 0.0, 0.0), count = 3 },
+			{ max_rgb = Vector3(0.0, 1.0, 0.0), count = 2 },
+		],
+		interval = 1.2,
+	},
+	{
+		groups = [
+			{ max_rgb = Vector3(1.0, 0.0, 0.0), count = 4 },
+			{ max_rgb = Vector3(0.0, 1.0, 0.0), count = 3 },
+			{ max_rgb = Vector3(0.0, 0.0, 1.0), count = 1 },
+		],
+		interval = 1.0,
+	},
+]
+
+var _spawn_queue: Array[Vector3] = []
+var _spawn_timer: Timer
+var _mob_scene: PackedScene
+
 
 func _ready() -> void:
 	set_process_input(true)
 	_setup_tilemap()
 	_setup_path()
-	_spawn_mob()
+	_mob_scene = preload("res://mob/mob.tscn")
+	_spawn_timer = Timer.new()
+	_spawn_timer.one_shot = false
+	_spawn_timer.timeout.connect(_on_spawn_timer_timeout)
+	add_child(_spawn_timer)
+	GameState.wave_completed.connect(_on_wave_completed)
 
 
 func _input(event: InputEvent) -> void:
@@ -108,7 +141,33 @@ func _setup_path() -> void:
 	$Path.curve = curve
 
 
-func _spawn_mob() -> void:
-	var mob_scene := preload("res://mob/mob.tscn")
-	var mob := mob_scene.instantiate()
+func _on_wave_completed() -> void:
+	pass
+
+
+func start_wave() -> void:
+	var idx: int = min(GameState.wave_number, WAVES.size() - 1)
+	var wave: Dictionary = WAVES[idx]
+	_spawn_queue.clear()
+	for group in wave.groups:
+		for j in range(group.count):
+			_spawn_queue.append(group.max_rgb)
+
+	GameState.wave_number += 1
+	GameState.is_wave_active = true
+	_spawn_timer.wait_time = wave.interval
+	_spawn_timer.start()
+
+
+func _on_spawn_timer_timeout() -> void:
+	if _spawn_queue.is_empty():
+		_spawn_timer.stop()
+		return
+	var max_rgb := _spawn_queue.pop_front()
+	_spawn_mob(max_rgb)
+
+
+func _spawn_mob(max_rgb: Vector3) -> void:
+	var mob := _mob_scene.instantiate()
+	mob.max_rgb = max_rgb
 	$Path/SpawnPoint.add_child(mob)

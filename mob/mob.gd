@@ -12,6 +12,7 @@ func _ready() -> void:
 	_update_appearance()
 	_base_sprite_x = $AnimatedSprite2D.position.x
 	add_to_group("mobs")
+	GameState.mob_spawned()
 
 
 func _process(delta: float) -> void:
@@ -19,6 +20,11 @@ func _process(delta: float) -> void:
 	if not path_follow:
 		return
 	path_follow.progress += speed * delta
+	if path_follow.progress_ratio >= 1.0:
+		GameState.lose_life()
+		GameState.mob_destroyed()
+		queue_free()
+		return
 	_update_flip(path_follow)
 
 
@@ -60,6 +66,7 @@ func take_damage(color_index: int, amount: float) -> void:
 	rgb[color_index] = maxf(0.0, rgb[color_index] - amount)
 	_update_appearance()
 	if rgb == Vector3.ZERO:
+		GameState.mob_destroyed()
 		queue_free()
 
 
