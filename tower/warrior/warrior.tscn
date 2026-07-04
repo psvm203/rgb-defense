@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cvhouptbx60ks"]
 
-[ext_resource type="Script" uid="uid://bxueqrfpqhyma" path="res://tower/warrior.gd" id="1_tower"]
-[ext_resource type="Texture2D" uid="uid://c3uvodo5byfef" path="res://tower/warrior_idle.png" id="2_3fjlj"]
-[ext_resource type="Texture2D" uid="uid://bo8doodydketa" path="res://tower/warrior_attack.png" id="2_4ulc0"]
+[ext_resource type="Script" uid="uid://bxueqrfpqhyma" path="res://tower/warrior/warrior.gd" id="1_tower"]
+[ext_resource type="Texture2D" uid="uid://c3uvodo5byfef" path="res://tower/warrior/warrior_idle.png" id="2_3fjlj"]
+[ext_resource type="Texture2D" uid="uid://bo8doodydketa" path="res://tower/warrior/warrior_attack.png" id="2_4ulc0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wwmrl"]
 atlas = ExtResource("2_4ulc0")

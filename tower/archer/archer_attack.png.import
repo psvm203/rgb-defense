@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3uvodo5byfef"
-path="res://.godot/imported/warrior_idle.png-fd12650b2d565c36be13af5f0003dc89.ctex"
+uid="uid://cyulql4jmrn50"
+path="res://.godot/imported/archer_attack.png-0027c0c1e8678b23a4ffc98f465dbad5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tower/warrior_idle.png"
-dest_files=["res://.godot/imported/warrior_idle.png-fd12650b2d565c36be13af5f0003dc89.ctex"]
+source_file="res://tower/archer/archer_attack.png"
+dest_files=["res://.godot/imported/archer_attack.png-0027c0c1e8678b23a4ffc98f465dbad5.ctex"]
 
 [params]
 
