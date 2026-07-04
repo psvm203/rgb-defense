@@ -45,10 +45,13 @@ const WAVES: Array = [
 var _spawn_queue: Array[Vector3] = []
 var _spawn_timer: Timer
 var _mob_scene: PackedScene
+var _selected_tower_scene: PackedScene
+var _selected_tower_cost: int
+var _preview: Node2D
+var _occupied_cells: Array[Vector2i] = []
 
 
 func _ready() -> void:
-	set_process_input(true)
 	_setup_tilemap()
 	_setup_path()
 	_mob_scene = preload("res://mob/mob.tscn")
@@ -56,29 +59,52 @@ func _ready() -> void:
 	_spawn_timer.one_shot = false
 	_spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	add_child(_spawn_timer)
+
 	var hud_scene := preload("res://ui/hud.tscn")
 	add_child(hud_scene.instantiate())
+
+	var panel_scene := preload("res://ui/tower_panel.tscn")
+	var panel := panel_scene.instantiate()
+	panel.tower_selected.connect(_on_tower_selected)
+	panel.selection_cancelled.connect(_on_selection_cancelled)
+	add_child(panel)
+
 	GameState.wave_completed.connect(_on_wave_completed)
 
 
-func _input(event: InputEvent) -> void:
+func _process(_delta: float) -> void:
+	if not _preview:
+		return
+	var grid_pos := _mouse_to_grid()
+	if _is_grid_valid(grid_pos):
+		_preview.position = Vector2(grid_pos) * GRID_UNIT + HALF_GRID
+		_preview.visible = true
+	else:
+		_preview.visible = false
+
+
+func _unhandled_input(event: InputEvent) -> void:
 	if not (
 			event is InputEventMouseButton
 			and event.pressed
 			and event.button_index == MOUSE_BUTTON_LEFT
+			and _preview
 	):
 		return
-	_place_tower()
+	_try_place_tower()
 
 
-func _place_tower() -> void:
+func _mouse_to_grid() -> Vector2i:
 	var world_pos := get_global_mouse_position()
-	var grid_pos := Vector2i(
-		roundi(world_pos.x / GRID_UNIT),
-		roundi(world_pos.y / GRID_UNIT),
+	return Vector2i(
+		floori(world_pos.x / GRID_UNIT),
+		floori(world_pos.y / GRID_UNIT),
 	)
+
+
+func _is_grid_valid(grid_pos: Vector2i) -> bool:
 	if grid_pos.x < 0 or grid_pos.y < 0 or grid_pos.x >= MAP_SIZE.x or grid_pos.y >= MAP_SIZE.y:
-		return
+		return false
 
 	var track_cells := _get_track_cells()
 	var tile_x := grid_pos.x * 2
@@ -86,12 +112,48 @@ func _place_tower() -> void:
 	for tx in range(tile_x, tile_x + 2):
 		for ty in range(tile_y, tile_y + 2):
 			if track_cells.has(Vector2i(tx, ty)):
-				return
+				return false
 
-	var tower_scene := preload("res://tower/mage/mage.tscn")
-	var tower := tower_scene.instantiate()
+	if _occupied_cells.has(grid_pos):
+		return false
+
+	return true
+
+
+func _try_place_tower() -> void:
+	var grid_pos := _mouse_to_grid()
+	if not _is_grid_valid(grid_pos):
+		return
+	if not GameState.spend_coins(_selected_tower_cost):
+		return
+
+	var tower := _selected_tower_scene.instantiate()
 	tower.position = Vector2(grid_pos) * GRID_UNIT + HALF_GRID
+	tower.add_to_group("towers")
 	add_child(tower)
+	_occupied_cells.append(grid_pos)
+	_clear_selection()
+
+
+func _on_tower_selected(scene_path: String, cost: int) -> void:
+	_clear_selection()
+	_selected_tower_scene = load(scene_path)
+	_selected_tower_cost = cost
+	_preview = _selected_tower_scene.instantiate()
+	_preview.modulate.a = 0.5
+	_preview.process_mode = PROCESS_MODE_DISABLED
+	add_child(_preview)
+
+
+func _on_selection_cancelled() -> void:
+	_clear_selection()
+
+
+func _clear_selection() -> void:
+	if _preview:
+		_preview.queue_free()
+		_preview = null
+	_selected_tower_scene = null
 
 
 func _get_track_cells() -> Array[Vector2i]:
