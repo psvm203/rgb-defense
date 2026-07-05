@@ -62,6 +62,7 @@ func _process(delta: float) -> void:
 	position = curve.sample_baked(_traveled)
 	if _traveled >= baked_length:
 		GameState.lose_life()
+		SfxPlayer.play("damage")
 		died.emit()
 		queue_free()
 		return

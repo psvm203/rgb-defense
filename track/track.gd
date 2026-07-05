@@ -313,6 +313,7 @@ func _try_place_tower() -> void:
 	tower.add_to_group("towers")
 	add_child(tower)
 	_occupied_cells.append(grid_pos)
+	SfxPlayer.play("build")
 	_clear_selection()
 
 
@@ -451,6 +452,15 @@ func _on_upgrade_pressed(upgrade: Dictionary) -> void:
 	new_tower.cost = _selected_tower.cost + upgrade.cost
 	new_tower.add_to_group("towers")
 	add_child(new_tower)
+	const BASE_TOWERS := [
+		"res://tower/red/warrior/warrior.tscn",
+		"res://tower/green/archer/archer.tscn",
+		"res://tower/blue/mage/mage.tscn",
+	]
+	if BASE_TOWERS.has(_selected_tower.scene_file_path):
+		SfxPlayer.play("tier1")
+	else:
+		SfxPlayer.play("tier2")
 	_selected_tower.queue_free()
 	_hide_tower_menu()
 

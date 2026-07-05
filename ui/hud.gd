@@ -196,6 +196,7 @@ func _apply_button_style(btn: Button) -> void:
 
 func _pause() -> void:
 	get_tree().paused = true
+	SfxPlayer.play("pause")
 	_pause_overlay.visible = true
 	_pause_menu.visible = true
 	_pause_settings.visible = false
