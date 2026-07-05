@@ -1,5 +1,7 @@
 extends Area2D
 
+signal died
+
 @export var speed: float = 128.0
 @export var max_rgb: Vector3 = Vector3(0.0, 0.0, 1.0)
 
@@ -39,7 +41,6 @@ func _ready() -> void:
 	_update_appearance()
 	_base_sprite_x = $AnimatedSprite2D.position.x
 	add_to_group("mobs")
-	GameState.mob_spawned()
 	var path := get_parent() as Path2D
 	if path and path.curve:
 		position = path.curve.sample_baked(0.0)
@@ -61,7 +62,7 @@ func _process(delta: float) -> void:
 	position = curve.sample_baked(_traveled)
 	if _traveled >= baked_length:
 		GameState.lose_life()
-		GameState.mob_destroyed()
+		died.emit()
 		queue_free()
 		return
 	_update_flip(curve, baked_length)
@@ -101,7 +102,7 @@ func take_damage(color_index: int, amount: float) -> void:
 			rgb[i] = maxf(0.0, rgb[i] - splash_amount)
 	_update_appearance()
 	if rgb == Vector3.ZERO:
-		GameState.mob_destroyed()
+		died.emit()
 		queue_free()
 
 

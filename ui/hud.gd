@@ -16,6 +16,8 @@ const MAX_GROUPS := 3
 @onready var _fullscreen_check: CheckButton = $PauseOverlay/PauseSettingsPanel/FullscreenCheck
 @onready var _volume_slider: HSlider = $PauseOverlay/PauseSettingsPanel/VolumeHBox/VolumeSlider
 
+var _track: Node2D
+
 const RESOLUTIONS: Array[Vector2i] = [
 	Vector2i(960, 540),
 	Vector2i(1280, 720),
@@ -51,6 +53,7 @@ const TUTORIAL_MESSAGES: Dictionary = {
 
 
 func _ready() -> void:
+	_track = get_parent()
 	_start_wave_btn.pressed.connect(_on_start_wave_pressed)
 	_load_settings()
 	_apply_settings()
@@ -97,10 +100,10 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	_lives_label.text = str(GameState.lives)
 	_coins_label.text = str(GameState.coins)
-	_wave_label.text = "Wave " + str(GameState.wave_number)
-	_start_wave_btn.disabled = GameState.is_wave_active
+	_wave_label.text = "Wave " + str(_track.wave_number)
+	_start_wave_btn.disabled = _track.is_wave_active
 
-	var wave: Dictionary = GameState.get_wave(GameState.current_level, GameState.wave_number)
+	var wave: Dictionary = GameState.get_wave(GameState.current_level, _track.wave_number)
 	var groups: Array = wave.groups
 	for i in range(MAX_GROUPS):
 		var row_data: Dictionary = _group_rows[i]
@@ -133,7 +136,7 @@ func _rgb_color(max_rgb: Vector3) -> Color:
 
 
 func _on_start_wave_pressed() -> void:
-	GameState.start_wave_pressed.emit()
+	_track.start_wave_pressed.emit()
 
 
 func _pause() -> void:
@@ -226,11 +229,11 @@ func _update_tutorial() -> void:
 			if not get_tree().get_nodes_in_group("towers").is_empty():
 				_advance_tutorial()
 		1:
-			if GameState.is_wave_active:
+			if _track.is_wave_active:
 				_advance_tutorial()
 		2:
 			var level_waves := GameState.get_waves(GameState.current_level)
-			if GameState.wave_number >= level_waves.size():
+			if _track.wave_number >= level_waves.size():
 				_advance_tutorial()
 
 

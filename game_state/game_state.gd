@@ -1,15 +1,6 @@
 extends Node
 
 @warning_ignore("unused_signal")
-signal wave_completed
-@warning_ignore("unused_signal")
-signal mob_killed
-@warning_ignore("unused_signal")
-signal start_wave_pressed
-@warning_ignore("unused_signal")
-signal level_completed(level: int)
-
-@warning_ignore("unused_signal")
 signal game_over
 
 const LEVEL_WAVES: Dictionary = {
@@ -121,9 +112,6 @@ const PROGRESS_SECTION := "progress"
 
 var lives: int = 10
 var coins: int = 10000
-var wave_number: int = 0
-var is_wave_active: bool = false
-var mobs_alive: int = 0
 var current_level: int = 1
 
 
@@ -170,12 +158,3 @@ func lose_life() -> void:
 	lives -= 1
 	if lives <= 0:
 		game_over.emit()
-
-
-func mob_spawned() -> void:
-	mobs_alive += 1
-
-
-func mob_destroyed() -> void:
-	mobs_alive -= 1
-	mob_killed.emit()

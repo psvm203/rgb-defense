@@ -1,5 +1,13 @@
 extends Node2D
 
+signal wave_completed
+signal level_completed(level: int)
+signal start_wave_pressed
+
+var wave_number: int = 0
+var is_wave_active: bool = false
+var mobs_alive: int = 0
+
 const GRID_UNIT: int = 64
 const MAP_SIZE := Vector2i(15, 9)
 const HALF_GRID := Vector2(GRID_UNIT / 2.0, GRID_UNIT / 2.0)
@@ -170,9 +178,8 @@ func _ready() -> void:
 	panel.selection_cancelled.connect(_on_selection_cancelled)
 	add_child(panel)
 
-	GameState.mob_killed.connect(_check_wave_completion)
-	GameState.start_wave_pressed.connect(start_wave)
-	GameState.level_completed.connect(_on_level_completed)
+	start_wave_pressed.connect(start_wave)
+	level_completed.connect(_on_level_completed)
 	GameState.game_over.connect(_on_game_over)
 	_create_tower_menu()
 
@@ -214,8 +221,8 @@ func _input(event: InputEvent) -> void:
 			if GameState.current_level != 1:
 				_on_tower_selected("res://tower/blue/mage/mage.tscn", 75)
 		KEY_SPACE:
-			if not GameState.is_wave_active:
-				GameState.start_wave_pressed.emit()
+			if not is_wave_active:
+				start_wave_pressed.emit()
 
 
 func _mouse_to_grid() -> Vector2i:
@@ -424,14 +431,14 @@ func _setup_path() -> void:
 
 
 func _check_wave_completion() -> void:
-	if not GameState.is_wave_active:
+	if not is_wave_active:
 		return
-	if _spawn_queue.is_empty() and GameState.mobs_alive <= 0:
-		GameState.is_wave_active = false
-		GameState.wave_completed.emit()
+	if _spawn_queue.is_empty() and mobs_alive <= 0:
+		is_wave_active = false
+		wave_completed.emit()
 		var level_waves := GameState.get_waves(GameState.current_level)
-		if GameState.wave_number >= level_waves.size():
-			GameState.level_completed.emit(GameState.current_level)
+		if wave_number >= level_waves.size():
+			level_completed.emit(GameState.current_level)
 
 
 func _on_level_completed(_level: int) -> void:
@@ -450,14 +457,14 @@ func _on_game_over() -> void:
 
 
 func start_wave() -> void:
-	var wave: Dictionary = GameState.get_wave(GameState.current_level, GameState.wave_number)
+	var wave: Dictionary = GameState.get_wave(GameState.current_level, wave_number)
 	_spawn_queue.clear()
 	for group in wave.groups:
 		for j in range(group.count):
 			_spawn_queue.append(group.max_rgb)
 
-	GameState.wave_number += 1
-	GameState.is_wave_active = true
+	wave_number += 1
+	is_wave_active = true
 	_spawn_timer.wait_time = wave.interval
 	_spawn_timer.start()
 
@@ -474,4 +481,11 @@ func _on_spawn_timer_timeout() -> void:
 func _spawn_mob(max_rgb: Vector3) -> void:
 	var mob := _mob_scene.instantiate()
 	mob.max_rgb = max_rgb
+	mobs_alive += 1
+	mob.died.connect(_on_mob_destroyed)
 	$Path.add_child(mob)
+
+
+func _on_mob_destroyed() -> void:
+	mobs_alive -= 1
+	_check_wave_completion()
