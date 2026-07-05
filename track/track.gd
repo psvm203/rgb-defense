@@ -48,14 +48,35 @@ const UPGRADES: Dictionary = {
 			cost = 50,
 		},
 	],
+	"res://tower/red/sword_saint/sword_saint.tscn": [
+		{
+			name = "Sword Sovereign",
+			scene = "res://tower/red/sword_sovereign/sword_sovereign.tscn",
+			cost = 100,
+		},
+	],
+	"res://tower/red/barbarian/barbarian.tscn": [
+		{
+			name = "Berserker",
+			scene = "res://tower/red/berserker/berserker.tscn",
+			cost = 100,
+		},
+	],
+	"res://tower/red/brawler/brawler.tscn": [
+		{
+			name = "Battle God",
+			scene = "res://tower/red/battle_god/battle_god.tscn",
+			cost = 100,
+		},
+	],
 	"res://tower/green/archer/archer.tscn": [
 		{
-			name = "Marksman",
+			name = "Sniper",
 			scene = "res://tower/green/marksman/marksman.tscn",
 			cost = 50,
 		},
 		{
-			name = "Stormbringer",
+			name = "Hunter",
 			scene = "res://tower/green/stormbringer/stormbringer.tscn",
 			cost = 50,
 		},
@@ -65,9 +86,30 @@ const UPGRADES: Dictionary = {
 			cost = 50,
 		},
 	],
+	"res://tower/green/marksman/marksman.tscn": [
+		{
+			name = "Deadeye",
+			scene = "res://tower/green/deadeye/deadeye.tscn",
+			cost = 100,
+		},
+	],
+	"res://tower/green/stormbringer/stormbringer.tscn": [
+		{
+			name = "Tempest",
+			scene = "res://tower/green/tempest/tempest.tscn",
+			cost = 100,
+		},
+	],
+	"res://tower/green/viper/viper.tscn": [
+		{
+			name = "Basilisk",
+			scene = "res://tower/green/basilisk/basilisk.tscn",
+			cost = 100,
+		},
+	],
 	"res://tower/blue/mage/mage.tscn": [
 		{
-			name = "Thunderbolt",
+			name = "Electromancer",
 			scene = "res://tower/blue/thunderbolt/thunderbolt.tscn",
 			cost = 50,
 		},
@@ -77,9 +119,30 @@ const UPGRADES: Dictionary = {
 			cost = 50,
 		},
 		{
-			name = "Frost Mage",
+			name = "Cryomancer",
 			scene = "res://tower/blue/frost_mage/frost_mage.tscn",
 			cost = 50,
+		},
+	],
+	"res://tower/blue/thunderbolt/thunderbolt.tscn": [
+		{
+			name = "Storm Lord",
+			scene = "res://tower/blue/storm_lord/storm_lord.tscn",
+			cost = 100,
+		},
+	],
+	"res://tower/blue/necromancer/necromancer.tscn": [
+		{
+			name = "Death Lord",
+			scene = "res://tower/blue/death_lord/death_lord.tscn",
+			cost = 100,
+		},
+	],
+	"res://tower/blue/frost_mage/frost_mage.tscn": [
+		{
+			name = "Absolute Zero",
+			scene = "res://tower/blue/absolute_zero/absolute_zero.tscn",
+			cost = 100,
 		},
 	],
 }
