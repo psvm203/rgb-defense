@@ -10,6 +10,8 @@ const MAX_GROUPS := 3
 @onready var _pause_overlay: ColorRect = $PauseOverlay
 @onready var _pause_menu: VBoxContainer = $PauseOverlay/PauseMenuPanel
 @onready var _pause_settings: VBoxContainer = $PauseOverlay/PauseSettingsPanel
+@onready var _tutorial_label: Label = $TutorialPanel/TutorialLabel
+@onready var _tutorial_panel: PanelContainer = $TutorialPanel
 @onready var _res_option: OptionButton = $PauseOverlay/PauseSettingsPanel/ResHBox/ResOption
 @onready var _fullscreen_check: CheckButton = $PauseOverlay/PauseSettingsPanel/FullscreenCheck
 @onready var _volume_slider: HSlider = $PauseOverlay/PauseSettingsPanel/VolumeHBox/VolumeSlider
@@ -27,12 +29,37 @@ const MASTER_BUS := 0
 const MIN_VOLUME_DB := -40.0
 
 var _group_rows: Array = []
+var _tutorial_step: int = -1
+
+const TUTORIAL_MESSAGES: Dictionary = {
+	1: [
+		"타워를 설치해보세요!\n우측 패널에서 Warrior를 선택하거나 R 키를 누르세요.",
+		"좌측 하단의 Start Wave 버튼을 눌러\n웨이브를 시작하세요!",
+		"적을 모두 처치하면 웨이브가 완료됩니다.\n총 3 웨이브를 클리어하세요!",
+	],
+	2: [
+		"적과 같은 색의 타워가 효과적입니다!\n빨강 적 → Warrior | 초록 적 → Archer | 파랑 적 → Mage",
+		"같은 색 공격은 100%, 다른 색은 33% 데미지!\n적 체력바 색을 확인하고 배치하세요.",
+		"R/G/B 키 또는 우측 패널로 타워를 선택하고\n총 4 웨이브를 클리어하세요!",
+	],
+	3: [
+		"타워를 클릭하면 판매/전직 메뉴가 열립니다!\nSell: 구매가의 90% 환불 | Upgrade: 전직 가능",
+		"전직 타워는 더 강력한 공격 능력을 가집니다.\n각 타워마다 3가지 전직 중 하나를 선택하세요!",
+		"총 5 웨이브를 클리어하면 레벨 완료!",
+	],
+}
 
 
 func _ready() -> void:
 	_start_wave_btn.pressed.connect(_on_start_wave_pressed)
 	_load_settings()
 	_apply_settings()
+	var tutorial_messages: Array = TUTORIAL_MESSAGES.get(GameState.current_level, [])
+	if not tutorial_messages.is_empty():
+		_tutorial_step = 0
+		_tutorial_label.text = tutorial_messages[0]
+	else:
+		_tutorial_panel.hide()
 	for i in range(MAX_GROUPS):
 		var row := HBoxContainer.new()
 		var icon := TextureRect.new()
@@ -73,6 +100,8 @@ func _process(_delta: float) -> void:
 				_resume()
 		else:
 			_pause()
+
+	_update_tutorial()
 
 
 func _rgb_color(max_rgb: Vector3) -> Color:
@@ -166,3 +195,29 @@ func _load_settings() -> void:
 	_res_option.selected = config.get_value(CONFIG_SECTION, CONFIG_RES_INDEX, 0)
 	_fullscreen_check.button_pressed = config.get_value(CONFIG_SECTION, CONFIG_FULLSCREEN, false)
 	_volume_slider.value = config.get_value(CONFIG_SECTION, CONFIG_VOLUME, 100.0)
+
+
+func _update_tutorial() -> void:
+	var tutorial_messages: Array = TUTORIAL_MESSAGES.get(GameState.current_level, [])
+	if tutorial_messages.is_empty():
+		return
+	match _tutorial_step:
+		0:
+			if not get_tree().get_nodes_in_group("towers").is_empty():
+				_advance_tutorial()
+		1:
+			if GameState.is_wave_active:
+				_advance_tutorial()
+		2:
+			var level_waves := GameState.get_waves(GameState.current_level)
+			if GameState.wave_number >= level_waves.size():
+				_advance_tutorial()
+
+
+func _advance_tutorial() -> void:
+	var tutorial_messages: Array = TUTORIAL_MESSAGES.get(GameState.current_level, [])
+	_tutorial_step += 1
+	if _tutorial_step >= tutorial_messages.size():
+		_tutorial_panel.hide()
+	else:
+		_tutorial_label.text = tutorial_messages[_tutorial_step]

@@ -56,8 +56,47 @@ const LEVEL_WAVES: Dictionary = {
 			interval = 1.0,
 		},
 	],
+	3: [
+		{
+			groups = [
+				{ max_rgb = Vector3(1.0, 0.0, 0.0), count = 6 },
+				{ max_rgb = Vector3(0.0, 1.0, 0.0), count = 4 },
+			],
+			interval = 1.2,
+		},
+		{
+			groups = [
+				{ max_rgb = Vector3(0.0, 0.0, 1.0), count = 5 },
+				{ max_rgb = Vector3(0.0, 1.0, 0.0), count = 5 },
+			],
+			interval = 1.0,
+		},
+		{
+			groups = [
+				{ max_rgb = Vector3(1.0, 0.0, 0.0), count = 4 },
+				{ max_rgb = Vector3(0.0, 1.0, 0.0), count = 4 },
+				{ max_rgb = Vector3(0.0, 0.0, 1.0), count = 4 },
+			],
+			interval = 1.0,
+		},
+		{
+			groups = [
+				{ max_rgb = Vector3(0.0, 0.0, 1.0), count = 6 },
+				{ max_rgb = Vector3(1.0, 0.0, 0.0), count = 4 },
+			],
+			interval = 0.9,
+		},
+		{
+			groups = [
+				{ max_rgb = Vector3(1.0, 0.0, 0.0), count = 5 },
+				{ max_rgb = Vector3(0.0, 1.0, 0.0), count = 5 },
+				{ max_rgb = Vector3(0.0, 0.0, 1.0), count = 5 },
+			],
+			interval = 0.8,
+		},
+	],
 }
-const MAX_LEVEL := 2
+const MAX_LEVEL := 3
 
 const PROGRESS_PATH := "user://progress.cfg"
 const PROGRESS_SECTION := "progress"
