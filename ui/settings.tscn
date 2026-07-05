@@ -1,13 +1,29 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://dmh4b3j1xmmym"]
 
-[ext_resource type="Script" path="res://ui/settings.gd" id="1_settings"]
+[ext_resource type="Script" uid="uid://c48ef13eab2cd" path="res://ui/settings.gd" id="1_settings"]
 
-[node name="Settings" type="Control"]
-script = ExtResource("1_settings")
+[node name="Settings" type="Control" unique_id=441272243]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_settings")
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=492931615]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_right = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1418126488]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -18,63 +34,72 @@ offset_top = -160.0
 offset_right = 200.0
 offset_bottom = 160.0
 
-[node name="VBox" type="VBoxContainer" parent="Panel"]
+[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=1150400816]
+custom_minimum_size = Vector2(300, 0)
+custom_maximum_size = Vector2(400, -1)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Spacer3" type="Control" parent="Panel/VBox" unique_id=1307557122]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Title" type="Label" parent="Panel/VBox"]
+[node name="Title" type="Label" parent="Panel/VBox" unique_id=1378822188]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Settings"
 horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="Panel/VBox"]
+[node name="Spacer" type="Control" parent="Panel/VBox" unique_id=2086732521]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="ResHBox" type="HBoxContainer" parent="Panel/VBox"]
+[node name="ResHBox" type="HBoxContainer" parent="Panel/VBox" unique_id=2098788202]
 layout_mode = 2
 
-[node name="ResLabel" type="Label" parent="Panel/VBox/ResHBox"]
+[node name="ResLabel" type="Label" parent="Panel/VBox/ResHBox" unique_id=1760066097]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Resolution"
 
-[node name="ResOption" type="OptionButton" parent="Panel/VBox/ResHBox"]
+[node name="ResOption" type="OptionButton" parent="Panel/VBox/ResHBox" unique_id=539270071]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="FullscreenCheck" type="CheckButton" parent="Panel/VBox"]
+[node name="FullscreenCheck" type="CheckButton" parent="Panel/VBox" unique_id=433892835]
 layout_mode = 2
 text = "Fullscreen"
 
-[node name="BgmHBox" type="HBoxContainer" parent="Panel/VBox"]
+[node name="BgmHBox" type="HBoxContainer" parent="Panel/VBox" unique_id=9201118]
 layout_mode = 2
 
-[node name="BgmLabel" type="Label" parent="Panel/VBox/BgmHBox"]
+[node name="BgmLabel" type="Label" parent="Panel/VBox/BgmHBox" unique_id=1465433743]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "BGM"
 
-[node name="BgmSlider" type="HSlider" parent="Panel/VBox/BgmHBox"]
+[node name="BgmSlider" type="HSlider" parent="Panel/VBox/BgmHBox" unique_id=440196299]
 layout_mode = 2
 size_flags_horizontal = 3
 value = 100.0
 
-[node name="SfxHBox" type="HBoxContainer" parent="Panel/VBox"]
+[node name="SfxHBox" type="HBoxContainer" parent="Panel/VBox" unique_id=1825045626]
 layout_mode = 2
 
-[node name="SfxLabel" type="Label" parent="Panel/VBox/SfxHBox"]
+[node name="SfxLabel" type="Label" parent="Panel/VBox/SfxHBox" unique_id=465619445]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SFX"
 
-[node name="SfxSlider" type="HSlider" parent="Panel/VBox/SfxHBox"]
+[node name="SfxSlider" type="HSlider" parent="Panel/VBox/SfxHBox" unique_id=762037853]
 layout_mode = 2
 size_flags_horizontal = 3
 value = 100.0
 
-[node name="Spacer2" type="Control" parent="Panel/VBox"]
+[node name="Spacer2" type="Control" parent="Panel/VBox" unique_id=494491606]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="BackBtn" type="Button" parent="Panel/VBox"]
+[node name="BackBtn" type="Button" parent="Panel/VBox" unique_id=517836275]
 layout_mode = 2
 text = "Back"
