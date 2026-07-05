@@ -61,4 +61,6 @@ rgb-defense
 ### 커밋
 
 - 커밋하기 전 사용자에게 허락을 받으세요.
+- 커밋 시 git diff를 고려하세요.
+- uid 파일이 누락되지 않게 유의하세요.
 - 커밋 메시지는 Conventional Commits 형식을 사용하세요. (예: feat(monster): implement shield)
