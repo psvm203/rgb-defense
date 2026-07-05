@@ -12,6 +12,10 @@ func get_traveled() -> float:
 	return _traveled
 
 
+func knock_back(distance: float) -> void:
+	_traveled = maxf(0.0, _traveled - distance)
+
+
 func _ready() -> void:
 	rgb = max_rgb
 	_update_appearance()
