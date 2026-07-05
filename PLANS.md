@@ -1,4 +1,4 @@
-# Prism Defense 기획
+# RGB Defense 기획
 
 빛의 삼원색(RGB)을 소재로 한 탑뷰 타워디펜스 게임
 

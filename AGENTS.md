@@ -1,6 +1,6 @@
-# Prism Defense
+# RGB Defense
 
-탑뷰 타워디펜스 게임 Prism Defense입니다.
+탑뷰 타워디펜스 게임 RGB Defense입니다.
 프로젝트에 관한 세부 내용은 PLANS.md를 확인하세요.
 
 ## 개발 환경
@@ -14,7 +14,7 @@
 
 예:
 ```tree
-prism-defense
+rgb-defense
 ├── mob
 │   ├── mob_zombie.png
 │   ├── mob.gd

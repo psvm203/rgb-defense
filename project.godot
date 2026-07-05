@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="prism_defense"
+config/name="rgb_defense"
 run/main_scene="res://track/track.tscn"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
