@@ -42,7 +42,7 @@ func _update_stage_display() -> void:
 
 
 func _get_level_names() -> Array:
-	return ["Debug Stage", "Level 1", "Level 2", "Level 3"]
+	return ["Debug Stage", "Level 1", "Level 2", "Level 3", "Level 4"]
 
 
 func _is_level_available(level: int) -> bool:
