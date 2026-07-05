@@ -35,6 +35,8 @@ func _ready() -> void:
 func _build_buttons() -> void:
 	var coin_tex := preload("res://game_state/coins.png")
 	for tower in TOWERS:
+		if GameState.current_level <= 1 and tower.name != "Warrior":
+			continue
 		var row := HBoxContainer.new()
 		row.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 

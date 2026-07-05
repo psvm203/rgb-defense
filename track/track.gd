@@ -141,9 +141,11 @@ func _input(event: InputEvent) -> void:
 		KEY_R:
 			_on_tower_selected("res://tower/red/warrior/warrior.tscn", 25)
 		KEY_G:
-			_on_tower_selected("res://tower/green/archer/archer.tscn", 50)
+			if GameState.current_level > 1:
+				_on_tower_selected("res://tower/green/archer/archer.tscn", 50)
 		KEY_B:
-			_on_tower_selected("res://tower/blue/mage/mage.tscn", 75)
+			if GameState.current_level > 1:
+				_on_tower_selected("res://tower/blue/mage/mage.tscn", 75)
 		KEY_SPACE:
 			if not GameState.is_wave_active:
 				GameState.start_wave_pressed.emit()
@@ -251,7 +253,7 @@ func _try_select_tower() -> void:
 		_upgrade_btns.clear()
 
 		var upgrades: Array = UPGRADES.get(closest.scene_file_path, [])
-		if not upgrades.is_empty():
+		if not upgrades.is_empty() and GameState.current_level > 1:
 			var vbox: VBoxContainer = _tower_menu.get_child(0).get_child(0)
 			for upgrade in upgrades:
 				var btn := Button.new()
