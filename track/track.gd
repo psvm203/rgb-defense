@@ -429,7 +429,10 @@ func _on_wave_completed() -> void:
 
 func _on_level_completed(_level: int) -> void:
 	GameState.unlock_next_level()
-	get_tree().change_scene_to_file("res://ui/main_menu.tscn")
+	var victory_scene := preload("res://ui/victory.tscn")
+	var victory := victory_scene.instantiate()
+	add_child(victory)
+	get_tree().paused = true
 
 
 func start_wave() -> void:
