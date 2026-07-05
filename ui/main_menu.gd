@@ -3,34 +3,22 @@ extends CanvasLayer
 const WaveData = preload("res://level/wave.gd")
 
 @onready var _menu_panel: VBoxContainer = $MenuPanel
-@onready var _settings_panel: VBoxContainer = $SettingsPanel
-@onready var _res_option: OptionButton = $SettingsPanel/ResHBox/ResOption
-@onready var _fullscreen_check: CheckButton = $SettingsPanel/FullscreenCheck
-@onready var _volume_slider: HSlider = $SettingsPanel/VolumeHBox/VolumeSlider
 @onready var _stage_label: Label = $MenuPanel/StageHBox/StageLabel
 @onready var _prev_btn: TextureButton = $MenuPanel/StageHBox/PrevWrapper/PrevBtn
 @onready var _next_btn: TextureButton = $MenuPanel/StageHBox/NextWrapper/NextBtn
 @onready var _start_btn: TextureButton = $MenuPanel/StartWrapper/StartBtn
 @onready var _start_label: Label = $MenuPanel/StartWrapper/StartBtn/Label
 
-const RESOLUTIONS: Array[Vector2i] = [
-	Vector2i(960, 540),
-	Vector2i(1280, 720),
-	Vector2i(1920, 1080),
-]
-const CONFIG_SECTION := "display"
-const CONFIG_RES_INDEX := "resolution_index"
-const CONFIG_FULLSCREEN := "fullscreen"
-const CONFIG_VOLUME := "volume"
-const MASTER_BUS := 0
-const MIN_VOLUME_DB := -40.0
-
 var _selected_level: int = 1
+var _settings_scene: Control
 
 
 func _ready() -> void:
-	_load_settings()
-	_apply_settings()
+	$SettingsPanel.hide()
+	_settings_scene = preload("res://ui/settings.tscn").instantiate()
+	_settings_scene.back.connect(_on_settings_back)
+	_settings_scene.hide()
+	add_child(_settings_scene)
 	_update_stage_display()
 
 
@@ -70,61 +58,13 @@ func _on_start_pressed() -> void:
 
 func _on_settings_pressed() -> void:
 	_menu_panel.visible = false
-	_settings_panel.visible = true
+	_settings_scene.show()
 
 
-func _on_back_pressed() -> void:
-	_settings_panel.visible = false
+func _on_settings_back() -> void:
+	_settings_scene.hide()
 	_menu_panel.visible = true
 
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
-
-
-func _on_resolution_changed(_index: int) -> void:
-	_save_settings()
-	_apply_settings()
-
-
-func _on_fullscreen_toggled(_on: bool) -> void:
-	_save_settings()
-	_apply_settings()
-
-
-func _on_volume_changed(_value: float) -> void:
-	_apply_volume()
-	_save_settings()
-
-
-func _apply_settings() -> void:
-	var index := _res_option.selected
-	var size := RESOLUTIONS[index]
-	if _fullscreen_check.button_pressed:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		DisplayServer.window_set_size(size)
-	_apply_volume()
-
-
-func _apply_volume() -> void:
-	var db := lerpf(MIN_VOLUME_DB, 0.0, _volume_slider.value / 100.0)
-	AudioServer.set_bus_volume_db(MASTER_BUS, db)
-
-
-func _save_settings() -> void:
-	var config := ConfigFile.new()
-	config.set_value(CONFIG_SECTION, CONFIG_RES_INDEX, _res_option.selected)
-	config.set_value(CONFIG_SECTION, CONFIG_FULLSCREEN, _fullscreen_check.button_pressed)
-	config.set_value(CONFIG_SECTION, CONFIG_VOLUME, _volume_slider.value)
-	config.save("user://settings.cfg")
-
-
-func _load_settings() -> void:
-	var config := ConfigFile.new()
-	if config.load("user://settings.cfg") != OK:
-		return
-	_res_option.selected = config.get_value(CONFIG_SECTION, CONFIG_RES_INDEX, 0)
-	_fullscreen_check.button_pressed = config.get_value(CONFIG_SECTION, CONFIG_FULLSCREEN, false)
-	_volume_slider.value = config.get_value(CONFIG_SECTION, CONFIG_VOLUME, 100.0)
