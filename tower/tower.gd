@@ -12,6 +12,7 @@ var _time_since_attack: float = 0.0
 var _target: Area2D
 var _base_sprite_x: float
 var _projectile_scene: PackedScene
+var _target_locked: bool = false
 
 
 func _ready() -> void:
@@ -36,6 +37,8 @@ func _process(delta: float) -> void:
 
 
 func _find_target() -> void:
+	if _target_locked:
+		return
 	var mobs := get_tree().get_nodes_in_group("mobs")
 
 	var closest: Area2D = null
@@ -70,6 +73,7 @@ func _attack() -> void:
 	if not is_instance_valid(_target):
 		_target = null
 		return
+	_target_locked = true
 	var is_flipped := _target.global_position.x < global_position.x
 	$AnimatedSprite2D.flip_h = is_flipped
 	$AnimatedSprite2D.position.x = -_base_sprite_x if is_flipped else _base_sprite_x
@@ -95,6 +99,7 @@ func _spawn_projectile(splash_radius: float = 0.0) -> void:
 
 func _on_animation_finished() -> void:
 	if $AnimatedSprite2D.animation == "attack":
+		_target_locked = false
 		$AnimatedSprite2D.play("default")
 
 
