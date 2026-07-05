@@ -1,24 +1,24 @@
 [gd_scene format=3 uid="uid://dif8phw16lbpp"]
 
 [ext_resource type="Script" uid="uid://kl3oxjk4au7c" path="res://mob/mob.gd" id="1_mob"]
-[ext_resource type="Texture2D" uid="uid://bkbnq8gb04vwe" path="res://mob/slime_idle.png" id="2_6jlfs"]
+[ext_resource type="Texture2D" uid="uid://b3fas03aqy0m6" path="res://mob/slime_idle.png" id="2_6jlfs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jlfs"]
+atlas = ExtResource("2_6jlfs")
+region = Rect2(0, 0, 80, 72)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pirjb"]
 atlas = ExtResource("2_6jlfs")
-region = Rect2(0, 432, 80, 72)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mixeo"]
-atlas = ExtResource("2_6jlfs")
-region = Rect2(80, 432, 80, 72)
+region = Rect2(80, 0, 80, 72)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_okuid"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pirjb")
+"texture": SubResource("AtlasTexture_6jlfs")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mixeo")
+"texture": SubResource("AtlasTexture_pirjb")
 }],
 "loop": 1,
 "name": &"default",
