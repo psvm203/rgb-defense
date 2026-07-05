@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 		return
 
 	_find_target()
-	if _target and $AnimatedSprite2D.animation != "attack":
+	if _target and $AnimatedSprite2D.animation == "default":
 		_attack()
 		if _state == State.IDLE:
 			_state = State.FRENZY

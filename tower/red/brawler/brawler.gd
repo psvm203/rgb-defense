@@ -14,6 +14,22 @@ func _setup_tower() -> void:
 	_tower_color = Color(1.0, 0.2, 0.2)
 
 
+func _attack() -> void:
+	if not is_instance_valid(_target):
+		_target = null
+		return
+	_target_locked = true
+	var is_flipped := _target.global_position.x < global_position.x
+	$AnimatedSprite2D.flip_h = is_flipped
+	$AnimatedSprite2D.position.x = -_base_sprite_x if is_flipped else _base_sprite_x
+	if _attack_count + 1 >= knockback_interval:
+		_attack_frame = 5
+		$AnimatedSprite2D.play("knockback")
+	else:
+		_attack_frame = 3
+		$AnimatedSprite2D.play("attack")
+
+
 func _perform_attack() -> void:
 	_attack_count += 1
 	_target.take_damage(0, damage)
