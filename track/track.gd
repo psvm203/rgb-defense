@@ -11,7 +11,7 @@ var is_wave_active: bool = false
 var mobs_alive: int = 0
 
 const GRID_UNIT: int = 64
-const MAP_SIZE := Vector2i(15, 9)
+const MAP_SIZE := Vector2i(18, 10)
 const HALF_GRID := Vector2(GRID_UNIT / 2.0, GRID_UNIT / 2.0)
 
 const TRACK_GRID: Array[Vector2i] = [
@@ -25,7 +25,7 @@ const TRACK_GRID: Array[Vector2i] = [
 	Vector2i(10, 6),
 	Vector2i(10, 2),
 	Vector2i(12, 2),
-	Vector2i(12, 8),
+	Vector2i(12, 9),
 ]
 
 var _spawn_queue: Array[Vector3] = []
@@ -42,6 +42,7 @@ var _selected_tower: Node2D
 var _tooltip: Control
 var _tooltip_label: RichTextLabel
 var _suppress_pause: bool = false
+var _hud: Node
 
 const UPGRADES: Dictionary = {
 	"res://tower/red/warrior/warrior.tscn": [
@@ -216,7 +217,8 @@ func _ready() -> void:
 	add_child(_spawn_timer)
 
 	var hud_scene := preload("res://ui/hud.tscn")
-	add_child(hud_scene.instantiate())
+	_hud = hud_scene.instantiate()
+	add_child(_hud)
 
 	var panel_scene := preload("res://ui/tower_panel.tscn")
 	var panel := panel_scene.instantiate()
@@ -321,6 +323,7 @@ func _on_tower_selected(scene_path: String, cost: int) -> void:
 	_preview = _selected_tower_scene.instantiate()
 	_preview.modulate.a = 0.5
 	_preview.process_mode = PROCESS_MODE_DISABLED
+	_preview.set_show_range(true)
 	add_child(_preview)
 
 
@@ -381,7 +384,11 @@ func _try_select_tower() -> void:
 			closest_dist = dist
 
 	if closest:
+		if _selected_tower and _selected_tower != closest:
+			_selected_tower.set_show_range(false)
 		_selected_tower = closest
+		closest.set_show_range(true)
+		_hud.show_tower_info(closest.damage, closest.attack_range)
 		_tower_menu.position = closest.position - Vector2(0, 64)
 
 		for btn in _upgrade_btns:
@@ -410,7 +417,10 @@ func _try_select_tower() -> void:
 
 
 func _hide_tower_menu() -> void:
+	if _selected_tower:
+		_selected_tower.set_show_range(false)
 	_selected_tower = null
+	_hud.hide_tower_info()
 	_tooltip.hide()
 	_tower_menu.hide()
 

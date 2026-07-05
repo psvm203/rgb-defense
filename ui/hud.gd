@@ -19,6 +19,8 @@ const MAX_GROUPS := 3
 @onready var _volume_slider: HSlider = $PauseOverlay/PauseSettingsPanel/VolumeHBox/VolumeSlider
 
 var _track: Node2D
+var _tower_info_label: Label
+var _tower_info_panel: PanelContainer
 
 const RESOLUTIONS: Array[Vector2i] = [
 	Vector2i(960, 540),
@@ -104,6 +106,38 @@ func _ready() -> void:
 		row.add_child(label)
 		_wave_mobs.add_child(row)
 		_group_rows.append({ row = row, icon = icon, label = label })
+
+	_tower_info_panel = PanelContainer.new()
+	_tower_info_panel.offset_left = 300
+	_tower_info_panel.offset_right = -300
+	_tower_info_panel.offset_top = -80
+	_tower_info_panel.offset_bottom = -20
+	_tower_info_panel.anchor_left = 0.5
+	_tower_info_panel.anchor_right = 0.5
+	_tower_info_panel.anchor_bottom = 1.0
+	var info_style := StyleBoxFlat.new()
+	info_style.bg_color = Color(0.1, 0.1, 0.15, 0.85)
+	info_style.border_width_left = 2
+	info_style.border_width_right = 2
+	info_style.border_width_top = 2
+	info_style.border_width_bottom = 2
+	info_style.border_color = Color(0.5, 0.5, 0.6, 0.8)
+	info_style.corner_radius_top_left = 8
+	info_style.corner_radius_top_right = 8
+	info_style.corner_radius_bottom_left = 8
+	info_style.corner_radius_bottom_right = 8
+	info_style.content_margin_left = 16
+	info_style.content_margin_right = 16
+	info_style.content_margin_top = 8
+	info_style.content_margin_bottom = 8
+	_tower_info_panel.add_theme_stylebox_override(&"panel", info_style)
+
+	_tower_info_label = Label.new()
+	_tower_info_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_tower_info_label.add_theme_color_override(&"font_color", Color.WHITE)
+	_tower_info_panel.add_child(_tower_info_label)
+	_tower_info_panel.hide()
+	add_child(_tower_info_panel)
 
 
 func _process(_delta: float) -> void:
@@ -265,3 +299,12 @@ func _advance_tutorial() -> void:
 		_tutorial_panel.hide()
 	else:
 		_tutorial_label.text = tutorial_messages[_tutorial_step]
+
+
+func show_tower_info(damage: float, attack_range: float) -> void:
+	_tower_info_label.text = "Damage: %.1f  |  Range: %.0f" % [damage, attack_range]
+	_tower_info_panel.show()
+
+
+func hide_tower_info() -> void:
+	_tower_info_panel.hide()

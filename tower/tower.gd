@@ -18,6 +18,12 @@ var _projectile_homing_duration: float = 0.0
 var _projectile_afterimage_interval: float = 0.0
 var _target_locked: bool = false
 var cost: int = 0
+var _show_range := false
+
+
+func set_show_range(show: bool) -> void:
+	_show_range = show
+	queue_redraw()
 
 
 func _ready() -> void:
@@ -132,4 +138,5 @@ func _on_animation_finished() -> void:
 
 
 func _draw() -> void:
-	draw_circle(Vector2.ZERO, attack_range, Color(_tower_color, 0.1))
+	if _show_range:
+		draw_arc(Vector2.ZERO, attack_range, 0, TAU, 64, _tower_color, 2.0)
