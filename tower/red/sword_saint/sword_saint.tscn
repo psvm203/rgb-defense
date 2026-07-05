@@ -1,0 +1,118 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://qfjfagkdjf5p" path="res://tower/red/sword_saint/sword_saint.gd" id="1_tower"]
+[ext_resource type="Texture2D" uid="uid://c3uvodo5byfef" path="res://tower/red/warrior/warrior_idle.png" id="2_3fjlj"]
+[ext_resource type="Texture2D" uid="uid://bo8doodydketa" path="res://tower/red/warrior/warrior_attack.png" id="2_4ulc0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwmrl"]
+atlas = ExtResource("2_4ulc0")
+region = Rect2(0, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2jxr"]
+atlas = ExtResource("2_4ulc0")
+region = Rect2(96, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynnoe"]
+atlas = ExtResource("2_4ulc0")
+region = Rect2(192, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dmss"]
+atlas = ExtResource("2_4ulc0")
+region = Rect2(288, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qimy"]
+atlas = ExtResource("2_4ulc0")
+region = Rect2(384, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4ln4"]
+atlas = ExtResource("2_4ulc0")
+region = Rect2(480, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ulc0"]
+atlas = ExtResource("2_3fjlj")
+region = Rect2(0, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xnkcx"]
+atlas = ExtResource("2_3fjlj")
+region = Rect2(96, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwp32"]
+atlas = ExtResource("2_3fjlj")
+region = Rect2(192, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vplrr"]
+atlas = ExtResource("2_3fjlj")
+region = Rect2(288, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntkfq"]
+atlas = ExtResource("2_3fjlj")
+region = Rect2(384, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_earr4"]
+atlas = ExtResource("2_3fjlj")
+region = Rect2(480, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gihtl"]
+atlas = ExtResource("2_3fjlj")
+region = Rect2(576, 0, 96, 84)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_etvis"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwmrl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e2jxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynnoe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6dmss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qimy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4ln4")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ulc0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xnkcx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwp32")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vplrr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ntkfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_earr4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gihtl")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Tower" type="Node2D"]
+script = ExtResource("1_tower")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_etvis")
+autoplay = "default"
+frame = 5
+frame_progress = 1.0

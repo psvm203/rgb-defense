@@ -31,54 +31,54 @@ var _sell_btn: Button
 var _selected_tower: Node2D
 
 const UPGRADES: Dictionary = {
-	"res://tower/warrior/warrior.tscn": [
+	"res://tower/red/warrior/warrior.tscn": [
 		{
 			name = "Sword Saint",
-			scene = "res://tower/warrior/sword_saint/sword_saint.tscn",
+			scene = "res://tower/red/sword_saint/sword_saint.tscn",
 			cost = 50,
 		},
 		{
 			name = "Barbarian",
-			scene = "res://tower/warrior/barbarian/barbarian.tscn",
+			scene = "res://tower/red/barbarian/barbarian.tscn",
 			cost = 50,
 		},
 		{
 			name = "Brawler",
-			scene = "res://tower/warrior/brawler/brawler.tscn",
+			scene = "res://tower/red/brawler/brawler.tscn",
 			cost = 50,
 		},
 	],
-	"res://tower/archer/archer.tscn": [
+	"res://tower/green/archer/archer.tscn": [
 		{
 			name = "Marksman",
-			scene = "res://tower/archer/marksman/marksman.tscn",
+			scene = "res://tower/green/marksman/marksman.tscn",
 			cost = 50,
 		},
 		{
 			name = "Stormbringer",
-			scene = "res://tower/archer/stormbringer/stormbringer.tscn",
+			scene = "res://tower/green/stormbringer/stormbringer.tscn",
 			cost = 50,
 		},
 		{
 			name = "Viper",
-			scene = "res://tower/archer/viper/viper.tscn",
+			scene = "res://tower/green/viper/viper.tscn",
 			cost = 50,
 		},
 	],
-	"res://tower/mage/mage.tscn": [
+	"res://tower/blue/mage/mage.tscn": [
 		{
 			name = "Thunderbolt",
-			scene = "res://tower/mage/thunderbolt/thunderbolt.tscn",
+			scene = "res://tower/blue/thunderbolt/thunderbolt.tscn",
 			cost = 50,
 		},
 		{
 			name = "Necromancer",
-			scene = "res://tower/mage/necromancer/necromancer.tscn",
+			scene = "res://tower/blue/necromancer/necromancer.tscn",
 			cost = 50,
 		},
 		{
 			name = "Frost Mage",
-			scene = "res://tower/mage/frost_mage/frost_mage.tscn",
+			scene = "res://tower/blue/frost_mage/frost_mage.tscn",
 			cost = 50,
 		},
 	],
@@ -138,11 +138,11 @@ func _input(event: InputEvent) -> void:
 		return
 	match event.keycode:
 		KEY_R:
-			_on_tower_selected("res://tower/warrior/warrior.tscn", 25)
+			_on_tower_selected("res://tower/red/warrior/warrior.tscn", 25)
 		KEY_G:
-			_on_tower_selected("res://tower/archer/archer.tscn", 50)
+			_on_tower_selected("res://tower/green/archer/archer.tscn", 50)
 		KEY_B:
-			_on_tower_selected("res://tower/mage/mage.tscn", 75)
+			_on_tower_selected("res://tower/blue/mage/mage.tscn", 75)
 		KEY_SPACE:
 			if not GameState.is_wave_active:
 				GameState.start_wave_pressed.emit()

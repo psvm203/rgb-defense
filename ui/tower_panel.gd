@@ -6,22 +6,22 @@ signal selection_cancelled
 const TOWERS: Array[Dictionary] = [
 	{
 		name = "Warrior",
-		scene = "res://tower/warrior/warrior.tscn",
-		icon = "res://tower/warrior/warrior_icon.png",
+		scene = "res://tower/red/warrior/warrior.tscn",
+		icon = "res://tower/red/warrior/warrior_icon.png",
 		cost = 25,
 		color = Color(1.0, 0.2, 0.2),
 	},
 	{
 		name = "Archer",
-		scene = "res://tower/archer/archer.tscn",
-		icon = "res://tower/archer/archer_icon.png",
+		scene = "res://tower/green/archer/archer.tscn",
+		icon = "res://tower/green/archer/archer_icon.png",
 		cost = 50,
 		color = Color(0.2, 1.0, 0.2),
 	},
 	{
 		name = "Mage",
-		scene = "res://tower/mage/mage.tscn",
-		icon = "res://tower/mage/mage_icon.png",
+		scene = "res://tower/blue/mage/mage.tscn",
+		icon = "res://tower/blue/mage/mage_icon.png",
 		cost = 75,
 		color = Color(0.2, 0.2, 1.0),
 	},
