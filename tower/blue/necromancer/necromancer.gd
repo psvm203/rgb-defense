@@ -13,6 +13,7 @@ func _setup_tower() -> void:
 
 
 func _perform_attack() -> void:
+	SfxPlayer.play("summon")
 	var skeleton := _skeleton_scene.instantiate()
 	get_parent().add_child(skeleton)
 	skeleton.global_position = global_position

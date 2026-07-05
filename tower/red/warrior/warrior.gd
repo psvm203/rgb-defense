@@ -9,4 +9,5 @@ func _setup_tower() -> void:
 
 
 func _perform_attack() -> void:
+	SfxPlayer.play("sword")
 	_target.take_damage(0, damage)

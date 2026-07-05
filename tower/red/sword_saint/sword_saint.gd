@@ -12,4 +12,5 @@ func _setup_tower() -> void:
 
 
 func _perform_attack() -> void:
+	SfxPlayer.play("sword_aura")
 	_spawn_projectile()

@@ -14,4 +14,5 @@ func _setup_tower() -> void:
 
 
 func _perform_attack() -> void:
+	SfxPlayer.play("magic")
 	_spawn_projectile(splash_radius)

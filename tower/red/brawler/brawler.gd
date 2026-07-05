@@ -31,8 +31,10 @@ func _attack() -> void:
 
 
 func _perform_attack() -> void:
+	SfxPlayer.play("brawler_punch")
 	_attack_count += 1
 	_target.take_damage(0, damage)
 	if _attack_count >= knockback_interval:
+		SfxPlayer.play("brawler_knockback")
 		_target.knock_back(knockback_distance)
 		_attack_count = 0

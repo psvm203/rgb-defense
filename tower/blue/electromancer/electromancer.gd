@@ -19,6 +19,7 @@ func _setup_tower() -> void:
 func _perform_attack() -> void:
 	if not is_instance_valid(_target):
 		return
+	SfxPlayer.play("thunder")
 	_target.take_damage(_color_index, damage)
 	_lightning_lines.clear()
 	_lightning_lines.append([global_position, _target.global_position])
