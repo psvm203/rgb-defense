@@ -96,6 +96,8 @@ func _spawn_projectile(
 		pierce_count: int = 0,
 		slow_duration: float = 0.0,
 		slow_factor: float = 1.0,
+		chain_count: int = 0,
+		chain_radius: float = 0.0,
 ) -> void:
 	var projectile := _projectile_scene.instantiate()
 	get_parent().add_child(projectile)
@@ -109,6 +111,8 @@ func _spawn_projectile(
 		pierce_count,
 		slow_duration,
 		slow_factor,
+		chain_count,
+		chain_radius,
 	)
 
 
