@@ -20,6 +20,8 @@ func _ready() -> void:
 	$AnimatedSprite2D.animation_finished.connect(_on_animation_finished)
 	$AnimatedSprite2D.frame_changed.connect(_on_frame_changed)
 	_setup_tower()
+	$AnimatedSprite2D.flip_h = true
+	$AnimatedSprite2D.position.x = -_base_sprite_x
 
 
 func _setup_tower() -> void:
