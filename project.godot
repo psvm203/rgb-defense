@@ -33,3 +33,4 @@ window/stretch/aspect="expand"
 
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="mobile"
+rendering/environment/defaults/default_clear_color=Color(0.894118, 0.815686, 0.670588, 1)

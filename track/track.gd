@@ -28,6 +28,7 @@ var _occupied_cells: Array[Vector2i] = []
 
 
 func _ready() -> void:
+	RenderingServer.set_default_clear_color(Color(0.894118, 0.815686, 0.670588))
 	_setup_tilemap()
 	_setup_path()
 	_mob_scene = preload("res://mob/mob.tscn")
@@ -153,7 +154,8 @@ func _get_track_cells() -> Array[Vector2i]:
 
 
 func _setup_tilemap() -> void:
-	$TileMap.clear()
+	$GrassTileMap.clear()
+	$DirtTileMap.clear()
 
 	var track_cells := _get_track_cells()
 	var grass_cells: Array[Vector2i] = []
@@ -167,7 +169,8 @@ func _setup_tilemap() -> void:
 			if not track_cells.has(cell):
 				grass_cells.append(cell)
 
-	$TileMap.set_cells_terrain_connect(grass_cells, 0, 0, false)
+	$GrassTileMap.set_cells_terrain_connect(grass_cells, 0, 0, false)
+	$DirtTileMap.set_cells_terrain_connect(track_cells, 0, 1, false)
 
 
 func _setup_path() -> void:
