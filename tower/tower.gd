@@ -31,7 +31,6 @@ func _setup_tower() -> void:
 func _process(delta: float) -> void:
 	_time_since_attack += delta
 	_find_target()
-	_update_flip()
 	if _target and _time_since_attack >= attack_cooldown:
 		_attack()
 
@@ -52,19 +51,14 @@ func _find_target() -> void:
 	_target = closest
 
 
-func _update_flip() -> void:
-	if not is_instance_valid(_target):
-		return
-	var is_flipped := _target.global_position.x < global_position.x
-	$AnimatedSprite2D.flip_h = is_flipped
-	$AnimatedSprite2D.position.x = -_base_sprite_x if is_flipped else _base_sprite_x
-
-
 func _attack() -> void:
 	_time_since_attack = 0.0
 	if not is_instance_valid(_target):
 		_target = null
 		return
+	var is_flipped := _target.global_position.x < global_position.x
+	$AnimatedSprite2D.flip_h = is_flipped
+	$AnimatedSprite2D.position.x = -_base_sprite_x if is_flipped else _base_sprite_x
 	$AnimatedSprite2D.play("attack")
 
 
