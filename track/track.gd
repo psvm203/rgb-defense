@@ -253,7 +253,7 @@ func _try_select_tower() -> void:
 		_upgrade_btns.clear()
 
 		var upgrades: Array = UPGRADES.get(closest.scene_file_path, [])
-		if not upgrades.is_empty() and GameState.current_level > 1:
+		if not upgrades.is_empty() and GameState.current_level > 2:
 			var vbox: VBoxContainer = _tower_menu.get_child(0).get_child(0)
 			for upgrade in upgrades:
 				var btn := Button.new()
