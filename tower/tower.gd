@@ -132,5 +132,4 @@ func _on_animation_finished() -> void:
 
 
 func _draw() -> void:
-	draw_rect(Rect2(-16, -16, 32, 32), _tower_color, false, 2.0)
 	draw_circle(Vector2.ZERO, attack_range, Color(_tower_color, 0.1))
