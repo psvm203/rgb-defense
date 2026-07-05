@@ -35,6 +35,9 @@ theme/custom_font="res://ui/mulmaru.woff2"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="mobile"
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
 rendering/environment/defaults/default_clear_color=Color(0.894118, 0.815686, 0.670588, 1)
