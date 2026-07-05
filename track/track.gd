@@ -26,8 +26,17 @@ var _selected_tower_cost: int
 var _preview: Node2D
 var _occupied_cells: Array[Vector2i] = []
 var _tower_menu: Control
+var _upgrade_btn: Button
 var _sell_btn: Button
 var _selected_tower: Node2D
+
+const UPGRADES: Dictionary = {
+	"res://tower/warrior/warrior.tscn": {
+		name = "Sword Saint",
+		scene = "res://tower/warrior/sword_saint.tscn",
+		cost = 50,
+	},
+}
 
 
 func _ready() -> void:
@@ -164,10 +173,17 @@ func _create_tower_menu() -> void:
 	var panel := PanelContainer.new()
 	_tower_menu.add_child(panel)
 
+	var vbox := VBoxContainer.new()
+	panel.add_child(vbox)
+
+	_upgrade_btn = Button.new()
+	_upgrade_btn.pressed.connect(_on_upgrade_pressed)
+	vbox.add_child(_upgrade_btn)
+
 	_sell_btn = Button.new()
 	_sell_btn.text = "Sell"
 	_sell_btn.pressed.connect(_on_sell_pressed)
-	panel.add_child(_sell_btn)
+	vbox.add_child(_sell_btn)
 
 	add_child(_tower_menu)
 
@@ -186,6 +202,12 @@ func _try_select_tower() -> void:
 	if closest:
 		_selected_tower = closest
 		_tower_menu.position = closest.position - Vector2(0, 64)
+		var upgrade: Dictionary = UPGRADES.get(closest.scene_file_path, { })
+		if upgrade.is_empty():
+			_upgrade_btn.hide()
+		else:
+			_upgrade_btn.text = "Upgrade: %s - %d" % [upgrade.name, upgrade.cost]
+			_upgrade_btn.show()
 		_tower_menu.show()
 	else:
 		_hide_tower_menu()
@@ -206,6 +228,25 @@ func _on_sell_pressed() -> void:
 		floori((_selected_tower.position.y - HALF_GRID.y) / GRID_UNIT),
 	)
 	_occupied_cells.erase(grid_pos)
+	_selected_tower.queue_free()
+	_hide_tower_menu()
+
+
+func _on_upgrade_pressed() -> void:
+	if not _selected_tower:
+		return
+	var upgrade: Dictionary = UPGRADES.get(_selected_tower.scene_file_path, { })
+	if upgrade.is_empty():
+		return
+	if not GameState.spend_coins(upgrade.cost):
+		return
+
+	var packed: PackedScene = load(upgrade.scene)
+	var new_tower: Node2D = packed.instantiate()
+	new_tower.position = _selected_tower.position
+	new_tower.cost = _selected_tower.cost + upgrade.cost
+	new_tower.add_to_group("towers")
+	add_child(new_tower)
 	_selected_tower.queue_free()
 	_hide_tower_menu()
 
