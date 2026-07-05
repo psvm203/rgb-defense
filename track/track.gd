@@ -48,6 +48,13 @@ const UPGRADES: Dictionary = {
 			cost = 50,
 		},
 	],
+	"res://tower/archer/archer.tscn": [
+		{
+			name = "Marksman",
+			scene = "res://tower/archer/marksman.tscn",
+			cost = 50,
+		},
+	],
 }
 
 
