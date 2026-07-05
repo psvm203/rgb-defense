@@ -121,6 +121,8 @@ func _process(_delta: float) -> void:
 			row_data.row.visible = false
 
 	if Input.is_action_just_pressed("ui_cancel"):
+		if _track.is_suppressing_pause():
+			return
 		if get_tree().paused:
 			if _pause_settings.visible:
 				_on_pause_settings_back_pressed()

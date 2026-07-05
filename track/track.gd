@@ -39,6 +39,7 @@ var _sell_btn: Button
 var _selected_tower: Node2D
 var _tooltip: Control
 var _tooltip_label: RichTextLabel
+var _suppress_pause: bool = false
 
 const UPGRADES: Dictionary = {
 	"res://tower/red/warrior/warrior.tscn": [
@@ -228,6 +229,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	_suppress_pause = false
 	if not _preview:
 		return
 	var grid_pos := _mouse_to_grid()
@@ -321,7 +323,12 @@ func _on_tower_selected(scene_path: String, cost: int) -> void:
 
 
 func _on_selection_cancelled() -> void:
+	_suppress_pause = true
 	_clear_selection()
+
+
+func is_suppressing_pause() -> bool:
+	return _suppress_pause
 
 
 func _clear_selection() -> void:
