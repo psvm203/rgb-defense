@@ -36,7 +36,7 @@ func _setup_tower() -> void:
 
 func _process(_delta: float) -> void:
 	_find_target()
-	if _target and $AnimatedSprite2D.animation != "attack":
+	if _target and $AnimatedSprite2D.animation == "default":
 		_attack()
 
 
@@ -84,7 +84,7 @@ func _attack() -> void:
 
 
 func _on_frame_changed() -> void:
-	if $AnimatedSprite2D.animation == "attack" and $AnimatedSprite2D.frame == _attack_frame:
+	if $AnimatedSprite2D.animation != "default" and $AnimatedSprite2D.frame == _attack_frame:
 		if is_instance_valid(_target):
 			_perform_attack()
 
@@ -126,7 +126,7 @@ func _spawn_projectile(
 
 
 func _on_animation_finished() -> void:
-	if $AnimatedSprite2D.animation == "attack":
+	if $AnimatedSprite2D.animation != "default":
 		_target_locked = false
 		$AnimatedSprite2D.play("default")
 
