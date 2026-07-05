@@ -37,9 +37,9 @@ func _process(delta: float) -> void:
 
 func _find_target() -> void:
 	var mobs := get_tree().get_nodes_in_group("mobs")
+
 	var closest: Area2D = null
 	var closest_dist := INF
-
 	for mob in mobs:
 		if mob.rgb[_color_index] <= 0.0:
 			continue
@@ -48,7 +48,21 @@ func _find_target() -> void:
 			closest = mob
 			closest_dist = dist
 
-	_target = closest
+	if closest:
+		_target = closest
+		return
+
+	var best: Area2D = null
+	var best_progress: float = -1.0
+	for mob in mobs:
+		if mob.rgb == Vector3.ZERO:
+			continue
+		var dist := global_position.distance_to(mob.global_position)
+		if dist <= attack_range and mob.get_traveled() > best_progress:
+			best = mob
+			best_progress = mob.get_traveled()
+
+	_target = best
 
 
 func _attack() -> void:

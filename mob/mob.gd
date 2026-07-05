@@ -8,6 +8,10 @@ var _base_sprite_x: float
 var _traveled: float = 0.0
 
 
+func get_traveled() -> float:
+	return _traveled
+
+
 func _ready() -> void:
 	rgb = max_rgb
 	_update_appearance()
@@ -63,6 +67,10 @@ func _channel_color(value: float, max_value: float) -> float:
 
 func take_damage(color_index: int, amount: float) -> void:
 	rgb[color_index] = maxf(0.0, rgb[color_index] - amount)
+	var splash_amount := amount / 3.0
+	for i in range(3):
+		if i != color_index and rgb[i] > 0.0:
+			rgb[i] = maxf(0.0, rgb[i] - splash_amount)
 	_update_appearance()
 	if rgb == Vector3.ZERO:
 		GameState.mob_destroyed()

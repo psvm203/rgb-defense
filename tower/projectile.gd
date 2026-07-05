@@ -46,7 +46,7 @@ func _apply_splash() -> void:
 		if not is_instance_valid(mob):
 			continue
 		var dist := global_position.distance_to(mob.global_position)
-		if dist <= _splash_radius and mob.rgb[_color_index] > 0.0:
+		if dist <= _splash_radius:
 			mob.take_damage(_color_index, _damage)
 
 
