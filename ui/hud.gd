@@ -54,6 +54,26 @@ func _ready() -> void:
 	_start_wave_btn.pressed.connect(_on_start_wave_pressed)
 	_load_settings()
 	_apply_settings()
+	var dialog_style := StyleBoxFlat.new()
+	dialog_style.bg_color = Color(0.1, 0.1, 0.15, 0.85)
+	dialog_style.border_width_left = 2
+	dialog_style.border_width_right = 2
+	dialog_style.border_width_top = 2
+	dialog_style.border_width_bottom = 2
+	dialog_style.border_color = Color(0.5, 0.5, 0.6, 0.8)
+	dialog_style.corner_radius_top_left = 12
+	dialog_style.corner_radius_top_right = 12
+	dialog_style.corner_radius_bottom_left = 12
+	dialog_style.corner_radius_bottom_right = 12
+	dialog_style.content_margin_left = 20.0
+	dialog_style.content_margin_right = 20.0
+	dialog_style.content_margin_top = 16.0
+	dialog_style.content_margin_bottom = 16.0
+	_tutorial_panel.add_theme_stylebox_override("panel", dialog_style)
+	_tutorial_label.add_theme_color_override("font_color", Color.WHITE)
+	_tutorial_label.add_theme_color_override("font_outline_color", Color.BLACK)
+	_tutorial_label.add_theme_constant_override("outline_size", 4)
+	_tutorial_panel.offset_bottom = 180.0
 	var tutorial_messages: Array = TUTORIAL_MESSAGES.get(GameState.current_level, [])
 	if not tutorial_messages.is_empty():
 		_tutorial_step = 0
