@@ -437,7 +437,7 @@ func _on_level_completed(_level: int) -> void:
 
 
 func _on_game_over() -> void:
-	var defeat_scene := preload("res://ui/defeat.tscn")
+	var defeat_scene := preload("res://ui/lose.tscn")
 	var defeat := defeat_scene.instantiate()
 	add_child(defeat)
 	get_tree().paused = true
