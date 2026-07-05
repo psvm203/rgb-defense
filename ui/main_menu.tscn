@@ -1,56 +1,165 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://b3taae0gg1f8j"]
 
-[ext_resource type="Script" path="res://ui/main_menu.gd" id="1_menu"]
+[ext_resource type="Script" uid="uid://b2taae0gg1f8j" path="res://ui/main_menu.gd" id="1_menu"]
+[ext_resource type="Texture2D" uid="uid://b7sf07fvox6r3" path="res://ui/button.png" id="3_btn"]
+[ext_resource type="Texture2D" uid="uid://mlivxwhpm20n" path="res://ui/button_pressed.png" id="4_btn_p"]
 
-[node name="MainMenu" type="CanvasLayer"]
+[node name="MainMenu" type="CanvasLayer" unique_id=1177519296]
 script = ExtResource("1_menu")
 
-[node name="MenuPanel" type="VBoxContainer" parent="."]
+[node name="MenuPanel" type="VBoxContainer" parent="." unique_id=655180054]
 anchors_preset = 8
 anchor_left = 0.5
-anchor_right = 0.5
 anchor_top = 0.5
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
+offset_left = -70.0
 offset_top = -120.0
-offset_right = 100.0
+offset_right = 70.0
 offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
-[node name="Title" type="Label" parent="MenuPanel"]
+[node name="Title" type="Label" parent="MenuPanel" unique_id=380087867]
 layout_mode = 2
-horizontal_alignment = 1
 theme_override_font_sizes/font_size = 48
 text = "RGB Defense"
+horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="MenuPanel"]
-layout_mode = 2
+[node name="Spacer" type="Control" parent="MenuPanel" unique_id=1786882793]
 custom_minimum_size = Vector2(0, 32)
-
-[node name="StartBtn" type="Button" parent="MenuPanel"]
-layout_mode = 2
-custom_minimum_size = Vector2(200, 50)
-text = "Start Game"
-
-[node name="LevelList" type="VBoxContainer" parent="MenuPanel"]
 layout_mode = 2
 
-[node name="SettingsBtn" type="Button" parent="MenuPanel"]
+[node name="StageHBox" type="HBoxContainer" parent="MenuPanel" unique_id=226516461]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
-custom_minimum_size = Vector2(200, 50)
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="PrevWrapper" type="CenterContainer" parent="MenuPanel/StageHBox" unique_id=631030260]
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="PrevBtn" type="TextureButton" parent="MenuPanel/StageHBox/PrevWrapper" unique_id=1247508036]
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("3_btn")
+texture_pressed = ExtResource("4_btn_p")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MenuPanel/StageHBox/PrevWrapper/PrevBtn" unique_id=973122801]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StageLabel" type="Label" parent="MenuPanel/StageHBox" unique_id=885589621]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextWrapper" type="CenterContainer" parent="MenuPanel/StageHBox" unique_id=1140492573]
+layout_mode = 2
+
+[node name="NextBtn" type="TextureButton" parent="MenuPanel/StageHBox/NextWrapper" unique_id=1394344848]
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("3_btn")
+texture_pressed = ExtResource("4_btn_p")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MenuPanel/StageHBox/NextWrapper/NextBtn" unique_id=1796967781]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartWrapper" type="CenterContainer" parent="MenuPanel" unique_id=806956327]
+layout_mode = 2
+
+[node name="StartBtn" type="TextureButton" parent="MenuPanel/StartWrapper" unique_id=234733711]
+texture_filter = 1
+layout_mode = 2
+texture_normal = ExtResource("3_btn")
+texture_pressed = ExtResource("4_btn_p")
+
+[node name="Label" type="Label" parent="MenuPanel/StartWrapper/StartBtn" unique_id=709700242]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsWrapper" type="CenterContainer" parent="MenuPanel" unique_id=102121803]
+layout_mode = 2
+
+[node name="SettingsBtn" type="TextureButton" parent="MenuPanel/SettingsWrapper" unique_id=120658131]
+texture_filter = 1
+layout_mode = 2
+texture_normal = ExtResource("3_btn")
+texture_pressed = ExtResource("4_btn_p")
+
+[node name="Label" type="Label" parent="MenuPanel/SettingsWrapper/SettingsBtn" unique_id=1388030628]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="QuitBtn" type="Button" parent="MenuPanel"]
+[node name="QuitWrapper" type="CenterContainer" parent="MenuPanel" unique_id=291152877]
 layout_mode = 2
-custom_minimum_size = Vector2(200, 50)
-text = "Quit"
 
-[node name="SettingsPanel" type="VBoxContainer" parent="."]
+[node name="QuitBtn" type="TextureButton" parent="MenuPanel/QuitWrapper" unique_id=1992273865]
+texture_filter = 1
+layout_mode = 2
+texture_normal = ExtResource("3_btn")
+texture_pressed = ExtResource("4_btn_p")
+
+[node name="Label" type="Label" parent="MenuPanel/QuitWrapper/QuitBtn" unique_id=811795613]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsPanel" type="VBoxContainer" parent="." unique_id=182586562]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
-anchor_right = 0.5
 anchor_top = 0.5
+anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -150.0
 offset_top = -120.0
@@ -58,29 +167,29 @@ offset_right = 150.0
 offset_bottom = 120.0
 alignment = 1
 
-[node name="Title" type="Label" parent="SettingsPanel"]
+[node name="Title" type="Label" parent="SettingsPanel" unique_id=289867329]
 layout_mode = 2
-horizontal_alignment = 1
 theme_override_font_sizes/font_size = 36
 text = "Settings"
+horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="SettingsPanel"]
-layout_mode = 2
+[node name="Spacer" type="Control" parent="SettingsPanel" unique_id=325705514]
 custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
 
-[node name="ResHBox" type="HBoxContainer" parent="SettingsPanel"]
+[node name="ResHBox" type="HBoxContainer" parent="SettingsPanel" unique_id=1788698694]
 layout_mode = 2
 alignment = 1
 
-[node name="ResLabel" type="Label" parent="SettingsPanel/ResHBox"]
+[node name="ResLabel" type="Label" parent="SettingsPanel/ResHBox" unique_id=297125572]
 layout_mode = 2
 text = "Resolution"
 
-[node name="ResOption" type="OptionButton" parent="SettingsPanel/ResHBox"]
-layout_mode = 2
+[node name="ResOption" type="OptionButton" parent="SettingsPanel/ResHBox" unique_id=1413603967]
 custom_minimum_size = Vector2(160, 0)
-item_count = 3
+layout_mode = 2
 selected = 0
+item_count = 3
 popup/item_0/text = "960x540"
 popup/item_0/id = 0
 popup/item_1/text = "1280x720"
@@ -88,38 +197,53 @@ popup/item_1/id = 1
 popup/item_2/text = "1920x1080"
 popup/item_2/id = 2
 
-[node name="FullscreenCheck" type="CheckButton" parent="SettingsPanel"]
+[node name="FullscreenCheck" type="CheckButton" parent="SettingsPanel" unique_id=1238794455]
 layout_mode = 2
 text = "Fullscreen"
 
-[node name="VolumeHBox" type="HBoxContainer" parent="SettingsPanel"]
+[node name="VolumeHBox" type="HBoxContainer" parent="SettingsPanel" unique_id=485511058]
 layout_mode = 2
 alignment = 1
 
-[node name="VolumeLabel" type="Label" parent="SettingsPanel/VolumeHBox"]
+[node name="VolumeLabel" type="Label" parent="SettingsPanel/VolumeHBox" unique_id=1053260584]
 layout_mode = 2
 text = "Volume"
 
-[node name="VolumeSlider" type="HSlider" parent="SettingsPanel/VolumeHBox"]
-layout_mode = 2
+[node name="VolumeSlider" type="HSlider" parent="SettingsPanel/VolumeHBox" unique_id=1027603946]
 custom_minimum_size = Vector2(160, 0)
-min_value = 0.0
-max_value = 100.0
-step = 1.0
+layout_mode = 2
 value = 100.0
 
-[node name="Spacer2" type="Control" parent="SettingsPanel"]
-layout_mode = 2
+[node name="Spacer2" type="Control" parent="SettingsPanel" unique_id=893470350]
 custom_minimum_size = Vector2(0, 24)
-
-[node name="BackBtn" type="Button" parent="SettingsPanel"]
 layout_mode = 2
-custom_minimum_size = Vector2(200, 50)
-text = "Back"
 
-[connection signal="pressed" from="MenuPanel/SettingsBtn" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="MenuPanel/QuitBtn" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="SettingsPanel/BackBtn" to="." method="_on_back_pressed"]
+[node name="BackWrapper" type="CenterContainer" parent="SettingsPanel" unique_id=937139254]
+layout_mode = 2
+
+[node name="BackBtn" type="TextureButton" parent="SettingsPanel/BackWrapper" unique_id=1244750739]
+texture_filter = 1
+layout_mode = 2
+texture_normal = ExtResource("3_btn")
+texture_pressed = ExtResource("4_btn_p")
+
+[node name="Label" type="Label" parent="SettingsPanel/BackWrapper/BackBtn" unique_id=1839734218]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="MenuPanel/StageHBox/PrevWrapper/PrevBtn" to="." method="_on_prev_stage"]
+[connection signal="pressed" from="MenuPanel/StageHBox/NextWrapper/NextBtn" to="." method="_on_next_stage"]
+[connection signal="pressed" from="MenuPanel/StartWrapper/StartBtn" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MenuPanel/SettingsWrapper/SettingsBtn" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MenuPanel/QuitWrapper/QuitBtn" to="." method="_on_quit_pressed"]
 [connection signal="item_selected" from="SettingsPanel/ResHBox/ResOption" to="." method="_on_resolution_changed"]
 [connection signal="toggled" from="SettingsPanel/FullscreenCheck" to="." method="_on_fullscreen_toggled"]
 [connection signal="value_changed" from="SettingsPanel/VolumeHBox/VolumeSlider" to="." method="_on_volume_changed"]
+[connection signal="pressed" from="SettingsPanel/BackWrapper/BackBtn" to="." method="_on_back_pressed"]
