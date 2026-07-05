@@ -71,6 +71,11 @@ const UPGRADES: Dictionary = {
 			scene = "res://tower/mage/thunderbolt.tscn",
 			cost = 50,
 		},
+		{
+			name = "Necromancer",
+			scene = "res://tower/mage/necromancer.tscn",
+			cost = 50,
+		},
 	],
 }
 
