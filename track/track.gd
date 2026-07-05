@@ -37,6 +37,8 @@ var _tower_menu: Control
 var _upgrade_btns: Array[Button] = []
 var _sell_btn: Button
 var _selected_tower: Node2D
+var _tooltip: Control
+var _tooltip_label: RichTextLabel
 
 const UPGRADES: Dictionary = {
 	"res://tower/red/warrior/warrior.tscn": [
@@ -154,6 +156,47 @@ const UPGRADES: Dictionary = {
 		},
 	],
 }
+
+
+func _upgrade_tooltip(scene_path: String) -> String:
+	match scene_path:
+		"res://tower/red/sword_saint/sword_saint.tscn":
+			return "[color=red]검성[/color]\n근거리 공격 시 검기를 날립니다."
+		"res://tower/red/barbarian/barbarian.tscn":
+			return "[color=red]바바리안[/color]\n짧은 시간 빠른 속도로 연속 공격 후 휴식합니다."
+		"res://tower/red/brawler/brawler.tscn":
+			return "[color=red]격투가[/color]\n3회 공격마다 적을 넉백시킵니다."
+		"res://tower/red/sword_sovereign/sword_sovereign.tscn":
+			return "[color=red]검존[/color]\n검기 폭 증가, 관통, 사거리 증가"
+		"res://tower/red/berserker/berserker.tscn":
+			return "[color=red]광전사[/color]\n연속 공격 증가, 휴식 감소\n적 체력 낮을수록 공속 증가"
+		"res://tower/red/battle_god/battle_god.tscn":
+			return "[color=red]투신[/color]\n2회 공격마다 넉백, 거리 증가\n넉백된 적이 기절합니다."
+		"res://tower/green/sniper/sniper.tscn":
+			return "[color=green]저격수[/color]\n큰 화살이 적을 관통합니다."
+		"res://tower/green/hunter/hunter.tscn":
+			return "[color=green]사냥꾼[/color]\n한 번에 화살 3개를 발사합니다."
+		"res://tower/green/viper/viper.tscn":
+			return "[color=green]독사[/color]\n독화살로 적의 이동 속도를 늦춥니다."
+		"res://tower/green/deadeye/deadeye.tscn":
+			return "[color=green]데드아이[/color]\n모든 적 관통, 첫 타겟 치명타\n사거리 증가"
+		"res://tower/green/tempest/tempest.tscn":
+			return "[color=green]폭풍[/color]\n화살 5발 확산 발사, 공속 증가"
+		"res://tower/green/basilisk/basilisk.tscn":
+			return "[color=green]바실리스크[/color]\n슬로우 + 도트 데미지, 독 전염"
+		"res://tower/blue/electromancer/electromancer.tscn":
+			return "[color=blue]번개술사[/color]\n체인 라이트닝으로 다수의 적을 공격합니다."
+		"res://tower/blue/necromancer/necromancer.tscn":
+			return "[color=blue]네크로맨서[/color]\n해골을 소환하여 근접 공격을 시킵니다."
+		"res://tower/blue/cryomancer/cryomancer.tscn":
+			return "[color=blue]빙결학자[/color]\n적을 얼려 행동 불능으로 만듭니다."
+		"res://tower/blue/thunderbolt/thunderbolt.tscn":
+			return "[color=blue]벽력[/color]\n연쇄 9회, 체인 분기\n연쇄당 데미지 증가"
+		"res://tower/blue/death_lord/death_lord.tscn":
+			return "[color=blue]죽음군주[/color]\n해골 2마리 소환, 강화\n사망 시 폭발"
+		"res://tower/blue/absolute_zero/absolute_zero.tscn":
+			return "[color=blue]절대영도[/color]\n빙결 시간 증가, 추가 피해\n범위 빙결 가능"
+	return ""
 
 
 func _ready() -> void:
@@ -305,6 +348,15 @@ func _create_tower_menu() -> void:
 	_sell_btn.pressed.connect(_on_sell_pressed)
 	vbox.add_child(_sell_btn)
 
+	_tooltip = PanelContainer.new()
+	_tooltip.hide()
+	_tooltip_label = RichTextLabel.new()
+	_tooltip_label.bbcode_enabled = true
+	_tooltip_label.fit_content = true
+	_tooltip_label.custom_minimum_size = Vector2(200, 0)
+	_tooltip.add_child(_tooltip_label)
+	_tower_menu.add_child(_tooltip)
+
 	add_child(_tower_menu)
 
 
@@ -334,6 +386,10 @@ func _try_select_tower() -> void:
 			for upgrade in upgrades:
 				var btn := Button.new()
 				btn.text = "Upgrade: %s - %d" % [upgrade.name, upgrade.cost]
+				var desc: String = _upgrade_tooltip(upgrade.scene)
+				if not desc.is_empty():
+					btn.mouse_entered.connect(_on_upgrade_hover.bind(desc))
+					btn.mouse_exited.connect(_on_upgrade_unhover)
 				btn.pressed.connect(_on_upgrade_pressed.bind(upgrade))
 				vbox.add_child(btn)
 				vbox.move_child(btn, vbox.get_child_count() - 2)
@@ -346,6 +402,7 @@ func _try_select_tower() -> void:
 
 func _hide_tower_menu() -> void:
 	_selected_tower = null
+	_tooltip.hide()
 	_tower_menu.hide()
 
 
@@ -489,3 +546,14 @@ func _spawn_mob(max_rgb: Vector3) -> void:
 func _on_mob_destroyed() -> void:
 	mobs_alive -= 1
 	_check_wave_completion()
+
+
+func _on_upgrade_hover(description: String) -> void:
+	_tooltip_label.text = description
+	var panel: PanelContainer = _tower_menu.get_child(0)
+	_tooltip.position = Vector2(panel.size.x + 8, 0)
+	_tooltip.show()
+
+
+func _on_upgrade_unhover() -> void:
+	_tooltip.hide()
