@@ -102,6 +102,7 @@ func take_damage(color_index: int, amount: float) -> void:
 			rgb[i] = maxf(0.0, rgb[i] - splash_amount)
 	_update_appearance()
 	if rgb == Vector3.ZERO:
+		GameState.add_coins(int(max_rgb.x + max_rgb.y + max_rgb.z))
 		died.emit()
 		queue_free()
 
