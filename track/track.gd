@@ -72,12 +72,12 @@ const UPGRADES: Dictionary = {
 	"res://tower/green/archer/archer.tscn": [
 		{
 			name = "Sniper",
-			scene = "res://tower/green/marksman/marksman.tscn",
+			scene = "res://tower/green/sniper/sniper.tscn",
 			cost = 50,
 		},
 		{
 			name = "Hunter",
-			scene = "res://tower/green/stormbringer/stormbringer.tscn",
+			scene = "res://tower/green/hunter/hunter.tscn",
 			cost = 50,
 		},
 		{
@@ -86,14 +86,14 @@ const UPGRADES: Dictionary = {
 			cost = 50,
 		},
 	],
-	"res://tower/green/marksman/marksman.tscn": [
+	"res://tower/green/sniper/sniper.tscn": [
 		{
 			name = "Deadeye",
 			scene = "res://tower/green/deadeye/deadeye.tscn",
 			cost = 100,
 		},
 	],
-	"res://tower/green/stormbringer/stormbringer.tscn": [
+	"res://tower/green/hunter/hunter.tscn": [
 		{
 			name = "Tempest",
 			scene = "res://tower/green/tempest/tempest.tscn",
@@ -110,7 +110,7 @@ const UPGRADES: Dictionary = {
 	"res://tower/blue/mage/mage.tscn": [
 		{
 			name = "Electromancer",
-			scene = "res://tower/blue/thunderbolt/thunderbolt.tscn",
+			scene = "res://tower/blue/electromancer/electromancer.tscn",
 			cost = 50,
 		},
 		{
@@ -120,14 +120,14 @@ const UPGRADES: Dictionary = {
 		},
 		{
 			name = "Cryomancer",
-			scene = "res://tower/blue/frost_mage/frost_mage.tscn",
+			scene = "res://tower/blue/cryomancer/cryomancer.tscn",
 			cost = 50,
 		},
 	],
-	"res://tower/blue/thunderbolt/thunderbolt.tscn": [
+	"res://tower/blue/electromancer/electromancer.tscn": [
 		{
-			name = "Storm Lord",
-			scene = "res://tower/blue/storm_lord/storm_lord.tscn",
+			name = "Thunderbolt",
+			scene = "res://tower/blue/thunderbolt/thunderbolt.tscn",
 			cost = 100,
 		},
 	],
@@ -138,7 +138,7 @@ const UPGRADES: Dictionary = {
 			cost = 100,
 		},
 	],
-	"res://tower/blue/frost_mage/frost_mage.tscn": [
+	"res://tower/blue/cryomancer/cryomancer.tscn": [
 		{
 			name = "Absolute Zero",
 			scene = "res://tower/blue/absolute_zero/absolute_zero.tscn",

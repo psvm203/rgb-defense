@@ -1,4 +1,4 @@
-extends "res://tower/green/stormbringer/stormbringer.gd"
+extends "res://tower/green/hunter/hunter.gd"
 
 func _setup_tower() -> void:
 	attack_range = 220.0

@@ -1,7 +1,10 @@
 extends Node
 
+@warning_ignore("unused_signal")
 signal wave_completed
+@warning_ignore("unused_signal")
 signal start_wave_pressed
+@warning_ignore("unused_signal")
 signal level_completed(level: int)
 
 const LEVEL_WAVES: Dictionary = {

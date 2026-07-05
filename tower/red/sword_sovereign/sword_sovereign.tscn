@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" uid="uid://qfjfagkdjf5p" path="res://tower/red/sword_sovereign/sword_sovereign.gd" id="1_tower"]
+[ext_resource type="Script" path="res://tower/red/sword_sovereign/sword_sovereign.gd" id="1_tower"]
 [ext_resource type="Texture2D" uid="uid://c3uvodo5byfef" path="res://tower/red/warrior/warrior_idle.png" id="2_3fjlj"]
 [ext_resource type="Texture2D" uid="uid://bo8doodydketa" path="res://tower/red/warrior/warrior_attack.png" id="2_4ulc0"]
 

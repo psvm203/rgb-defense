@@ -1,4 +1,4 @@
-extends "res://tower/blue/frost_mage/frost_mage.gd"
+extends "res://tower/blue/cryomancer/cryomancer.gd"
 
 func _setup_tower() -> void:
 	attack_range = 200.0

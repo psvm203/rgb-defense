@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://tower/blue/storm_lord/storm_lord.gd" id="1_tower"]
+[ext_resource type="Script" path="res://tower/blue/cryomancer/cryomancer.gd" id="1_tower"]
 [ext_resource type="Texture2D" path="res://tower/blue/mage/mage_attack.png" id="2_oghgm"]
 [ext_resource type="Texture2D" path="res://tower/blue/mage/mage_idle.png" id="3_daq3v"]
 
