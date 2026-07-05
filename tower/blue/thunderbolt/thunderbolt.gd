@@ -1,5 +1,12 @@
 extends "res://tower/blue/mage/mage.gd"
 
+const CHAIN_COUNT := 5
+const CHAIN_RADIUS := 200.0
+
+var _lightning_lines: Array = []
+var _should_draw_lightning: bool = false
+
+
 func _setup_tower() -> void:
 	attack_range = 200.0
 	attack_cooldown = 2.5
@@ -10,4 +17,47 @@ func _setup_tower() -> void:
 
 
 func _perform_attack() -> void:
-	_spawn_projectile(0.0, 0, 0.0, 1.0, 5, 200.0)
+	if not is_instance_valid(_target):
+		return
+	_target.take_damage(_color_index, damage)
+	_lightning_lines.clear()
+	_lightning_lines.append([global_position, _target.global_position])
+	var from := _target.global_position
+	var hit_targets: Array[Area2D] = [_target]
+	for i in range(CHAIN_COUNT):
+		var closest := _find_chain_mob(from, hit_targets, CHAIN_RADIUS)
+		if not closest:
+			break
+		closest.take_damage(_color_index, damage)
+		hit_targets.append(closest)
+		_lightning_lines.append([from, closest.global_position])
+		from = closest.global_position
+	_should_draw_lightning = true
+	queue_redraw()
+
+
+func _find_chain_mob(from: Vector2, exclude: Array, radius: float) -> Area2D:
+	var mobs := get_tree().get_nodes_in_group("mobs")
+	var closest: Area2D = null
+	var closest_dist := radius
+	for mob in mobs:
+		if not is_instance_valid(mob) or exclude.has(mob):
+			continue
+		var dist := from.distance_to(mob.global_position)
+		if dist < closest_dist:
+			closest = mob
+			closest_dist = dist
+	return closest
+
+
+func _draw() -> void:
+	super._draw()
+	if _should_draw_lightning:
+		for line in _lightning_lines:
+			draw_line(
+				line[0] - global_position,
+				line[1] - global_position,
+				Color.YELLOW,
+				3.0,
+			)
+		_should_draw_lightning = false
