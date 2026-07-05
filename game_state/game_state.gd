@@ -3,6 +3,8 @@ extends Node
 @warning_ignore("unused_signal")
 signal wave_completed
 @warning_ignore("unused_signal")
+signal mob_killed
+@warning_ignore("unused_signal")
 signal start_wave_pressed
 @warning_ignore("unused_signal")
 signal level_completed(level: int)
@@ -176,6 +178,4 @@ func mob_spawned() -> void:
 
 func mob_destroyed() -> void:
 	mobs_alive -= 1
-	if mobs_alive <= 0 and is_wave_active:
-		is_wave_active = false
-		wave_completed.emit()
+	mob_killed.emit()

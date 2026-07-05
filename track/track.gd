@@ -170,7 +170,7 @@ func _ready() -> void:
 	panel.selection_cancelled.connect(_on_selection_cancelled)
 	add_child(panel)
 
-	GameState.wave_completed.connect(_on_wave_completed)
+	GameState.mob_killed.connect(_check_wave_completion)
 	GameState.start_wave_pressed.connect(start_wave)
 	GameState.level_completed.connect(_on_level_completed)
 	GameState.game_over.connect(_on_game_over)
@@ -422,10 +422,15 @@ func _setup_path() -> void:
 	$Path.curve = curve
 
 
-func _on_wave_completed() -> void:
-	var level_waves := GameState.get_waves(GameState.current_level)
-	if GameState.wave_number >= level_waves.size():
-		GameState.level_completed.emit(GameState.current_level)
+func _check_wave_completion() -> void:
+	if not GameState.is_wave_active:
+		return
+	if _spawn_queue.is_empty() and GameState.mobs_alive <= 0:
+		GameState.is_wave_active = false
+		GameState.wave_completed.emit()
+		var level_waves := GameState.get_waves(GameState.current_level)
+		if GameState.wave_number >= level_waves.size():
+			GameState.level_completed.emit(GameState.current_level)
 
 
 func _on_level_completed(_level: int) -> void:
@@ -459,6 +464,7 @@ func start_wave() -> void:
 func _on_spawn_timer_timeout() -> void:
 	if _spawn_queue.is_empty():
 		_spawn_timer.stop()
+		_check_wave_completion()
 		return
 	var max_rgb: Vector3 = _spawn_queue.pop_front()
 	_spawn_mob(max_rgb)
