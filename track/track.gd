@@ -173,6 +173,7 @@ func _ready() -> void:
 	GameState.wave_completed.connect(_on_wave_completed)
 	GameState.start_wave_pressed.connect(start_wave)
 	GameState.level_completed.connect(_on_level_completed)
+	GameState.game_over.connect(_on_game_over)
 	_create_tower_menu()
 
 
@@ -432,6 +433,13 @@ func _on_level_completed(_level: int) -> void:
 	var victory_scene := preload("res://ui/victory.tscn")
 	var victory := victory_scene.instantiate()
 	add_child(victory)
+	get_tree().paused = true
+
+
+func _on_game_over() -> void:
+	var defeat_scene := preload("res://ui/defeat.tscn")
+	var defeat := defeat_scene.instantiate()
+	add_child(defeat)
 	get_tree().paused = true
 
 

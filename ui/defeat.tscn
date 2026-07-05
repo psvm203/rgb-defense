@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3 uid="uid://defeat_scene_1"]
+
+[ext_resource type="Script" path="res://ui/defeat.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://ui/lose.png" id="2_lose"]
+[ext_resource type="Texture2D" path="res://ui/button.png" id="3_btn"]
+[ext_resource type="Texture2D" path="res://ui/button_pressed.png" id="4_btn_p"]
+
+[node name="Defeat" type="CanvasLayer"]
+process_mode = 3
+layer = 10
+script = ExtResource("1_script")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoseContainer" type="TextureRect" parent="CenterContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(448, 384)
+layout_mode = 2
+texture = ExtResource("2_lose")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/LoseContainer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -106.0
+offset_top = -100.0
+offset_right = 106.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="MainBtn" type="TextureButton" parent="CenterContainer/LoseContainer/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(96, 32)
+layout_mode = 2
+texture_normal = ExtResource("3_btn")
+texture_pressed = ExtResource("4_btn_p")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CenterContainer/LoseContainer/HBoxContainer/MainBtn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Main"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RetryBtn" type="TextureButton" parent="CenterContainer/LoseContainer/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(96, 32)
+layout_mode = 2
+texture_normal = ExtResource("3_btn")
+texture_pressed = ExtResource("4_btn_p")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CenterContainer/LoseContainer/HBoxContainer/RetryBtn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Retry"
+horizontal_alignment = 1
+vertical_alignment = 1

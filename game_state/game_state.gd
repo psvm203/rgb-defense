@@ -7,6 +7,9 @@ signal start_wave_pressed
 @warning_ignore("unused_signal")
 signal level_completed(level: int)
 
+@warning_ignore("unused_signal")
+signal game_over
+
 const LEVEL_WAVES: Dictionary = {
 	0: [
 		{
@@ -163,6 +166,8 @@ func lose_life() -> void:
 	if lives <= 0:
 		return
 	lives -= 1
+	if lives <= 0:
+		game_over.emit()
 
 
 func mob_spawned() -> void:
