@@ -7,24 +7,25 @@ const TOWERS: Array[Dictionary] = [
 	{
 		name = "Warrior",
 		scene = "res://tower/warrior/warrior.tscn",
+		icon = "res://tower/warrior/warrior_icon.png",
 		cost = 25,
 		color = Color(1.0, 0.2, 0.2),
 	},
 	{
 		name = "Archer",
 		scene = "res://tower/archer/archer.tscn",
+		icon = "res://tower/archer/archer_icon.png",
 		cost = 50,
 		color = Color(0.2, 1.0, 0.2),
 	},
 	{
 		name = "Mage",
 		scene = "res://tower/mage/mage.tscn",
+		icon = "res://tower/mage/mage_icon.png",
 		cost = 75,
 		color = Color(0.2, 0.2, 1.0),
 	},
 ]
-
-var _buttons: Array[Button] = []
 
 
 func _ready() -> void:
@@ -32,16 +33,36 @@ func _ready() -> void:
 
 
 func _build_buttons() -> void:
+	var coin_tex := preload("res://game_state/coins.png")
 	for tower in TOWERS:
-		var btn := Button.new()
-		btn.text = "%s - %d" % [tower.name, tower.cost]
-		btn.pressed.connect(_on_tower_button_pressed.bind(tower.scene, tower.cost))
-		$Panel/VBox/TowerList.add_child(btn)
-		_buttons.append(btn)
+		var row := HBoxContainer.new()
+		row.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+
+		var icon := TextureRect.new()
+		icon.texture = load(tower.icon)
+		icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		icon.custom_minimum_size = Vector2(24, 24)
+		row.add_child(icon)
+
+		var coin := TextureRect.new()
+		coin.texture = coin_tex
+		coin.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+		coin.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		coin.custom_minimum_size = Vector2(16, 16)
+		row.add_child(coin)
+
+		var label := Label.new()
+		label.text = str(tower.cost)
+		row.add_child(label)
+
+		row.gui_input.connect(_on_tower_row_input.bind(tower.scene, tower.cost))
+		$Panel/VBox/TowerList.add_child(row)
 
 
-func _on_tower_button_pressed(scene_path: String, cost: int) -> void:
-	tower_selected.emit(scene_path, cost)
+func _on_tower_row_input(event: InputEvent, scene_path: String, cost: int) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		tower_selected.emit(scene_path, cost)
 
 
 func _on_cancel_pressed() -> void:
