@@ -19,7 +19,7 @@ func _ready() -> void:
 		icon.texture = preload("res://mob/slime_icon.png")
 		icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		icon.custom_minimum_size = Vector2(24, 24)
+		icon.custom_minimum_size = Vector2(36, 36)
 		var label := Label.new()
 		row.add_child(icon)
 		row.add_child(label)
