@@ -106,6 +106,7 @@ func _ready() -> void:
 
 	GameState.wave_completed.connect(_on_wave_completed)
 	GameState.start_wave_pressed.connect(start_wave)
+	GameState.level_completed.connect(_on_level_completed)
 	_create_tower_menu()
 
 
@@ -352,11 +353,18 @@ func _setup_path() -> void:
 
 
 func _on_wave_completed() -> void:
-	pass
+	var level_waves := GameState.get_waves(GameState.current_level)
+	if GameState.wave_number >= level_waves.size():
+		GameState.level_completed.emit(GameState.current_level)
+
+
+func _on_level_completed(_level: int) -> void:
+	GameState.unlock_next_level()
+	get_tree().change_scene_to_file("res://ui/main_menu.tscn")
 
 
 func start_wave() -> void:
-	var wave: Dictionary = GameState.get_wave(GameState.wave_number)
+	var wave: Dictionary = GameState.get_wave(GameState.current_level, GameState.wave_number)
 	_spawn_queue.clear()
 	for group in wave.groups:
 		for j in range(group.count):

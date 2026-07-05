@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @onready var _menu_panel: VBoxContainer = $MenuPanel
+@onready var _level_list: VBoxContainer = $MenuPanel/LevelList
 @onready var _settings_panel: VBoxContainer = $SettingsPanel
 @onready var _res_option: OptionButton = $SettingsPanel/ResHBox/ResOption
 @onready var _fullscreen_check: CheckButton = $SettingsPanel/FullscreenCheck
@@ -22,9 +23,24 @@ const MIN_VOLUME_DB := -40.0
 func _ready() -> void:
 	_load_settings()
 	_apply_settings()
+	_create_level_buttons()
 
 
-func _on_start_pressed() -> void:
+func _create_level_buttons() -> void:
+	for level in range(1, GameState.MAX_LEVEL + 1):
+		var btn := Button.new()
+		btn.custom_minimum_size = Vector2(200, 50)
+		if GameState.is_level_unlocked(level):
+			btn.text = "Level %d" % level
+			btn.pressed.connect(_on_level_pressed.bind(level))
+		else:
+			btn.text = "Level %d - Locked" % level
+			btn.disabled = true
+		_level_list.add_child(btn)
+
+
+func _on_level_pressed(level: int) -> void:
+	GameState.current_level = level
 	get_tree().change_scene_to_file("res://track/track.tscn")
 
 

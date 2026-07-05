@@ -53,7 +53,7 @@ func _process(_delta: float) -> void:
 	_wave_label.text = "Wave " + str(GameState.wave_number)
 	_start_wave_btn.disabled = GameState.is_wave_active
 
-	var wave: Dictionary = GameState.get_wave(GameState.wave_number)
+	var wave: Dictionary = GameState.get_wave(GameState.current_level, GameState.wave_number)
 	var groups: Array = wave.groups
 	for i in range(MAX_GROUPS):
 		var row_data: Dictionary = _group_rows[i]
