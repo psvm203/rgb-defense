@@ -5,40 +5,102 @@
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_menu")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="VBox" type="VBoxContainer" parent="CenterContainer"]
-layout_mode = 2
+[node name="MenuPanel" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -120.0
+offset_right = 100.0
+offset_bottom = 120.0
 alignment = 1
 
-[node name="Title" type="Label" parent="CenterContainer/VBox"]
+[node name="Title" type="Label" parent="MenuPanel"]
 layout_mode = 2
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 48
 text = "RGB Defense"
 
-[node name="Spacer" type="Control" parent="CenterContainer/VBox"]
+[node name="Spacer" type="Control" parent="MenuPanel"]
 layout_mode = 2
 custom_minimum_size = Vector2(0, 32)
 
-[node name="StartBtn" type="Button" parent="CenterContainer/VBox"]
+[node name="StartBtn" type="Button" parent="MenuPanel"]
 layout_mode = 2
 custom_minimum_size = Vector2(200, 50)
 text = "Start Game"
 
-[node name="SettingsBtn" type="Button" parent="CenterContainer/VBox"]
+[node name="SettingsBtn" type="Button" parent="MenuPanel"]
 layout_mode = 2
 custom_minimum_size = Vector2(200, 50)
 text = "Settings"
 
-[node name="QuitBtn" type="Button" parent="CenterContainer/VBox"]
+[node name="QuitBtn" type="Button" parent="MenuPanel"]
 layout_mode = 2
 custom_minimum_size = Vector2(200, 50)
 text = "Quit"
 
-[connection signal="pressed" from="CenterContainer/VBox/StartBtn" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="CenterContainer/VBox/SettingsBtn" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="CenterContainer/VBox/QuitBtn" to="." method="_on_quit_pressed"]
+[node name="SettingsPanel" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -120.0
+offset_right = 150.0
+offset_bottom = 120.0
+alignment = 1
+
+[node name="Title" type="Label" parent="SettingsPanel"]
+layout_mode = 2
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 36
+text = "Settings"
+
+[node name="Spacer" type="Control" parent="SettingsPanel"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 24)
+
+[node name="ResHBox" type="HBoxContainer" parent="SettingsPanel"]
+layout_mode = 2
+alignment = 1
+
+[node name="ResLabel" type="Label" parent="SettingsPanel/ResHBox"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="ResOption" type="OptionButton" parent="SettingsPanel/ResHBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(160, 0)
+item_count = 3
+selected = 0
+popup/item_0/text = "960x540"
+popup/item_0/id = 0
+popup/item_1/text = "1280x720"
+popup/item_1/id = 1
+popup/item_2/text = "1920x1080"
+popup/item_2/id = 2
+
+[node name="FullscreenCheck" type="CheckButton" parent="SettingsPanel"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="Spacer2" type="Control" parent="SettingsPanel"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 24)
+
+[node name="BackBtn" type="Button" parent="SettingsPanel"]
+layout_mode = 2
+custom_minimum_size = Vector2(200, 50)
+text = "Back"
+
+[connection signal="pressed" from="MenuPanel/StartBtn" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MenuPanel/SettingsBtn" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MenuPanel/QuitBtn" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="SettingsPanel/BackBtn" to="." method="_on_back_pressed"]
+[connection signal="item_selected" from="SettingsPanel/ResHBox/ResOption" to="." method="_on_resolution_changed"]
+[connection signal="toggled" from="SettingsPanel/FullscreenCheck" to="." method="_on_fullscreen_toggled"]
