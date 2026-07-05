@@ -16,7 +16,7 @@ func _ready() -> void:
 	for i in range(MAX_GROUPS):
 		var row := HBoxContainer.new()
 		var icon := TextureRect.new()
-		icon.texture = preload("res://mob/slime_idle.png")
+		icon.texture = preload("res://mob/slime_icon.png")
 		icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		icon.custom_minimum_size = Vector2(24, 24)
