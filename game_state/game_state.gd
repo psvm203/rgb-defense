@@ -28,7 +28,7 @@ const WAVES: Array = [
 ]
 
 var lives: int = 10
-var coins: int = 100
+var coins: int = 10000
 var wave_number: int = 0
 var is_wave_active: bool = false
 var mobs_alive: int = 0
