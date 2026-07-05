@@ -1,6 +1,21 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://jo6nm2dn51ae"]
 
-[ext_resource type="Script" path="res://tower/blue/skeleton/skeleton.gd" id="1_skeleton"]
+[ext_resource type="Script" uid="uid://dmrgeejijak8m" path="res://tower/blue/skeleton/skeleton.gd" id="1_skeleton"]
+[ext_resource type="Texture2D" uid="uid://cdbgr4hlj5kij" path="res://tower/blue/skeleton/skeleton.png" id="2_fj113"]
 
-[node name="Skeleton" type="Area2D"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_okuid"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fj113")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Skeleton" type="Area2D" unique_id=72620140]
 script = ExtResource("1_skeleton")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1841759717]
+sprite_frames = SubResource("SpriteFrames_okuid")
