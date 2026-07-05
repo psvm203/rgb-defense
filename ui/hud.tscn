@@ -34,6 +34,7 @@ stretch_mode = 5
 [node name="LivesLabel" type="Label" parent="TopPanel/VBox/Lives" unique_id=1543825734]
 layout_mode = 2
 text = "10"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 
 [node name="Coins" type="HBoxContainer" parent="TopPanel/VBox" unique_id=1480092103]
 layout_mode = 2
@@ -48,10 +49,12 @@ stretch_mode = 5
 [node name="CoinsLabel" type="Label" parent="TopPanel/VBox/Coins" unique_id=309898315]
 layout_mode = 2
 text = "100"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 
 [node name="WaveLabel" type="Label" parent="TopPanel/VBox" unique_id=810861388]
 layout_mode = 2
 text = "Wave 0"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 
 [node name="WavePanel" type="MarginContainer" parent="." unique_id=487869024]
 anchors_preset = 2
@@ -73,6 +76,7 @@ layout_mode = 2
 [node name="NextWaveLabel" type="Label" parent="WavePanel/VBox" unique_id=203665892]
 layout_mode = 2
 text = "Next Wave"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 
 [node name="WaveMobs" type="VBoxContainer" parent="WavePanel/VBox" unique_id=460800359]
 layout_mode = 2
@@ -81,6 +85,7 @@ layout_mode = 2
 layout_mode = 2
 disabled = true
 text = "Start Wave"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 
 [node name="TutorialPanel" type="PanelContainer" parent="."]
 anchors_preset = 5

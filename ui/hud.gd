@@ -96,6 +96,7 @@ func _ready() -> void:
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		icon.custom_minimum_size = Vector2(36, 36)
 		var label := Label.new()
+		label.add_theme_color_override(&"font_color", Color.BLACK)
 		row.add_child(icon)
 		row.add_child(label)
 		_wave_mobs.add_child(row)
