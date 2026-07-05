@@ -26,16 +26,23 @@ var _selected_tower_cost: int
 var _preview: Node2D
 var _occupied_cells: Array[Vector2i] = []
 var _tower_menu: Control
-var _upgrade_btn: Button
+var _upgrade_btns: Array[Button] = []
 var _sell_btn: Button
 var _selected_tower: Node2D
 
 const UPGRADES: Dictionary = {
-	"res://tower/warrior/warrior.tscn": {
-		name = "Sword Saint",
-		scene = "res://tower/warrior/sword_saint.tscn",
-		cost = 50,
-	},
+	"res://tower/warrior/warrior.tscn": [
+		{
+			name = "Sword Saint",
+			scene = "res://tower/warrior/sword_saint.tscn",
+			cost = 50,
+		},
+		{
+			name = "Barbarian",
+			scene = "res://tower/warrior/barbarian.tscn",
+			cost = 50,
+		},
+	],
 }
 
 
@@ -176,10 +183,6 @@ func _create_tower_menu() -> void:
 	var vbox := VBoxContainer.new()
 	panel.add_child(vbox)
 
-	_upgrade_btn = Button.new()
-	_upgrade_btn.pressed.connect(_on_upgrade_pressed)
-	vbox.add_child(_upgrade_btn)
-
 	_sell_btn = Button.new()
 	_sell_btn.text = "Sell"
 	_sell_btn.pressed.connect(_on_sell_pressed)
@@ -202,12 +205,22 @@ func _try_select_tower() -> void:
 	if closest:
 		_selected_tower = closest
 		_tower_menu.position = closest.position - Vector2(0, 64)
-		var upgrade: Dictionary = UPGRADES.get(closest.scene_file_path, { })
-		if upgrade.is_empty():
-			_upgrade_btn.hide()
-		else:
-			_upgrade_btn.text = "Upgrade: %s - %d" % [upgrade.name, upgrade.cost]
-			_upgrade_btn.show()
+
+		for btn in _upgrade_btns:
+			btn.queue_free()
+		_upgrade_btns.clear()
+
+		var upgrades: Array = UPGRADES.get(closest.scene_file_path, [])
+		if not upgrades.is_empty():
+			var vbox: VBoxContainer = _tower_menu.get_child(0).get_child(0)
+			for upgrade in upgrades:
+				var btn := Button.new()
+				btn.text = "Upgrade: %s - %d" % [upgrade.name, upgrade.cost]
+				btn.pressed.connect(_on_upgrade_pressed.bind(upgrade))
+				vbox.add_child(btn)
+				vbox.move_child(btn, vbox.get_child_count() - 2)
+				_upgrade_btns.append(btn)
+
 		_tower_menu.show()
 	else:
 		_hide_tower_menu()
@@ -232,11 +245,8 @@ func _on_sell_pressed() -> void:
 	_hide_tower_menu()
 
 
-func _on_upgrade_pressed() -> void:
+func _on_upgrade_pressed(upgrade: Dictionary) -> void:
 	if not _selected_tower:
-		return
-	var upgrade: Dictionary = UPGRADES.get(_selected_tower.scene_file_path, { })
-	if upgrade.is_empty():
 		return
 	if not GameState.spend_coins(upgrade.cost):
 		return
