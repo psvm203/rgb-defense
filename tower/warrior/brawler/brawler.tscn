@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://tower/warrior/brawler.gd" id="1_tower"]
+[ext_resource type="Script" path="res://tower/warrior/brawler/brawler.gd" id="1_tower"]
 [ext_resource type="Texture2D" path="res://tower/warrior/warrior_idle.png" id="2_3fjlj"]
 [ext_resource type="Texture2D" path="res://tower/warrior/warrior_attack.png" id="2_4ulc0"]
 

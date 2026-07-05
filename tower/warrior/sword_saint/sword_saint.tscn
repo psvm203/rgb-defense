@@ -1,8 +1,8 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://tower/warrior/barbarian.gd" id="1_tower"]
-[ext_resource type="Texture2D" path="res://tower/warrior/warrior_idle.png" id="2_3fjlj"]
-[ext_resource type="Texture2D" path="res://tower/warrior/warrior_attack.png" id="2_4ulc0"]
+[ext_resource type="Script" uid="uid://qfjfagkdjf5p" path="res://tower/warrior/sword_saint/sword_saint.gd" id="1_tower"]
+[ext_resource type="Texture2D" uid="uid://c3uvodo5byfef" path="res://tower/warrior/warrior_idle.png" id="2_3fjlj"]
+[ext_resource type="Texture2D" uid="uid://bo8doodydketa" path="res://tower/warrior/warrior_attack.png" id="2_4ulc0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wwmrl"]
 atlas = ExtResource("2_4ulc0")
@@ -108,10 +108,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Tower" type="Node2D" unique_id=250026220]
+[node name="Tower" type="Node2D"]
 script = ExtResource("1_tower")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1540324020]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_etvis")
 autoplay = "default"
 frame = 5

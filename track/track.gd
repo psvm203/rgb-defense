@@ -34,51 +34,51 @@ const UPGRADES: Dictionary = {
 	"res://tower/warrior/warrior.tscn": [
 		{
 			name = "Sword Saint",
-			scene = "res://tower/warrior/sword_saint.tscn",
+			scene = "res://tower/warrior/sword_saint/sword_saint.tscn",
 			cost = 50,
 		},
 		{
 			name = "Barbarian",
-			scene = "res://tower/warrior/barbarian.tscn",
+			scene = "res://tower/warrior/barbarian/barbarian.tscn",
 			cost = 50,
 		},
 		{
 			name = "Brawler",
-			scene = "res://tower/warrior/brawler.tscn",
+			scene = "res://tower/warrior/brawler/brawler.tscn",
 			cost = 50,
 		},
 	],
 	"res://tower/archer/archer.tscn": [
 		{
 			name = "Marksman",
-			scene = "res://tower/archer/marksman.tscn",
+			scene = "res://tower/archer/marksman/marksman.tscn",
 			cost = 50,
 		},
 		{
 			name = "Stormbringer",
-			scene = "res://tower/archer/stormbringer.tscn",
+			scene = "res://tower/archer/stormbringer/stormbringer.tscn",
 			cost = 50,
 		},
 		{
 			name = "Viper",
-			scene = "res://tower/archer/viper.tscn",
+			scene = "res://tower/archer/viper/viper.tscn",
 			cost = 50,
 		},
 	],
 	"res://tower/mage/mage.tscn": [
 		{
 			name = "Thunderbolt",
-			scene = "res://tower/mage/thunderbolt.tscn",
+			scene = "res://tower/mage/thunderbolt/thunderbolt.tscn",
 			cost = 50,
 		},
 		{
 			name = "Necromancer",
-			scene = "res://tower/mage/necromancer.tscn",
+			scene = "res://tower/mage/necromancer/necromancer.tscn",
 			cost = 50,
 		},
 		{
 			name = "Frost Mage",
-			scene = "res://tower/mage/frost_mage.tscn",
+			scene = "res://tower/mage/frost_mage/frost_mage.tscn",
 			cost = 50,
 		},
 	],

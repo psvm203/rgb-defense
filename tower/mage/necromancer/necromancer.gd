@@ -4,7 +4,7 @@ var _skeleton_scene: PackedScene
 
 
 func _setup_tower() -> void:
-	_skeleton_scene = preload("res://tower/mage/skeleton.tscn")
+	_skeleton_scene = preload("res://tower/mage/skeleton/skeleton.tscn")
 	attack_range = 180.0
 	attack_cooldown = 4.0
 	damage = 0.3

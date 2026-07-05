@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://tower/archer/viper.gd" id="1_tower"]
+[ext_resource type="Script" path="res://tower/archer/stormbringer/stormbringer.gd" id="1_tower"]
 [ext_resource type="Texture2D" path="res://tower/archer/archer_attack.png" id="2_6aup3"]
 [ext_resource type="Texture2D" path="res://tower/archer/archer_idle.png" id="3_6aup3"]
 

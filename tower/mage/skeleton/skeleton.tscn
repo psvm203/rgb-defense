@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://tower/mage/skeleton.gd" id="1_skeleton"]
+[ext_resource type="Script" path="res://tower/mage/skeleton/skeleton.gd" id="1_skeleton"]
 
 [node name="Skeleton" type="Area2D"]
 script = ExtResource("1_skeleton")
