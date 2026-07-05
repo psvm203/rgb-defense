@@ -5,6 +5,7 @@ extends Area2D
 
 var rgb: Vector3
 var _base_sprite_x: float
+var _traveled: float = 0.0
 
 
 func _ready() -> void:
@@ -13,32 +14,30 @@ func _ready() -> void:
 	_base_sprite_x = $AnimatedSprite2D.position.x
 	add_to_group("mobs")
 	GameState.mob_spawned()
+	var path := get_parent() as Path2D
+	if path and path.curve:
+		position = path.curve.sample_baked(0.0)
 
 
 func _process(delta: float) -> void:
-	var path_follow := get_parent() as PathFollow2D
-	if not path_follow:
-		return
-	path_follow.progress += speed * delta
-	if path_follow.progress_ratio >= 1.0:
-		GameState.lose_life()
-		GameState.mob_destroyed()
-		queue_free()
-		return
-	_update_flip(path_follow)
-
-
-func _update_flip(path_follow: PathFollow2D) -> void:
-	var path := path_follow.get_parent() as Path2D
+	var path := get_parent() as Path2D
 	if not path or not path.curve:
 		return
 	var curve := path.curve
 	var baked_length := curve.get_baked_length()
-	if baked_length < 1.0:
+	_traveled += speed * delta
+	position = curve.sample_baked(_traveled)
+	if _traveled >= baked_length:
+		GameState.lose_life()
+		GameState.mob_destroyed()
+		queue_free()
 		return
-	var progress := path_follow.progress
-	var pos1 := curve.sample_baked(progress)
-	var pos2 := curve.sample_baked(minf(progress + 10.0, baked_length))
+	_update_flip(curve, baked_length)
+
+
+func _update_flip(curve: Curve2D, baked_length: float) -> void:
+	var pos1 := curve.sample_baked(_traveled)
+	var pos2 := curve.sample_baked(minf(_traveled + 10.0, baked_length))
 	var tangent := pos2 - pos1
 	if abs(tangent.x) > 1.0:
 		var is_flipped := tangent.x < 0.0

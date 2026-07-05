@@ -210,4 +210,4 @@ func _on_spawn_timer_timeout() -> void:
 func _spawn_mob(max_rgb: Vector3) -> void:
 	var mob := _mob_scene.instantiate()
 	mob.max_rgb = max_rgb
-	$Path/SpawnPoint.add_child(mob)
+	$Path.add_child(mob)
