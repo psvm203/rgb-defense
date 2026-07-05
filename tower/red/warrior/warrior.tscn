@@ -36,6 +36,10 @@ region = Rect2(264, 0, 44, 44)
 atlas = ExtResource("2_4ulc0")
 region = Rect2(308, 0, 44, 44)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_aw1ij"]
+atlas = ExtResource("2_4ulc0")
+region = Rect2(352, 0, 44, 44)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ruj3j"]
 atlas = ExtResource("2_3fjlj")
 region = Rect2(0, 0, 44, 44)
@@ -94,6 +98,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pfvpg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aw1ij")
 }],
 "loop": 0,
 "name": &"attack",
@@ -134,4 +141,7 @@ script = ExtResource("1_tower")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=245602569]
 sprite_frames = SubResource("SpriteFrames_etvis")
+animation = &"attack"
 autoplay = "default"
+frame = 8
+frame_progress = 1.0
