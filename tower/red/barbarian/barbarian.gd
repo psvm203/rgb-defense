@@ -7,8 +7,8 @@ var _state_timer: float = 0.0
 
 var normal_speed_scale: float = 0.278
 var frenzy_speed_scale: float = 1.111
-var frenzy_duration: float = 2.0
-var exhaust_duration: float = 3.0
+var frenzy_duration: float = 4.0
+var exhaust_duration: float = 2.0
 
 
 func _setup_tower() -> void:

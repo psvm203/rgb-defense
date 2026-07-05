@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bgcq82eks8667" path="res://tower/red/brawler/brawler.gd" id="1_tower"]
 [ext_resource type="Texture2D" uid="uid://cdcn3heqcsixp" path="res://tower/red/brawler/brawler_attack.png" id="2_vk1jd"]
 [ext_resource type="Texture2D" uid="uid://couap7l4hk17v" path="res://tower/red/brawler/brawler_idle.png" id="3_g0o2d"]
+[ext_resource type="Texture2D" uid="uid://cdft6f6mw8h4f" path="res://tower/red/brawler/brawler_knockback.png" id="4_g0o2d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lnap0"]
 atlas = ExtResource("2_vk1jd")
@@ -31,6 +32,38 @@ region = Rect2(390, 0, 78, 78)
 [sub_resource type="AtlasTexture" id="AtlasTexture_awt2t"]
 atlas = ExtResource("2_vk1jd")
 region = Rect2(468, 0, 78, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6komg"]
+atlas = ExtResource("4_g0o2d")
+region = Rect2(0, 0, 78, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sysak"]
+atlas = ExtResource("4_g0o2d")
+region = Rect2(78, 0, 78, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kj3op"]
+atlas = ExtResource("4_g0o2d")
+region = Rect2(156, 0, 78, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ipwv"]
+atlas = ExtResource("4_g0o2d")
+region = Rect2(234, 0, 78, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5j6v"]
+atlas = ExtResource("4_g0o2d")
+region = Rect2(312, 0, 78, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atsnd"]
+atlas = ExtResource("4_g0o2d")
+region = Rect2(390, 0, 78, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b46gr"]
+atlas = ExtResource("4_g0o2d")
+region = Rect2(468, 0, 78, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwdfb"]
+atlas = ExtResource("4_g0o2d")
+region = Rect2(546, 0, 78, 78)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_etvis"]
 animations = [{
@@ -67,6 +100,35 @@ animations = [{
 "loop": 1,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6komg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sysak")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kj3op")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ipwv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5j6v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atsnd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b46gr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwdfb")
+}],
+"loop": 0,
+"name": &"knockback",
+"speed": 14.0
 }]
 
 [node name="Tower" type="Node2D" unique_id=1133682901]
@@ -74,7 +136,7 @@ script = ExtResource("1_tower")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=809164284]
 sprite_frames = SubResource("SpriteFrames_etvis")
-animation = &"attack"
+animation = &"knockback"
 autoplay = "default"
-frame = 6
+frame = 7
 frame_progress = 1.0
