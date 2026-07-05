@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cneg3v36ajr41"
-path="res://.godot/imported/thunder.wav-5a97a32422fc2ca66827bc7c5717bdef.sample"
+path="res://.godot/imported/thunder.wav-2fc5dec250d016df53947334f832fb89.sample"
 
 [deps]
 
 source_file="res://sound/thunder.wav"
-dest_files=["res://.godot/imported/thunder.wav-5a97a32422fc2ca66827bc7c5717bdef.sample"]
+dest_files=["res://.godot/imported/thunder.wav-2fc5dec250d016df53947334f832fb89.sample"]
 
 [params]
 

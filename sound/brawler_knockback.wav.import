@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cixqet771lp61"
-path="res://.godot/imported/brawler_knockback.wav-e0d1c0ff6c9119e40a85299e6178e3b4.sample"
+path="res://.godot/imported/brawler_knockback.wav-5fd44ec4780d59e37843c3859d9d9f69.sample"
 
 [deps]
 
 source_file="res://sound/brawler_knockback.wav"
-dest_files=["res://.godot/imported/brawler_knockback.wav-e0d1c0ff6c9119e40a85299e6178e3b4.sample"]
+dest_files=["res://.godot/imported/brawler_knockback.wav-5fd44ec4780d59e37843c3859d9d9f69.sample"]
 
 [params]
 
