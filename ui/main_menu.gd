@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const WaveData = preload("res://level/wave.gd")
+
 @onready var _menu_panel: VBoxContainer = $MenuPanel
 @onready var _settings_panel: VBoxContainer = $SettingsPanel
 @onready var _res_option: OptionButton = $SettingsPanel/ResHBox/ResOption
@@ -36,7 +38,7 @@ func _update_stage_display() -> void:
 	var level_names := _get_level_names()
 	_stage_label.text = level_names[_selected_level]
 	_prev_btn.disabled = _selected_level <= 0
-	_next_btn.disabled = _selected_level >= GameState.MAX_LEVEL
+	_next_btn.disabled = _selected_level >= WaveData.MAX_LEVEL
 	_start_btn.disabled = not _is_level_available(_selected_level)
 	_start_label.text = "Start"
 
@@ -56,7 +58,7 @@ func _on_prev_stage() -> void:
 
 
 func _on_next_stage() -> void:
-	if _selected_level < GameState.MAX_LEVEL:
+	if _selected_level < WaveData.MAX_LEVEL:
 		_selected_level += 1
 		_update_stage_display()
 

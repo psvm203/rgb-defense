@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const WaveData = preload("res://level/wave.gd")
+
 const MAX_GROUPS := 3
 
 @onready var _lives_label: Label = $TopPanel/VBox/Lives/LivesLabel
@@ -110,7 +112,7 @@ func _process(_delta: float) -> void:
 	_wave_label.text = "Wave " + str(_track.wave_number)
 	_start_wave_btn.disabled = _track.is_wave_active
 
-	var wave: Dictionary = GameState.get_wave(GameState.current_level, _track.wave_number)
+	var wave: Dictionary = WaveData.get_wave(GameState.current_level, _track.wave_number)
 	var groups: Array = wave.groups
 	for i in range(MAX_GROUPS):
 		var row_data: Dictionary = _group_rows[i]
@@ -251,7 +253,7 @@ func _update_tutorial() -> void:
 			if _track.is_wave_active:
 				_advance_tutorial()
 		2:
-			var level_waves := GameState.get_waves(GameState.current_level)
+			var level_waves := WaveData.get_waves(GameState.current_level)
 			if _track.wave_number >= level_waves.size():
 				_advance_tutorial()
 

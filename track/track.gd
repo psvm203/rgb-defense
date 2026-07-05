@@ -1,5 +1,7 @@
 extends Node2D
 
+const WaveData = preload("res://level/wave.gd")
+
 signal wave_completed
 signal level_completed(level: int)
 signal start_wave_pressed
@@ -500,7 +502,7 @@ func _check_wave_completion() -> void:
 	if _spawn_queue.is_empty() and mobs_alive <= 0:
 		is_wave_active = false
 		wave_completed.emit()
-		var level_waves := GameState.get_waves(GameState.current_level)
+		var level_waves := WaveData.get_waves(GameState.current_level)
 		if wave_number >= level_waves.size():
 			level_completed.emit(GameState.current_level)
 
@@ -521,7 +523,7 @@ func _on_game_over() -> void:
 
 
 func start_wave() -> void:
-	var wave: Dictionary = GameState.get_wave(GameState.current_level, wave_number)
+	var wave: Dictionary = WaveData.get_wave(GameState.current_level, wave_number)
 	_spawn_queue.clear()
 	for group in wave.groups:
 		for j in range(group.count):
