@@ -21,11 +21,12 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Title" type="Label" parent="MenuPanel" unique_id=380087867]
+[node name="Title" type="RichTextLabel" parent="MenuPanel" unique_id=380087867]
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "RGB Defense"
-horizontal_alignment = 1
+bbcode_enabled = true
+fit_content = true
+theme_override_font_sizes/normal_font_size = 48
+text = "[center][color=red]R[/color][color=green]G[/color][color=blue]B[/color] [color=white]Defense[/color][/center]"
 
 [node name="Spacer" type="Control" parent="MenuPanel" unique_id=1786882793]
 custom_minimum_size = Vector2(0, 32)
