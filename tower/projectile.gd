@@ -5,6 +5,10 @@ extends Area2D
 var _damage: float
 var _color_index: int
 var _color: Color
+var _texture: Texture2D
+var _texture_scale: float = 1.0
+var _afterimage_interval: float = 0.0
+var _afterimage_timer: float = 0.0
 var _splash_radius: float = 0.0
 var _pierce_count: int = 0
 var _hit_direction: Vector2
@@ -48,6 +52,8 @@ func _process(delta: float) -> void:
 	if _travel_distance > MAX_TRAVEL:
 		queue_free()
 		return
+
+	_spawn_afterimage_trail(delta)
 
 	var mobs := get_tree().get_nodes_in_group("mobs")
 	for mob in mobs:
@@ -106,5 +112,52 @@ func _apply_chain(from_pos: Vector2) -> void:
 		from_pos = closest.global_position
 
 
+func set_texture(texture: Texture2D) -> void:
+	_texture = texture
+	queue_redraw()
+
+
+func set_texture_scale(scale: float) -> void:
+	_texture_scale = scale
+	queue_redraw()
+
+
+func set_afterimage(interval: float) -> void:
+	_afterimage_interval = interval
+
+
 func _draw() -> void:
-	draw_circle(Vector2.ZERO, 4.0, _color)
+	if _texture:
+		var angle := atan2(_hit_direction.y, _hit_direction.x)
+		draw_set_transform(Vector2.ZERO, angle, Vector2(_texture_scale, _texture_scale))
+		draw_texture(_texture, -_texture.get_size() / 2.0)
+	else:
+		draw_circle(Vector2.ZERO, 4.0, _color)
+
+
+func _spawn_afterimage_trail(delta: float) -> void:
+	if _afterimage_interval <= 0.0 or not _texture:
+		return
+	_afterimage_timer += delta
+	if _afterimage_timer < _afterimage_interval:
+		return
+	_afterimage_timer = 0.0
+	var parent := get_tree().current_scene
+	if not parent:
+		return
+	var img := Sprite2D.new()
+	img.texture = _texture
+	img.scale = Vector2(_texture_scale, _texture_scale)
+	img.rotation = atan2(_hit_direction.y, _hit_direction.x)
+	img.global_position = global_position
+	img.modulate = Color(1, 1, 1, 1)
+	img.z_index = 10
+	parent.add_child(img)
+	var tween := img.create_tween()
+	tween.tween_property(img, "modulate:a", 0.0, 0.4).set_ease(Tween.EASE_IN)
+	var timer := Timer.new()
+	timer.wait_time = 0.5
+	timer.one_shot = true
+	img.add_child(timer)
+	timer.timeout.connect(img.queue_free)
+	timer.start()

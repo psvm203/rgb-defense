@@ -12,6 +12,9 @@ var _time_since_attack: float = 0.0
 var _target: Area2D
 var _base_sprite_x: float
 var _projectile_scene: PackedScene
+var _projectile_texture: Texture2D
+var _projectile_scale: float = 1.0
+var _projectile_afterimage_interval: float = 0.0
 var _target_locked: bool = false
 var cost: int = 0
 
@@ -102,6 +105,10 @@ func _spawn_projectile(
 	var projectile := _projectile_scene.instantiate()
 	get_parent().add_child(projectile)
 	projectile.global_position = global_position
+	if _projectile_texture:
+		projectile.set_texture(_projectile_texture)
+		projectile.set_texture_scale(_projectile_scale)
+		projectile.set_afterimage(_projectile_afterimage_interval)
 	projectile.setup(
 		_target,
 		damage,
