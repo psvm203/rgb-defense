@@ -72,6 +72,21 @@ func _unhandled_input(event: InputEvent) -> void:
 	_try_place_tower()
 
 
+func _input(event: InputEvent) -> void:
+	if not (event is InputEventKey and event.pressed):
+		return
+	match event.keycode:
+		KEY_R:
+			_on_tower_selected("res://tower/warrior/warrior.tscn", 25)
+		KEY_G:
+			_on_tower_selected("res://tower/archer/archer.tscn", 50)
+		KEY_B:
+			_on_tower_selected("res://tower/mage/mage.tscn", 75)
+		KEY_SPACE:
+			if not GameState.is_wave_active:
+				GameState.start_wave_pressed.emit()
+
+
 func _mouse_to_grid() -> Vector2i:
 	var world_pos := get_global_mouse_position()
 	return Vector2i(
