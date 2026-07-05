@@ -1,7 +1,7 @@
 extends "res://tower/blue/mage/mage.gd"
 
-const CHAIN_COUNT := 5
-const CHAIN_RADIUS := 200.0
+var chain_count: int = 5
+var chain_radius: float = 200.0
 
 var _lightning_lines: Array = []
 var _should_draw_lightning: bool = false
@@ -24,8 +24,8 @@ func _perform_attack() -> void:
 	_lightning_lines.append([global_position, _target.global_position])
 	var from := _target.global_position
 	var hit_targets: Array[Area2D] = [_target]
-	for i in range(CHAIN_COUNT):
-		var closest := _find_chain_mob(from, hit_targets, CHAIN_RADIUS)
+	for i in range(chain_count):
+		var closest := _find_chain_mob(from, hit_targets, chain_radius)
 		if not closest:
 			break
 		closest.take_damage(_color_index, damage)
