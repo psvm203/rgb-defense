@@ -8,6 +8,7 @@ func _setup_tower() -> void:
 	_tower_color = Color(1.0, 0.2, 0.2)
 	_attack_frame = 3
 	_projectile_texture = preload("res://tower/red/sword_saint/sword_aura.png")
+	_projectile_homing_duration = 0.25
 
 
 func _perform_attack() -> void:

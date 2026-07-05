@@ -7,6 +7,10 @@ var _color_index: int
 var _color: Color
 var _texture: Texture2D
 var _texture_scale: float = 1.0
+var _target: Area2D
+var _acceleration: float = 0.0
+var _homing_duration: float = 0.0
+var _homing_timer: float = 0.0
 var _afterimage_interval: float = 0.0
 var _afterimage_timer: float = 0.0
 var _splash_radius: float = 0.0
@@ -33,6 +37,7 @@ func setup(
 		chain_count: int = 0,
 		chain_radius: float = 0.0,
 ) -> void:
+	_target = target
 	_damage = damage
 	_color_index = color_index
 	_color = proj_color
@@ -46,6 +51,15 @@ func setup(
 
 
 func _process(delta: float) -> void:
+	speed += _acceleration * delta
+	_homing_timer += delta
+	if _homing_timer < _homing_duration and is_instance_valid(_target):
+		var dir := _target.global_position - global_position
+		if dir.length() > 0.0:
+			var target_dir := dir.normalized()
+			var angle := _hit_direction.angle_to(target_dir)
+			var max_rot := 8.0 * delta
+			_hit_direction = _hit_direction.rotated(clampf(angle, -max_rot, max_rot))
 	var step := _hit_direction * speed * delta
 	global_position += step
 	_travel_distance += step.length()
@@ -66,6 +80,7 @@ func _process(delta: float) -> void:
 
 func _on_hit(mob: Area2D) -> void:
 	_hit_targets.append(mob)
+	_homing_timer = _homing_duration
 	_apply_damage(mob)
 	if _splash_radius > 0.0:
 		_apply_splash()
@@ -120,6 +135,14 @@ func set_texture(texture: Texture2D) -> void:
 func set_texture_scale(scale: float) -> void:
 	_texture_scale = scale
 	queue_redraw()
+
+
+func set_homing_duration(duration: float) -> void:
+	_homing_duration = duration
+
+
+func set_acceleration(accel: float) -> void:
+	_acceleration = accel
 
 
 func set_afterimage(interval: float) -> void:
