@@ -149,6 +149,9 @@ const UPGRADES: Dictionary = {
 
 
 func _ready() -> void:
+	if GameState.current_level == 0:
+		GameState.lives = 10000
+		GameState.coins = 10000
 	RenderingServer.set_default_clear_color(Color(0.894118, 0.815686, 0.670588))
 	_setup_tilemap()
 	_setup_path()
@@ -204,10 +207,10 @@ func _input(event: InputEvent) -> void:
 		KEY_R:
 			_on_tower_selected("res://tower/red/warrior/warrior.tscn", 25)
 		KEY_G:
-			if GameState.current_level > 1:
+			if GameState.current_level != 1:
 				_on_tower_selected("res://tower/green/archer/archer.tscn", 50)
 		KEY_B:
-			if GameState.current_level > 1:
+			if GameState.current_level != 1:
 				_on_tower_selected("res://tower/blue/mage/mage.tscn", 75)
 		KEY_SPACE:
 			if not GameState.is_wave_active:
@@ -316,7 +319,8 @@ func _try_select_tower() -> void:
 		_upgrade_btns.clear()
 
 		var upgrades: Array = UPGRADES.get(closest.scene_file_path, [])
-		if not upgrades.is_empty() and GameState.current_level > 2:
+		var can_upgrade := GameState.current_level > 2 or GameState.current_level == 0
+		if not upgrades.is_empty() and can_upgrade:
 			var vbox: VBoxContainer = _tower_menu.get_child(0).get_child(0)
 			for upgrade in upgrades:
 				var btn := Button.new()

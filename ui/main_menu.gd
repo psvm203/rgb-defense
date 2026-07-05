@@ -27,6 +27,12 @@ func _ready() -> void:
 
 
 func _create_level_buttons() -> void:
+	var debug_btn := Button.new()
+	debug_btn.custom_minimum_size = Vector2(200, 50)
+	debug_btn.text = "Debug"
+	debug_btn.pressed.connect(_on_level_pressed.bind(0))
+	_level_list.add_child(debug_btn)
+
 	for level in range(1, GameState.MAX_LEVEL + 1):
 		var btn := Button.new()
 		btn.custom_minimum_size = Vector2(200, 50)
