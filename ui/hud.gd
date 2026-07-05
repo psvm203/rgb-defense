@@ -60,6 +60,7 @@ const TUTORIAL_MESSAGES: Dictionary = {
 func _ready() -> void:
 	_track = get_parent()
 	_start_wave_btn.pressed.connect(_on_start_wave_pressed)
+	_apply_button_style(_start_wave_btn)
 	_load_settings()
 	_apply_settings()
 	var dialog_style := StyleBoxFlat.new()
@@ -145,6 +146,16 @@ func _rgb_color(max_rgb: Vector3) -> Color:
 
 func _on_start_wave_pressed() -> void:
 	_track.start_wave_pressed.emit()
+
+
+func _apply_button_style(btn: Button) -> void:
+	var normal_style := StyleBoxTexture.new()
+	normal_style.texture = preload("res://ui/button.png")
+	btn.add_theme_stylebox_override(&"normal", normal_style)
+
+	var pressed_style := StyleBoxTexture.new()
+	pressed_style.texture = preload("res://ui/button_pressed.png")
+	btn.add_theme_stylebox_override(&"pressed", pressed_style)
 
 
 func _pause() -> void:
