@@ -10,6 +10,8 @@ var _splash_radius: float = 0.0
 var _pierce_count: int = 0
 var _hit_direction: Vector2
 var _travel_distance: float = 0.0
+var _slow_duration: float = 0.0
+var _slow_factor: float = 1.0
 const MAX_TRAVEL := 500.0
 
 
@@ -20,6 +22,8 @@ func setup(
 		proj_color: Color,
 		splash_radius: float = 0.0,
 		pierce_count: int = 0,
+		slow_duration: float = 0.0,
+		slow_factor: float = 1.0,
 ) -> void:
 	_target = target
 	_damage = damage
@@ -27,6 +31,8 @@ func setup(
 	_color = proj_color
 	_splash_radius = splash_radius
 	_pierce_count = pierce_count
+	_slow_duration = slow_duration
+	_slow_factor = slow_factor
 
 
 func _process(delta: float) -> void:
@@ -49,7 +55,7 @@ func _process(delta: float) -> void:
 		if _splash_radius > 0.0:
 			_apply_splash()
 		else:
-			_target.take_damage(_color_index, _damage)
+			_apply_damage(_target)
 		if _pierce_count > 0:
 			_hit_direction = direction.normalized()
 			_pierce_count -= 1
@@ -61,13 +67,19 @@ func _process(delta: float) -> void:
 	global_position += direction.normalized() * speed * delta
 
 
+func _apply_damage(mob: Area2D) -> void:
+	mob.take_damage(_color_index, _damage)
+	if _slow_duration > 0.0:
+		mob.apply_slow(_slow_duration, _slow_factor)
+
+
 func _check_pierce() -> void:
 	var mobs := get_tree().get_nodes_in_group("mobs")
 	for mob in mobs:
 		if not is_instance_valid(mob):
 			continue
 		if global_position.distance_to(mob.global_position) < 24.0:
-			mob.take_damage(_color_index, _damage)
+			_apply_damage(mob)
 			_pierce_count -= 1
 			if _pierce_count <= 0:
 				queue_free()
@@ -81,7 +93,7 @@ func _apply_splash() -> void:
 			continue
 		var dist := global_position.distance_to(mob.global_position)
 		if dist <= _splash_radius:
-			mob.take_damage(_color_index, _damage)
+			_apply_damage(mob)
 
 
 func _draw() -> void:

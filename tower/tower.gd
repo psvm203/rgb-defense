@@ -91,11 +91,25 @@ func _perform_attack() -> void:
 	pass
 
 
-func _spawn_projectile(splash_radius: float = 0.0, pierce_count: int = 0) -> void:
+func _spawn_projectile(
+		splash_radius: float = 0.0,
+		pierce_count: int = 0,
+		slow_duration: float = 0.0,
+		slow_factor: float = 1.0,
+) -> void:
 	var projectile := _projectile_scene.instantiate()
 	get_parent().add_child(projectile)
 	projectile.global_position = global_position
-	projectile.setup(_target, damage, _color_index, _projectile_color, splash_radius, pierce_count)
+	projectile.setup(
+		_target,
+		damage,
+		_color_index,
+		_projectile_color,
+		splash_radius,
+		pierce_count,
+		slow_duration,
+		slow_factor,
+	)
 
 
 func _on_animation_finished() -> void:

@@ -6,6 +6,8 @@ extends Area2D
 var rgb: Vector3
 var _base_sprite_x: float
 var _traveled: float = 0.0
+var _base_speed: float
+var _slow_timer: float = 0.0
 
 
 func get_traveled() -> float:
@@ -16,8 +18,14 @@ func knock_back(distance: float) -> void:
 	_traveled = maxf(0.0, _traveled - distance)
 
 
+func apply_slow(duration: float, factor: float) -> void:
+	speed = _base_speed * factor
+	_slow_timer = duration
+
+
 func _ready() -> void:
 	rgb = max_rgb
+	_base_speed = speed
 	_update_appearance()
 	_base_sprite_x = $AnimatedSprite2D.position.x
 	add_to_group("mobs")
@@ -28,6 +36,11 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if _slow_timer > 0.0:
+		_slow_timer -= delta
+		if _slow_timer <= 0.0:
+			speed = _base_speed
+
 	var path := get_parent() as Path2D
 	if not path or not path.curve:
 		return
