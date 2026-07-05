@@ -8,6 +8,7 @@ var _base_sprite_x: float
 var _traveled: float = 0.0
 var _base_speed: float
 var _slow_timer: float = 0.0
+var _knockback_tween: Tween
 
 
 func get_traveled() -> float:
@@ -15,7 +16,16 @@ func get_traveled() -> float:
 
 
 func knock_back(distance: float) -> void:
-	_traveled = maxf(0.0, _traveled - distance)
+	var target := maxf(0.0, _traveled - distance)
+	if _knockback_tween:
+		_knockback_tween.kill()
+	_knockback_tween = create_tween()
+	_knockback_tween.tween_property(
+		self,
+		"_traveled",
+		target,
+		0.15,
+	).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
 
 func apply_slow(duration: float, factor: float) -> void:
@@ -46,7 +56,8 @@ func _process(delta: float) -> void:
 		return
 	var curve := path.curve
 	var baked_length := curve.get_baked_length()
-	_traveled += speed * delta
+	if not _knockback_tween or not _knockback_tween.is_running():
+		_traveled += speed * delta
 	position = curve.sample_baked(_traveled)
 	if _traveled >= baked_length:
 		GameState.lose_life()
