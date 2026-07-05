@@ -1,14 +1,12 @@
 extends Node2D
 
 @export var attack_range: float
-@export var attack_cooldown: float
 @export var damage: float
 
 var _color_index: int
 var _tower_color: Color
 var _projectile_color: Color
 var _attack_frame: int = 3
-var _time_since_attack: float = 0.0
 var _target: Area2D
 var _base_sprite_x: float
 var _projectile_scene: PackedScene
@@ -36,10 +34,9 @@ func _setup_tower() -> void:
 	pass
 
 
-func _process(delta: float) -> void:
-	_time_since_attack += delta
+func _process(_delta: float) -> void:
 	_find_target()
-	if _target and _time_since_attack >= attack_cooldown:
+	if _target and $AnimatedSprite2D.animation != "attack":
 		_attack()
 
 
@@ -76,7 +73,6 @@ func _find_target() -> void:
 
 
 func _attack() -> void:
-	_time_since_attack = 0.0
 	if not is_instance_valid(_target):
 		_target = null
 		return

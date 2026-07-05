@@ -3,7 +3,7 @@ extends "res://tower/blue/necromancer/necromancer.gd"
 func _setup_tower() -> void:
 	_skeleton_scene = preload("res://tower/blue/skeleton/skeleton.tscn")
 	attack_range = 200.0
-	attack_cooldown = 3.5
+	$AnimatedSprite2D.speed_scale = 0.357
 	damage = 0.35
 	_color_index = 2
 	_tower_color = Color(0.2, 0.2, 1.0)

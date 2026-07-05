@@ -2,7 +2,7 @@ extends "res://tower/green/archer/archer.gd"
 
 func _setup_tower() -> void:
 	attack_range = 250.0
-	attack_cooldown = 1.8
+	$AnimatedSprite2D.speed_scale = 0.667
 	damage = 0.2
 	_color_index = 1
 	_tower_color = Color(0.2, 1.0, 0.2)

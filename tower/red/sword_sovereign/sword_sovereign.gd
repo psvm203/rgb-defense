@@ -2,7 +2,7 @@ extends "res://tower/red/sword_saint/sword_saint.gd"
 
 func _setup_tower() -> void:
 	attack_range = 300.0
-	attack_cooldown = 1.2
+	$AnimatedSprite2D.speed_scale = 0.648
 	damage = 0.4
 	_color_index = 0
 	_tower_color = Color(1.0, 0.2, 0.2)
