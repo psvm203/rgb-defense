@@ -284,6 +284,7 @@ func _clear_selection() -> void:
 
 func _create_tower_menu() -> void:
 	_tower_menu = Control.new()
+	_tower_menu.z_index = 100
 	_tower_menu.hide()
 
 	var panel := PanelContainer.new()
