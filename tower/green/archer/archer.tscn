@@ -97,7 +97,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"attack",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -136,3 +136,5 @@ script = ExtResource("1_tower")
 sprite_frames = SubResource("SpriteFrames_etvis")
 animation = &"attack"
 autoplay = "default"
+frame = 7
+frame_progress = 1.0
