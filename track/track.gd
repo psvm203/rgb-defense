@@ -25,6 +25,9 @@ var _selected_tower_scene: PackedScene
 var _selected_tower_cost: int
 var _preview: Node2D
 var _occupied_cells: Array[Vector2i] = []
+var _tower_menu: Control
+var _sell_btn: Button
+var _selected_tower: Node2D
 
 
 func _ready() -> void:
@@ -48,6 +51,7 @@ func _ready() -> void:
 
 	GameState.wave_completed.connect(_on_wave_completed)
 	GameState.start_wave_pressed.connect(start_wave)
+	_create_tower_menu()
 
 
 func _process(_delta: float) -> void:
@@ -66,10 +70,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			event is InputEventMouseButton
 			and event.pressed
 			and event.button_index == MOUSE_BUTTON_LEFT
-			and _preview
 	):
 		return
-	_try_place_tower()
+	if _preview:
+		_try_place_tower()
+	else:
+		_try_select_tower()
 
 
 func _input(event: InputEvent) -> void:
@@ -122,6 +128,7 @@ func _try_place_tower() -> void:
 
 	var tower := _selected_tower_scene.instantiate()
 	tower.position = Vector2(grid_pos) * GRID_UNIT + HALF_GRID
+	tower.cost = _selected_tower_cost
 	tower.add_to_group("towers")
 	add_child(tower)
 	_occupied_cells.append(grid_pos)
@@ -147,6 +154,60 @@ func _clear_selection() -> void:
 		_preview.queue_free()
 		_preview = null
 	_selected_tower_scene = null
+	_hide_tower_menu()
+
+
+func _create_tower_menu() -> void:
+	_tower_menu = Control.new()
+	_tower_menu.hide()
+
+	var panel := PanelContainer.new()
+	_tower_menu.add_child(panel)
+
+	_sell_btn = Button.new()
+	_sell_btn.text = "Sell"
+	_sell_btn.pressed.connect(_on_sell_pressed)
+	panel.add_child(_sell_btn)
+
+	add_child(_tower_menu)
+
+
+func _try_select_tower() -> void:
+	var mouse_pos := get_global_mouse_position()
+	var towers := get_tree().get_nodes_in_group("towers")
+	var closest: Node2D = null
+	var closest_dist := 48.0
+	for tower in towers:
+		var dist := mouse_pos.distance_to(tower.position)
+		if dist < closest_dist:
+			closest = tower
+			closest_dist = dist
+
+	if closest:
+		_selected_tower = closest
+		_tower_menu.position = closest.position - Vector2(0, 64)
+		_tower_menu.show()
+	else:
+		_hide_tower_menu()
+
+
+func _hide_tower_menu() -> void:
+	_selected_tower = null
+	_tower_menu.hide()
+
+
+func _on_sell_pressed() -> void:
+	if not _selected_tower:
+		return
+	var refund := floori(_selected_tower.cost * 0.9)
+	GameState.add_coins(refund)
+	var grid_pos := Vector2i(
+		floori((_selected_tower.position.x - HALF_GRID.x) / GRID_UNIT),
+		floori((_selected_tower.position.y - HALF_GRID.y) / GRID_UNIT),
+	)
+	_occupied_cells.erase(grid_pos)
+	_selected_tower.queue_free()
+	_hide_tower_menu()
 
 
 func _get_track_cells() -> Array[Vector2i]:

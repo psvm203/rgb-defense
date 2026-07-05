@@ -41,6 +41,10 @@ func spend_coins(amount: int) -> bool:
 	return true
 
 
+func add_coins(amount: int) -> void:
+	coins += amount
+
+
 func lose_life() -> void:
 	if lives <= 0:
 		return

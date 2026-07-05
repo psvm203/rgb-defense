@@ -13,6 +13,7 @@ var _target: Area2D
 var _base_sprite_x: float
 var _projectile_scene: PackedScene
 var _target_locked: bool = false
+var cost: int = 0
 
 
 func _ready() -> void:
