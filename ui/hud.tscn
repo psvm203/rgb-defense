@@ -75,7 +75,6 @@ layout_mode = 2
 
 [node name="NextWaveLabel" type="Label" parent="WavePanel/VBox" unique_id=203665892]
 layout_mode = 2
-text = "Next Wave"
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 
 [node name="WaveMobs" type="VBoxContainer" parent="WavePanel/VBox" unique_id=460800359]
