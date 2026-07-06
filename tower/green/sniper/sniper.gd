@@ -5,7 +5,7 @@ func _setup_tower() -> void:
 	$AnimatedSprite2D.speed_scale = 0.667
 	damage = 20
 	_color_index = 1
-	_tower_color = Color(0.2, 1.0, 0.2)
+	_tower_color = Color(0.2, 0.9, 0.3)
 	_projectile_color = Color(0.2, 1.0, 0.2)
 
 
