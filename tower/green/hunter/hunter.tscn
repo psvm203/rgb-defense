@@ -1,81 +1,89 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dqtidi4bcfq3k"]
 
-[ext_resource type="Script" path="res://tower/green/hunter/hunter.gd" id="1_tower"]
-[ext_resource type="Texture2D" path="res://tower/green/archer/archer_attack.png" id="2_6aup3"]
-[ext_resource type="Texture2D" path="res://tower/green/archer/archer_idle.png" id="3_6aup3"]
+[ext_resource type="Script" uid="uid://bd16m3q8oc46b" path="res://tower/green/hunter/hunter.gd" id="1_tower"]
+[ext_resource type="Texture2D" path="res://tower/red/sword_saint/hunter_attack.png" id="2_qlaiw"]
+[ext_resource type="Texture2D" path="res://tower/red/sword_saint/hunter_idle.png" id="3_6d0k3"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jua71"]
-atlas = ExtResource("2_6aup3")
-region = Rect2(0, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_huopi"]
+atlas = ExtResource("2_qlaiw")
+region = Rect2(0, 0, 42, 42)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vtopp"]
-atlas = ExtResource("2_6aup3")
-region = Rect2(64, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_crtmw"]
+atlas = ExtResource("2_qlaiw")
+region = Rect2(42, 0, 42, 42)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6uvo8"]
-atlas = ExtResource("2_6aup3")
-region = Rect2(128, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cau6"]
+atlas = ExtResource("2_qlaiw")
+region = Rect2(84, 0, 42, 42)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vifhi"]
-atlas = ExtResource("2_6aup3")
-region = Rect2(192, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvaq1"]
+atlas = ExtResource("2_qlaiw")
+region = Rect2(126, 0, 42, 42)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_exd7o"]
-atlas = ExtResource("2_6aup3")
-region = Rect2(256, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqrhg"]
+atlas = ExtResource("2_qlaiw")
+region = Rect2(168, 0, 42, 42)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vum4o"]
-atlas = ExtResource("2_6aup3")
-region = Rect2(320, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2phw"]
+atlas = ExtResource("2_qlaiw")
+region = Rect2(210, 0, 42, 42)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3yj0o"]
-atlas = ExtResource("3_6aup3")
-region = Rect2(0, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jheoa"]
+atlas = ExtResource("2_qlaiw")
+region = Rect2(252, 0, 42, 42)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_k2rkv"]
-atlas = ExtResource("3_6aup3")
-region = Rect2(64, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_seanh"]
+atlas = ExtResource("3_6d0k3")
+region = Rect2(0, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujn4i"]
+atlas = ExtResource("3_6d0k3")
+region = Rect2(42, 0, 42, 42)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_etvis"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jua71")
+"texture": SubResource("AtlasTexture_huopi")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vtopp")
+"texture": SubResource("AtlasTexture_crtmw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6uvo8")
+"texture": SubResource("AtlasTexture_6cau6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vifhi")
+"texture": SubResource("AtlasTexture_nvaq1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_exd7o")
+"texture": SubResource("AtlasTexture_hqrhg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vum4o")
+"texture": SubResource("AtlasTexture_x2phw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jheoa")
 }],
 "loop": 0,
 "name": &"attack",
-"speed": 5.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3yj0o")
+"texture": SubResource("AtlasTexture_seanh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_k2rkv")
+"texture": SubResource("AtlasTexture_ujn4i")
 }],
 "loop": 1,
 "name": &"default",
-"speed": 5.0
+"speed": 3.0
 }]
 
-[node name="Tower" type="Node2D"]
+[node name="Tower" type="Node2D" unique_id=202764111]
 script = ExtResource("1_tower")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=229700151]
 sprite_frames = SubResource("SpriteFrames_etvis")
+animation = &"attack"
 autoplay = "default"
