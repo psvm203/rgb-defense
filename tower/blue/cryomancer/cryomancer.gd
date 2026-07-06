@@ -6,6 +6,7 @@ func _setup_tower() -> void:
 	damage = 10
 	_color_index = 2
 	_tower_color = Color(0.2, 0.2, 1.0)
+	_projectile_homing_duration = 0.25
 	_projectile_color = Color(0.5, 0.5, 1.0)
 
 
