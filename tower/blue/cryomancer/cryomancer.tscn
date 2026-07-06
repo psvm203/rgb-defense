@@ -134,7 +134,4 @@ script = ExtResource("1_tower")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=118218261]
 sprite_frames = SubResource("SpriteFrames_etvis")
-animation = &"attack"
 autoplay = "default"
-frame = 7
-frame_progress = 1.0
