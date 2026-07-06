@@ -1,6 +1,6 @@
 extends Node2D
 
-const WARRIOR_COST := 25
+const WARRIOR_COST := 20
 const ARCHER_COST := 50
 const MAGE_COST := 75
 
