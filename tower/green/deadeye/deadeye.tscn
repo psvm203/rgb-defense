@@ -1,8 +1,8 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://tower/green/deadeye/deadeye.gd" id="1_tower"]
-[ext_resource type="Texture2D" path="res://tower/green/archer/archer_attack.png" id="2_6aup3"]
-[ext_resource type="Texture2D" path="res://tower/green/archer/archer_idle.png" id="3_6aup3"]
+[ext_resource type="Texture2D" path="res://tower/green/sniper/sniper_attack.png" id="2_6aup3"]
+[ext_resource type="Texture2D" path="res://tower/green/sniper/sniper_idle.png" id="3_6aup3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jua71"]
 atlas = ExtResource("2_6aup3")

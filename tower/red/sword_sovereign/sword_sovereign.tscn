@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://d02xswordsov1"]
 
 [ext_resource type="Script" uid="uid://d01xswordsov1" path="res://tower/red/sword_sovereign/sword_sovereign.gd" id="1_tower"]
-[ext_resource type="Texture2D" uid="uid://cky3fdjo2ru4h" path="res://tower/red/sword_sovereign/sword_sovereign_attack.png" id="2_2w8nn"]
-[ext_resource type="Texture2D" uid="uid://cae8rilmtc8aa" path="res://tower/red/sword_sovereign/sword_sovereign_idle.png" id="3_2w8nn"]
+[ext_resource type="Texture2D" path="res://tower/red/sword_saint/sword_saint_attack.png" id="2_2w8nn"]
+[ext_resource type="Texture2D" path="res://tower/red/sword_saint/sword_saint_idle.png" id="3_2w8nn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4jv0w"]
 atlas = ExtResource("2_2w8nn")
