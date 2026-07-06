@@ -204,9 +204,8 @@ func _upgrade_tooltip(scene_path: String) -> String:
 
 
 func _ready() -> void:
-	if GameState.current_level == 0:
-		GameState.lives = 10000
-		GameState.coins = 10000
+	GameState.lives = WaveData.get_starting_lives(GameState.current_level)
+	GameState.coins = WaveData.get_starting_coins(GameState.current_level)
 	RenderingServer.set_default_clear_color(Color(0.894118, 0.815686, 0.670588))
 	_setup_tilemap()
 	_setup_path()
@@ -521,8 +520,6 @@ func _check_wave_completion() -> void:
 		return
 	if _spawn_queue.is_empty() and mobs_alive <= 0:
 		is_wave_active = false
-		var wave: Dictionary = WaveData.get_wave(GameState.current_level, wave_number - 1)
-		GameState.add_coins(wave.get("coins", 0))
 		wave_completed.emit()
 		var level_waves := WaveData.get_waves(GameState.current_level)
 		if wave_number >= level_waves.size():
