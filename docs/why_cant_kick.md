@@ -1,0 +1,8 @@
+![](kick_0.webp)
+![](kick_1.webp)
+![](kick_2.webp)
+![](kick_3.webp)
+![](kick_4.webp)
+![](kick_5.webp)
+![](kick_6.webp)
+![](kick_7.webp)
