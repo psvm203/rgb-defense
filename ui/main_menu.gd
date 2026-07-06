@@ -11,6 +11,9 @@ const WaveData = preload("res://level/wave.gd")
 
 var _selected_level: int = 1
 var _settings_scene: Control
+var _tower_anims: Array[Dictionary] = []
+var _tower_anim_time: float = 0.0
+const TOWER_ANIM_SPEED := 5.0
 
 
 func _ready() -> void:
@@ -20,6 +23,51 @@ func _ready() -> void:
 	_settings_scene.hide()
 	add_child(_settings_scene)
 	_update_stage_display()
+	_animate_towers()
+
+
+func _process(delta: float) -> void:
+	_tower_anim_time += delta
+	var frame_index: int = int(_tower_anim_time * TOWER_ANIM_SPEED)
+	for anim in _tower_anims:
+		var fc: int = anim.frame_count
+		var fs: int = anim.frame_size
+		var current_frame: int = frame_index % fc
+		var atlas_tex: AtlasTexture = anim.tex_rect.texture
+		atlas_tex.region = Rect2(
+			current_frame * fs,
+			0,
+			fs,
+			fs,
+		)
+
+
+func _animate_towers() -> void:
+	var tower_row := $TowerRow
+	for child in tower_row.get_children():
+		if not child is TextureRect:
+			continue
+		var tex_rect: TextureRect = child
+		var atlas_tex: AtlasTexture = tex_rect.texture
+		if atlas_tex == null:
+			continue
+		var atlas: Texture2D = atlas_tex.atlas
+		if atlas == null:
+			continue
+		var frame_size := int(atlas.get_height())
+		if int(atlas.get_width()) % frame_size != 0:
+			continue
+		var frame_count := int(float(atlas.get_width()) / frame_size)
+		if frame_count <= 1:
+			continue
+		_tower_anims.append(
+			{
+				tex_rect = tex_rect,
+				atlas = atlas,
+				frame_count = frame_count,
+				frame_size = frame_size,
+			},
+		)
 
 
 func _update_stage_display() -> void:

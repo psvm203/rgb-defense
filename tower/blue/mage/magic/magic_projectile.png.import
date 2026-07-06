@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d7tf1yg023u2"
-path="res://.godot/imported/cyromancer_attack.png-b53c3090b6a4fae86ae3a907fea016aa.ctex"
+uid="uid://dfmogymrfjg2h"
+path="res://.godot/imported/magic_projectile.png-24c8c1a62e552d30e1e99bba905c3ddc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tower/blue/cryomancer/cyromancer_attack.png"
-dest_files=["res://.godot/imported/cyromancer_attack.png-b53c3090b6a4fae86ae3a907fea016aa.ctex"]
+source_file="res://tower/blue/mage/magic/magic_projectile.png"
+dest_files=["res://.godot/imported/magic_projectile.png-24c8c1a62e552d30e1e99bba905c3ddc.ctex"]
 
 [params]
 

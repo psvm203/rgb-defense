@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://b20dbrcqqfnd5" path="res://tower/blue/mage/mage_idle.png" id="14_ma"]
 [ext_resource type="Texture2D" uid="uid://cr8l6no6v5hrn" path="res://tower/blue/electromancer/electromancer_idle.png" id="15_el"]
 [ext_resource type="Texture2D" uid="uid://bkbijab4nmi2a" path="res://tower/blue/necromancer/necromancer_idle.png" id="16_ne"]
-[ext_resource type="Texture2D" uid="uid://cni7pxdb6t708" path="res://tower/blue/cryomancer/cyromancer_idle.png" id="17_cr"]
+[ext_resource type="Texture2D" uid="uid://cni7pxdb6t708" path="res://tower/blue/cryomancer/cryomancer_idle.png" id="17_cr"]
 
 [sub_resource type="AtlasTexture" id="atlas_w"]
 atlas = ExtResource("6_w")

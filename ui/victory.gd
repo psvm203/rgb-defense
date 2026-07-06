@@ -10,7 +10,9 @@ func _ready() -> void:
 	_main_btn.pressed.connect(_on_main_pressed)
 	_next_btn.pressed.connect(_on_next_pressed)
 
-	if GameState.current_level >= WaveData.MAX_LEVEL:
+	var maxed_out := GameState.current_level >= WaveData.MAX_LEVEL
+	var next_locked := not GameState.is_level_unlocked(GameState.current_level + 1)
+	if maxed_out or next_locked:
 		_next_btn.disabled = true
 		_next_btn.modulate = Color(0.5, 0.5, 0.5)
 

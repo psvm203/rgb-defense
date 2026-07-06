@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://boxoj7g4fg4em"]
 
 [ext_resource type="Script" uid="uid://v5yfckwwocy7" path="res://tower/blue/cryomancer/cryomancer.gd" id="1_tower"]
-[ext_resource type="Texture2D" uid="uid://d7tf1yg023u2" path="res://tower/blue/cryomancer/cyromancer_attack.png" id="2_7pedc"]
-[ext_resource type="Texture2D" uid="uid://cni7pxdb6t708" path="res://tower/blue/cryomancer/cyromancer_idle.png" id="3_k4mlb"]
+[ext_resource type="Texture2D" uid="uid://d7tf1yg023u2" path="res://tower/blue/cryomancer/cryomancer_attack.png" id="2_7pedc"]
+[ext_resource type="Texture2D" uid="uid://cni7pxdb6t708" path="res://tower/blue/cryomancer/cryomancer_idle.png" id="3_k4mlb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ao5q8"]
 atlas = ExtResource("2_7pedc")

@@ -22,6 +22,10 @@ var _slow_factor: float = 1.0
 var _chain_count: int = 0
 var _chain_radius: float = 0.0
 var _hit_targets: Array[Area2D] = []
+var _frames: Array[Texture2D] = []
+var _frame_index: int = 0
+var _frame_timer: float = 0.0
+var _frame_duration: float = 0.1
 const MAX_TRAVEL := 500.0
 
 
@@ -67,6 +71,7 @@ func _process(delta: float) -> void:
 		queue_free()
 		return
 
+	_update_animation(delta)
 	_spawn_afterimage_trail(delta)
 
 	var mobs := get_tree().get_nodes_in_group("mobs")
@@ -127,6 +132,11 @@ func _apply_chain(from_pos: Vector2) -> void:
 		from_pos = closest.global_position
 
 
+func set_frames(frames: Array[Texture2D], fps: float = 10.0) -> void:
+	_frames = frames
+	_frame_duration = 1.0 / fps
+
+
 func set_texture(texture: Texture2D) -> void:
 	_texture = texture
 	queue_redraw()
@@ -150,7 +160,12 @@ func set_afterimage(interval: float) -> void:
 
 
 func _draw() -> void:
-	if _texture:
+	if not _frames.is_empty():
+		var texture := _frames[_frame_index]
+		var angle := atan2(_hit_direction.y, _hit_direction.x)
+		draw_set_transform(Vector2.ZERO, angle, Vector2(_texture_scale, _texture_scale))
+		draw_texture(texture, -texture.get_size() / 2.0)
+	elif _texture:
 		var angle := atan2(_hit_direction.y, _hit_direction.x)
 		draw_set_transform(Vector2.ZERO, angle, Vector2(_texture_scale, _texture_scale))
 		draw_texture(_texture, -_texture.get_size() / 2.0)
@@ -158,8 +173,23 @@ func _draw() -> void:
 		draw_circle(Vector2.ZERO, 4.0, _color)
 
 
+func _update_animation(delta: float) -> void:
+	if _frames.is_empty():
+		return
+	_frame_timer += delta
+	if _frame_timer >= _frame_duration:
+		_frame_timer = 0.0
+		_frame_index = (_frame_index + 1) % _frames.size()
+	queue_redraw()
+
+
 func _spawn_afterimage_trail(delta: float) -> void:
-	if _afterimage_interval <= 0.0 or not _texture:
+	var trail_texture: Texture2D
+	if not _frames.is_empty():
+		trail_texture = _frames[_frame_index]
+	elif _texture:
+		trail_texture = _texture
+	if not trail_texture or _afterimage_interval <= 0.0:
 		return
 	_afterimage_timer += delta
 	if _afterimage_timer < _afterimage_interval:
@@ -169,7 +199,7 @@ func _spawn_afterimage_trail(delta: float) -> void:
 	if not parent:
 		return
 	var img := Sprite2D.new()
-	img.texture = _texture
+	img.texture = trail_texture
 	img.scale = Vector2(_texture_scale, _texture_scale)
 	img.rotation = atan2(_hit_direction.y, _hit_direction.x)
 	img.global_position = global_position

@@ -136,14 +136,17 @@ func _process(_delta: float) -> void:
 	_coins_label.text = str(GameState.coins)
 	var total_waves := WaveData.get_waves(GameState.current_level).size()
 	_wave_label.text = "Wave %d/%d" % [_track.wave_number, total_waves]
-	_start_wave_btn.disabled = _track.is_wave_active
+	_start_wave_btn.disabled = _track.is_wave_active or _track.wave_number >= total_waves
 
-	var wave: Dictionary = WaveData.get_wave(GameState.current_level, _track.wave_number)
-	var groups: Array = wave.groups
+	var preview_index: int = _track.wave_number
+	if _track.is_wave_active:
+		preview_index = maxi(0, preview_index - 1)
+	var wave: Dictionary = WaveData.get_wave(GameState.current_level, preview_index)
+	var show_preview: bool = _track.wave_number < total_waves or _track.is_wave_active
 	for i in range(MAX_GROUPS):
 		var row_data: Dictionary = _group_rows[i]
-		if i < groups.size():
-			var group: Dictionary = groups[i]
+		if show_preview and i < wave.groups.size():
+			var group: Dictionary = wave.groups[i]
 			row_data.row.visible = true
 			row_data.icon.modulate = _rgb_color(group.max_rgb)
 			row_data.label.text = "x%d" % group.count

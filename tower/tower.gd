@@ -17,6 +17,8 @@ var _projectile_scene: PackedScene
 var _projectile_speed: float = 300.0
 var _projectile_texture: Texture2D
 var _projectile_scale: float = 1.0
+var _projectile_frames: Array[Texture2D] = []
+var _projectile_fps: float = 10.0
 var _projectile_acceleration: float = 0.0
 var _projectile_homing_duration: float = 0.0
 var _projectile_afterimage_interval: float = 0.0
@@ -115,7 +117,9 @@ func _spawn_projectile(
 	get_parent().add_child(projectile)
 	projectile.global_position = global_position
 	projectile.speed = _projectile_speed
-	if _projectile_texture:
+	if not _projectile_frames.is_empty():
+		projectile.set_frames(_projectile_frames, _projectile_fps)
+	elif _projectile_texture:
 		projectile.set_texture(_projectile_texture)
 		projectile.set_texture_scale(_projectile_scale)
 		projectile.set_homing_duration(_projectile_homing_duration)
