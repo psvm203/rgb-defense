@@ -1,107 +1,128 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://d02xbsrkrv1"]
 
-[ext_resource type="Script" path="res://tower/red/berserker/berserker.gd" id="1_tower"]
-[ext_resource type="Texture2D" path="res://tower/red/barbarian/barbarian_idle.png" id="2_3fjlj"]
-[ext_resource type="Texture2D" path="res://tower/red/barbarian/barbarian_attack.png" id="2_4ulc0"]
+[ext_resource type="Script" uid="uid://d01xbsrkrv1" path="res://tower/red/berserker/berserker.gd" id="1_tower"]
+[ext_resource type="Texture2D" uid="uid://ttaorpt4gt3t" path="res://tower/red/barbarian/barbarian_idle.png" id="2_3fjlj"]
+[ext_resource type="Texture2D" uid="uid://bxewd6eghmpl4" path="res://tower/red/barbarian/barbarian_attack.png" id="2_4ulc0"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wwmrl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_x86jq"]
 atlas = ExtResource("2_4ulc0")
-region = Rect2(0, 0, 96, 84)
+region = Rect2(0, 0, 46, 46)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e2jxr"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_skfwj"]
 atlas = ExtResource("2_4ulc0")
-region = Rect2(96, 0, 96, 84)
+region = Rect2(46, 0, 46, 46)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ynnoe"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwdt2"]
 atlas = ExtResource("2_4ulc0")
-region = Rect2(192, 0, 96, 84)
+region = Rect2(92, 0, 46, 46)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6dmss"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdb7c"]
 atlas = ExtResource("2_4ulc0")
-region = Rect2(288, 0, 96, 84)
+region = Rect2(138, 0, 46, 46)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0qimy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_74ws5"]
 atlas = ExtResource("2_4ulc0")
-region = Rect2(384, 0, 96, 84)
+region = Rect2(184, 0, 46, 46)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s4ln4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndcs7"]
 atlas = ExtResource("2_4ulc0")
-region = Rect2(480, 0, 96, 84)
+region = Rect2(230, 0, 46, 46)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ulc0"]
-atlas = ExtResource("2_3fjlj")
-region = Rect2(0, 0, 96, 84)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibyyw"]
+atlas = ExtResource("2_4ulc0")
+region = Rect2(276, 0, 46, 46)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xnkcx"]
-atlas = ExtResource("2_3fjlj")
-region = Rect2(96, 0, 96, 84)
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6keh"]
+atlas = ExtResource("2_4ulc0")
+region = Rect2(322, 0, 46, 46)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pwp32"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlpfl"]
 atlas = ExtResource("2_3fjlj")
-region = Rect2(192, 0, 96, 84)
+region = Rect2(0, 0, 46, 46)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vplrr"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sp6uk"]
 atlas = ExtResource("2_3fjlj")
-region = Rect2(288, 0, 96, 84)
+region = Rect2(46, 0, 46, 46)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ntkfq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xa4l"]
 atlas = ExtResource("2_3fjlj")
-region = Rect2(384, 0, 96, 84)
+region = Rect2(92, 0, 46, 46)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_earr4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3484"]
 atlas = ExtResource("2_3fjlj")
-region = Rect2(480, 0, 96, 84)
+region = Rect2(138, 0, 46, 46)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gihtl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0apeg"]
 atlas = ExtResource("2_3fjlj")
-region = Rect2(576, 0, 96, 84)
+region = Rect2(184, 0, 46, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdfl6"]
+atlas = ExtResource("2_3fjlj")
+region = Rect2(230, 0, 46, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4weiq"]
+atlas = ExtResource("2_3fjlj")
+region = Rect2(276, 0, 46, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftqcg"]
+atlas = ExtResource("2_3fjlj")
+region = Rect2(322, 0, 46, 46)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_etvis"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wwmrl")
+"texture": SubResource("AtlasTexture_x86jq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e2jxr")
+"texture": SubResource("AtlasTexture_skfwj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ynnoe")
+"texture": SubResource("AtlasTexture_rwdt2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6dmss")
+"texture": SubResource("AtlasTexture_xdb7c")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0qimy")
+"texture": SubResource("AtlasTexture_74ws5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_s4ln4")
+"texture": SubResource("AtlasTexture_ndcs7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ibyyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6keh")
 }],
 "loop": 0,
 "name": &"attack",
-"speed": 6.0
+"speed": 40.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4ulc0")
+"texture": SubResource("AtlasTexture_mlpfl")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xnkcx")
+"texture": SubResource("AtlasTexture_sp6uk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pwp32")
+"texture": SubResource("AtlasTexture_4xa4l")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vplrr")
+"texture": SubResource("AtlasTexture_k3484")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ntkfq")
+"texture": SubResource("AtlasTexture_0apeg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_earr4")
+"texture": SubResource("AtlasTexture_hdfl6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gihtl")
+"texture": SubResource("AtlasTexture_4weiq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ftqcg")
 }],
 "loop": 1,
 "name": &"default",
@@ -113,6 +134,5 @@ script = ExtResource("1_tower")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1540324020]
 sprite_frames = SubResource("SpriteFrames_etvis")
+animation = &"attack"
 autoplay = "default"
-frame = 5
-frame_progress = 1.0
