@@ -61,12 +61,12 @@ func _on_sfx_volume_changed(_value: float) -> void:
 
 func _apply_settings() -> void:
 	var index := _res_option.selected
-	var size := RESOLUTIONS[index]
+	var res := RESOLUTIONS[index]
 	if _fullscreen_check.button_pressed:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		DisplayServer.window_set_size(size)
+		DisplayServer.window_set_size(res)
 	_apply_volume()
 
 
