@@ -1,6 +1,7 @@
 extends Node2D
 
 const WaveData = preload("res://level/wave.gd")
+const TowerData = preload("res://tower/tower.gd")
 
 signal wave_completed
 signal level_completed(level: int)
@@ -261,13 +262,13 @@ func _input(event: InputEvent) -> void:
 		return
 	match event.keycode:
 		KEY_R:
-			_on_tower_selected("res://tower/red/warrior/warrior.tscn", 25)
+			_on_tower_selected("res://tower/red/warrior/warrior.tscn", TowerData.WARRIOR_COST)
 		KEY_G:
 			if GameState.current_level != 1:
-				_on_tower_selected("res://tower/green/archer/archer.tscn", 50)
+				_on_tower_selected("res://tower/green/archer/archer.tscn", TowerData.ARCHER_COST)
 		KEY_B:
 			if GameState.current_level != 1:
-				_on_tower_selected("res://tower/blue/mage/mage.tscn", 75)
+				_on_tower_selected("res://tower/blue/mage/mage.tscn", TowerData.MAGE_COST)
 		KEY_SPACE:
 			if not is_wave_active:
 				start_wave_pressed.emit()

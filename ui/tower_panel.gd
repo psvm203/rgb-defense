@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const TowerData = preload("res://tower/tower.gd")
+
 signal tower_selected(scene_path: String, cost: int)
 signal selection_cancelled
 
@@ -8,7 +10,7 @@ const TOWERS: Array[Dictionary] = [
 		name = "Warrior",
 		scene = "res://tower/red/warrior/warrior.tscn",
 		icon = "res://tower/red/warrior/warrior_icon.png",
-		cost = 25,
+		cost = TowerData.WARRIOR_COST,
 		color = Color(0.9, 0.2, 0.2),
 		shortcut = "R",
 	},
@@ -16,7 +18,7 @@ const TOWERS: Array[Dictionary] = [
 		name = "Archer",
 		scene = "res://tower/green/archer/archer.tscn",
 		icon = "res://tower/green/archer/archer_icon.png",
-		cost = 50,
+		cost = TowerData.ARCHER_COST,
 		color = Color(0.2, 0.9, 0.2),
 		shortcut = "G",
 	},
@@ -24,7 +26,7 @@ const TOWERS: Array[Dictionary] = [
 		name = "Mage",
 		scene = "res://tower/blue/mage/mage.tscn",
 		icon = "res://tower/blue/mage/mage_icon.png",
-		cost = 75,
+		cost = TowerData.MAGE_COST,
 		color = Color(0.3, 0.4, 1.0),
 		shortcut = "B",
 	},

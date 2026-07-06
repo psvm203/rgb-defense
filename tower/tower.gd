@@ -1,5 +1,9 @@
 extends Node2D
 
+const WARRIOR_COST := 25
+const ARCHER_COST := 50
+const MAGE_COST := 75
+
 @export var attack_range: float
 @export var damage: float
 
