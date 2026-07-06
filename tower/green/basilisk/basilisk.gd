@@ -7,6 +7,8 @@ func _setup_tower() -> void:
 	_color_index = 1
 	_tower_color = Color(0.2, 0.9, 0.3)
 	_projectile_homing_duration = 0.25
+	_projectile_texture = preload("res://tower/green/archer/arrow.png")
+	_projectile_speed = 600.0
 	_projectile_color = Color(0.2, 1.0, 0.2)
 
 

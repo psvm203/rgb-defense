@@ -2,13 +2,12 @@ extends RefCounted
 
 const STARTING_LIVES := 10
 
-const STARTING_COINS := 250
+const STARTING_COINS := 120
 
 const WAVES: Array = [
 	{
 		groups = [
-			{ max_rgb = Vector3(100, 0, 0), count = 5 },
-			{ max_rgb = Vector3(0, 100, 0), count = 3 },
+			{ max_rgb = Vector3(0, 100, 0), count = 5 },
 		],
 		interval = 1.2,
 	},
