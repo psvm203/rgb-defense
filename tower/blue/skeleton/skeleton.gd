@@ -6,7 +6,7 @@ var _color_index: int
 var _lifetime: float = 5.0
 var _time_since_attack: float = 0.0
 
-const SPEED := 180.0
+const SPEED := 360.0
 const ATTACK_RANGE := 64.0
 const ATTACK_COOLDOWN := 0.8
 const DETECT_RANGE := 300.0

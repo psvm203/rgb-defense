@@ -16,7 +16,7 @@ func _setup_tower() -> void:
 	_projectile_homing_duration = 0.25
 	_attack_frame = 6
 	_projectile_fps = 10.0
-	_projectile_speed = 600.0
+	_projectile_speed = 900.0
 	_setup_projectile_frames()
 
 

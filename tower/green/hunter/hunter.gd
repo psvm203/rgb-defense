@@ -22,4 +22,5 @@ func _perform_attack() -> void:
 		var projectile := _projectile_scene.instantiate()
 		get_parent().add_child(projectile)
 		projectile.global_position = global_position + perp * 20 * side
+		projectile.set_texture(_projectile_texture)
 		projectile.setup(_target, damage, _color_index, _projectile_color)
