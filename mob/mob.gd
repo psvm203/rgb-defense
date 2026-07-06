@@ -3,7 +3,7 @@ extends Area2D
 signal died
 
 @export var speed: float = 128.0
-@export var max_rgb: Vector3 = Vector3(0.0, 0.0, 1.0)
+@export var max_rgb: Vector3 = Vector3(0, 0, 100)
 
 var rgb: Vector3
 var _base_sprite_x: float
@@ -103,7 +103,7 @@ func take_damage(color_index: int, amount: float) -> void:
 			rgb[i] = maxf(0.0, rgb[i] - splash_amount)
 	_update_appearance()
 	if rgb == Vector3.ZERO:
-		GameState.add_coins(int(max_rgb.x + max_rgb.y + max_rgb.z))
+		GameState.add_coins(int((max_rgb.x + max_rgb.y + max_rgb.z) / 100.0))
 		died.emit()
 		queue_free()
 

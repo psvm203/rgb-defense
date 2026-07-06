@@ -7,6 +7,6 @@ func _setup_tower() -> void:
 	exhaust_duration = 1.5
 	attack_range = 128.0
 	$AnimatedSprite2D.speed_scale = normal_speed_scale
-	damage = 0.25
+	damage = 25
 	_color_index = 0
 	_tower_color = Color(1.0, 0.2, 0.2)
