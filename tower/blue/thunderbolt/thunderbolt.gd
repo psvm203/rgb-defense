@@ -1,6 +1,7 @@
 extends "res://tower/blue/electromancer/electromancer.gd"
 
 func _setup_tower() -> void:
+	super._setup_tower()
 	chain_count = 9
 	chain_radius = 250.0
 	attack_range = 220.0
