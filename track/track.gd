@@ -521,6 +521,8 @@ func _check_wave_completion() -> void:
 		return
 	if _spawn_queue.is_empty() and mobs_alive <= 0:
 		is_wave_active = false
+		var wave: Dictionary = WaveData.get_wave(GameState.current_level, wave_number - 1)
+		GameState.add_coins(wave.get("coins", 0))
 		wave_completed.emit()
 		var level_waves := WaveData.get_waves(GameState.current_level)
 		if wave_number >= level_waves.size():

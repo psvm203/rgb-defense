@@ -6,18 +6,21 @@ const WAVES: Array = [
 			{ max_rgb = Vector3(1.0, 0.0, 1.0), count = 5 },
 		],
 		interval = 1.2,
+		coins = 250,
 	},
 	{
 		groups = [
 			{ max_rgb = Vector3(1.0, 1.0, 0.0), count = 6 },
 		],
 		interval = 1.1,
+		coins = 250,
 	},
 	{
 		groups = [
 			{ max_rgb = Vector3(0.0, 1.0, 1.0), count = 5 },
 		],
 		interval = 1.1,
+		coins = 275,
 	},
 	{
 		groups = [
@@ -25,6 +28,7 @@ const WAVES: Array = [
 			{ max_rgb = Vector3(1.0, 1.0, 0.0), count = 3 },
 		],
 		interval = 1.0,
+		coins = 275,
 	},
 	{
 		groups = [
@@ -32,6 +36,7 @@ const WAVES: Array = [
 			{ max_rgb = Vector3(0.0, 1.0, 1.0), count = 3 },
 		],
 		interval = 0.9,
+		coins = 300,
 	},
 	{
 		groups = [
@@ -40,5 +45,6 @@ const WAVES: Array = [
 			{ max_rgb = Vector3(0.0, 1.0, 1.0), count = 4 },
 		],
 		interval = 0.8,
+		coins = 300,
 	},
 ]
