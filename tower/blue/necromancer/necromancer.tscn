@@ -36,6 +36,38 @@ region = Rect2(240, 0, 40, 40)
 atlas = ExtResource("2_oys4w")
 region = Rect2(280, 0, 40, 40)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_oys4w"]
+atlas = ExtResource("3_oys4w")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_go26t"]
+atlas = ExtResource("3_oys4w")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pswd8"]
+atlas = ExtResource("3_oys4w")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j75xp"]
+atlas = ExtResource("3_oys4w")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35l72"]
+atlas = ExtResource("3_oys4w")
+region = Rect2(160, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wpni"]
+atlas = ExtResource("3_oys4w")
+region = Rect2(200, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5hoe"]
+atlas = ExtResource("3_oys4w")
+region = Rect2(240, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhvt4"]
+atlas = ExtResource("3_oys4w")
+region = Rect2(280, 0, 40, 40)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_etvis"]
 animations = [{
 "frames": [{
@@ -65,11 +97,32 @@ animations = [{
 }],
 "loop": 0,
 "name": &"attack",
-"speed": 8.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_oys4w")
+"texture": SubResource("AtlasTexture_oys4w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_go26t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pswd8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j75xp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35l72")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wpni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5hoe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhvt4")
 }],
 "loop": 1,
 "name": &"default",
@@ -81,5 +134,5 @@ script = ExtResource("1_tower")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=972180487]
 sprite_frames = SubResource("SpriteFrames_etvis")
-animation = &"attack"
 autoplay = "default"
+frame_progress = 0.32653987
