@@ -132,9 +132,11 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	_lives_label.text = str(GameState.lives)
+	var max_lives := WaveData.get_starting_lives(GameState.current_level)
+	_lives_label.text = "%d/%d" % [GameState.lives, max_lives]
 	_coins_label.text = str(GameState.coins)
-	_wave_label.text = "Wave " + str(_track.wave_number)
+	var total_waves := WaveData.get_waves(GameState.current_level).size()
+	_wave_label.text = "Wave %d/%d" % [_track.wave_number, total_waves]
 	_start_wave_btn.disabled = _track.is_wave_active
 
 	var wave: Dictionary = WaveData.get_wave(GameState.current_level, _track.wave_number)
